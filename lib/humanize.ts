@@ -1,0 +1,118 @@
+/**
+ * Message humanization — anti-détection LinkedIn
+ *
+ * Probabilistically splits messages into fragments (phrase by phrase)
+ * and applies subtle text transforms to reduce bot-pattern detection.
+ *
+ * Applied at generation time (generate route + generate cron).
+ * Stored in generated_message with FRAGMENT_SEPARATOR between fragments.
+ * Parsed at render time (UI) and send time (execute.ts).
+ */
+
+/** Delimiter used to store fragments in the DB */
+export const FRAGMENT_SEPARATOR = "|||";
+
+/**
+ * Parse a stored message into fragments array.
+ * Returns a single-element array if no separator found.
+ */
+export function parseFragments(text: string): string[] {
+  if (!text.includes(FRAGMENT_SEPARATOR)) return [text];
+  return text
+    .split(FRAGMENT_SEPARATOR)
+    .map((f) => f.trim())
+    .filter((f) => f.length > 0);
+}
+
+/**
+ * Random delay between fragments at send time: 12–25 seconds.
+ */
+export function getFragmentDelay(): number {
+  return Math.floor(Math.random() * 13_000) + 12_000;
+}
+
+/**
+ * Split text on sentence-ending punctuation into individual sentences.
+ * Filters out very short results (e.g. "M." abbreviations).
+ */
+function splitSentences(text: string): string[] {
+  return text
+    .split(/(?<=[.!?])\s+/)
+    .map((s) => s.trim())
+    .filter((s) => s.length >= 12);
+}
+
+/**
+ * Apply subtle text transforms to a single fragment:
+ * - ~25% chance: lowercase first letter on non-first fragments (casual typing)
+ * - ~50% chance: remove trailing period on the last fragment
+ */
+function transformFragment(
+  fragment: string,
+  isFirst: boolean,
+  isLast: boolean
+): string {
+  let f = fragment.trim();
+
+  if (!isFirst && Math.random() < 0.25 && f.length > 0) {
+    f = f[0].toLowerCase() + f.slice(1);
+  }
+
+  if (isLast && Math.random() < 0.5 && f.endsWith(".")) {
+    f = f.slice(0, -1);
+  }
+
+  return f;
+}
+
+/**
+ * Probabilistically split a message into 2–3 fragments and apply text transforms.
+ *
+ * Conditions for splitting:
+ * - actionType is "message" or "inmail" (invitations are too short, visits have no text)
+ * - Message has 3+ sentences
+ * - ~40% random chance (so most messages are NOT split)
+ *
+ * Returns the original text unchanged if conditions are not met.
+ * Returns transformed text with FRAGMENT_SEPARATOR between fragments otherwise.
+ */
+export function humanizeMessage(text: string, actionType: string): string {
+  if (actionType !== "message" && actionType !== "inmail") return text;
+
+  const sentences = splitSentences(text);
+  if (sentences.length < 3) return text;
+
+  // ~40% chance to actually split
+  if (Math.random() > 0.4) return text;
+
+  // 3 fragments only if 5+ sentences and coin flip
+  const fragmentCount =
+    sentences.length >= 5 && Math.random() > 0.5 ? 3 : 2;
+
+  let fragments: string[];
+  if (fragmentCount === 2) {
+    const mid = Math.ceil(sentences.length / 2);
+    fragments = [
+      sentences.slice(0, mid).join(" "),
+      sentences.slice(mid).join(" "),
+    ];
+  } else {
+    const a = Math.floor(sentences.length / 3);
+    const b = Math.floor((sentences.length * 2) / 3);
+    fragments = [
+      sentences.slice(0, a).join(" "),
+      sentences.slice(a, b).join(" "),
+      sentences.slice(b).join(" "),
+    ];
+  }
+
+  // Guard: if any fragment ended up empty/too short, fallback
+  const valid = fragments.filter((f) => f.trim().length >= 10);
+  if (valid.length < 2) return text;
+
+  const transformed = valid.map((f, i) =>
+    transformFragment(f, i === 0, i === valid.length - 1)
+  );
+
+  return transformed.join(FRAGMENT_SEPARATOR);
+}

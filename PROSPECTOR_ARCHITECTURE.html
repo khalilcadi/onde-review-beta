@@ -1,0 +1,1664 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PROSPECTOR — Architecture Complète</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --bg-card: #161b22;
+      --bg-card-hover: #1c2333;
+      --border: #30363d;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --text-dim: #6e7681;
+      --accent: #58a6ff;
+      --accent-hover: #79c0ff;
+      --green: #3fb950;
+      --red: #f85149;
+      --orange: #d29922;
+      --purple: #bc8cff;
+      --pink: #f778ba;
+      --cyan: #39d353;
+      --nav-bg: rgba(13,17,23,0.95);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    /* ===== NAVIGATION ===== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+    }
+    nav .nav-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    nav .nav-inner::-webkit-scrollbar { display: none; }
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      padding: 0.75rem 0.65rem;
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+    }
+    nav a:hover { color: var(--text); border-bottom-color: var(--border); }
+    nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
+    .nav-logo {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text) !important;
+      margin-right: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    /* ===== MAIN ===== */
+    main {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      text-align: center;
+      padding: 4rem 2rem 3rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 3rem;
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      background: linear-gradient(135deg, var(--accent), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.75rem;
+    }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+    .hero .badges { display: flex; gap: 0.5rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap; }
+
+    /* ===== SECTIONS ===== */
+    section { margin-bottom: 4rem; }
+    section > h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+      letter-spacing: -0.02em;
+    }
+    h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin: 1.5rem 0 0.75rem;
+      color: var(--accent);
+    }
+    h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin: 1rem 0 0.5rem;
+      color: var(--text);
+    }
+    p { margin-bottom: 0.75rem; color: var(--text-muted); }
+
+    /* ===== BADGES ===== */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.2rem 0.65rem;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+    .badge-blue { background: rgba(88,166,255,0.15); color: var(--accent); border: 1px solid rgba(88,166,255,0.3); }
+    .badge-green { background: rgba(63,185,80,0.15); color: var(--green); border: 1px solid rgba(63,185,80,0.3); }
+    .badge-orange { background: rgba(210,153,34,0.15); color: var(--orange); border: 1px solid rgba(210,153,34,0.3); }
+    .badge-red { background: rgba(248,81,73,0.15); color: var(--red); border: 1px solid rgba(248,81,73,0.3); }
+    .badge-purple { background: rgba(188,140,255,0.15); color: var(--purple); border: 1px solid rgba(188,140,255,0.3); }
+    .badge-pink { background: rgba(247,120,186,0.15); color: var(--pink); border: 1px solid rgba(247,120,186,0.3); }
+    .badge-gray { background: rgba(139,148,158,0.12); color: var(--text-muted); border: 1px solid rgba(139,148,158,0.25); }
+
+    /* ===== CARDS ===== */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    /* ===== TABLES ===== */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.85rem;
+    }
+    th, td {
+      padding: 0.6rem 0.85rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      background: var(--bg-card);
+      color: var(--text);
+      font-weight: 600;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      position: sticky;
+      top: 0;
+    }
+    td { color: var(--text-muted); }
+    tr:hover td { background: var(--bg-card-hover); }
+
+    /* ===== COLLAPSIBLES ===== */
+    details {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 0.75rem;
+      overflow: hidden;
+    }
+    summary {
+      padding: 1rem 1.25rem;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      user-select: none;
+      transition: background 0.15s;
+    }
+    summary:hover { background: var(--bg-card-hover); }
+    summary::marker { content: ''; }
+    summary::before {
+      content: '▸';
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      transition: transform 0.2s;
+    }
+    details[open] > summary::before { transform: rotate(90deg); }
+    details .content { padding: 0 1.25rem 1.25rem; }
+
+    /* ===== MERMAID ===== */
+    .mermaid-wrapper {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      margin: 1.5rem 0;
+      overflow-x: auto;
+    }
+    .mermaid {
+      display: flex;
+      justify-content: center;
+    }
+
+    /* ===== CODE ===== */
+    code {
+      font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+      background: rgba(110,118,129,0.15);
+      padding: 0.15rem 0.4rem;
+      border-radius: 5px;
+      font-size: 0.82rem;
+      color: var(--accent);
+    }
+    pre {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+      font-size: 0.8rem;
+      line-height: 1.7;
+    }
+    pre code {
+      background: transparent;
+      padding: 0;
+      color: var(--text-muted);
+    }
+
+    /* ===== LISTS ===== */
+    ul, ol { padding-left: 1.5rem; margin-bottom: 0.75rem; }
+    li { color: var(--text-muted); margin-bottom: 0.3rem; font-size: 0.9rem; }
+    li strong { color: var(--text); }
+
+    /* ===== TIMELINE ===== */
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+      margin: 1.5rem 0;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2rem;
+      top: 0.4rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      background: var(--bg);
+    }
+    .timeline-item.active::before { background: var(--accent); }
+    .timeline-time {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      font-weight: 600;
+    }
+    .timeline-content {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* ===== FLOW ARROWS ===== */
+    .flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+      margin: 1rem 0;
+    }
+    .flow-step {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.4rem 0.85rem;
+      font-size: 0.82rem;
+      font-weight: 500;
+    }
+    .flow-arrow { color: var(--text-dim); font-size: 1.2rem; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      main { padding: 1rem; }
+      .hero h1 { font-size: 1.8rem; }
+      .card-grid { grid-template-columns: 1fr; }
+      nav { padding: 0 0.75rem; }
+    }
+
+    /* Mermaid overrides for dark theme */
+    .mermaid-wrapper svg { max-width: 100%; }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">PROSPECTOR</a>
+    <a href="#overview">Vue d'ensemble</a>
+    <a href="#lead-journey">Parcours Lead</a>
+    <a href="#state-machines">Machines à états</a>
+    <a href="#sequences">Séquences &amp; Timing</a>
+    <a href="#ai-system">Système IA</a>
+    <a href="#config">Configuration</a>
+    <a href="#pages">Pages Frontend</a>
+    <a href="#database">Base de données</a>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <h1>PROSPECTOR</h1>
+  <p>Plateforme de prospection LinkedIn semi-automatisée — Architecture technique complète</p>
+  <div class="badges">
+    <span class="badge badge-blue">Next.js 14</span>
+    <span class="badge badge-green">Supabase</span>
+    <span class="badge badge-purple">Claude API</span>
+    <span class="badge badge-orange">Unipile</span>
+    <span class="badge badge-pink">Perplexity</span>
+    <span class="badge badge-gray">TypeScript Strict</span>
+  </div>
+</div>
+
+<main>
+
+<!-- ========================================== -->
+<!-- SECTION 1 : VUE D'ENSEMBLE                 -->
+<!-- ========================================== -->
+<section id="overview">
+  <h2>1. Vue d'ensemble — Architecture technique</h2>
+
+  <div class="mermaid-wrapper">
+    <pre class="mermaid">
+graph TB
+    subgraph Frontend["Frontend (Next.js App Router)"]
+        direction TB
+        Auth["(auth)<br/>Login / Signup"]
+        Dashboard["Dashboard<br/>KPIs + Équipe"]
+        Pipeline["Pipeline<br/>Table + Filtres + Import CSV"]
+        Actions["Daily Actions<br/>Validation messages"]
+        Sequences["Séquences<br/>Builder + Steps"]
+        Inbox["Inbox<br/>Conversations"]
+        Cockpit["Cockpit IA<br/>Chat reporting"]
+        Settings["Settings<br/>API Keys + Prompts + RAG"]
+    end
+
+    subgraph ServerActions["Server Actions (lib/actions/)"]
+        SA_Leads["leads.ts<br/>CRUD + anti-doublon"]
+        SA_Actions["actions.ts<br/>validate / cancel / schedule"]
+        SA_Seq["sequences.ts<br/>CRUD + steps"]
+        SA_Conv["conversations.ts<br/>messages + sync"]
+        SA_Settings["settings.ts<br/>API keys + prompts"]
+        SA_LinkedIn["linkedin.ts<br/>connect + sync"]
+        SA_RAG["rag.ts<br/>blocs + overrides"]
+    end
+
+    subgraph APIRoutes["API Routes (app/api/)"]
+        AI_Gen["/ai/generate<br/>Messages LinkedIn"]
+        AI_Chat["/ai/chat<br/>Cockpit conversational"]
+        AI_Score["/ai/score<br/>Scoring lead"]
+        AI_Enrich["/ai/enrich<br/>Enrichissement"]
+        AI_Suggest["/ai/suggest<br/>Suggestion Inbox"]
+        LI_Send["/linkedin/send<br/>Envoi action"]
+        WH_Uni["/webhooks/unipile<br/>Events receiver"]
+        Cron_Gen["/crons/generate-actions<br/>06h00 quotidien"]
+        Cron_Send["/crons/send-actions<br/>Toutes les 2min"]
+    end
+
+    subgraph Services["Services (lib/)"]
+        AI_Service["ai/service.ts<br/>callAI() multi-provider"]
+        AI_Prompts["ai/prompts/<br/>4 agents + defaults"]
+        RAG["rag/<br/>14 blocs knowledge"]
+        Crypto["crypto.ts<br/>AES-256-GCM"]
+        Scheduling["scheduling.ts<br/>Non-uniform distribution"]
+        Unipile_Client["unipile/client.ts<br/>48 méthodes"]
+        Unipile_Exec["unipile/execute.ts<br/>executeLinkedInAction"]
+    end
+
+    subgraph External["Services externes"]
+        Supabase["Supabase<br/>PostgreSQL + Auth + RLS"]
+        Claude["Claude API<br/>Anthropic SDK"]
+        OpenAI["OpenAI API<br/>GPT-5.x"]
+        Perplexity["Perplexity API<br/>Sonar Pro"]
+        Unipile_API["Unipile API<br/>LinkedIn automation"]
+        Vercel["Vercel<br/>Hosting + Crons"]
+    end
+
+    Frontend --> ServerActions
+    Frontend --> APIRoutes
+    ServerActions --> Supabase
+    APIRoutes --> Services
+    Services --> Supabase
+    AI_Service --> Claude
+    AI_Service --> OpenAI
+    AI_Service --> Perplexity
+    Unipile_Client --> Unipile_API
+    Unipile_API -->|webhooks| WH_Uni
+    Vercel -->|cron schedule| Cron_Gen
+    Vercel -->|cron schedule| Cron_Send
+
+    style Frontend fill:#161b22,stroke:#30363d,color:#e6edf3
+    style ServerActions fill:#161b22,stroke:#30363d,color:#e6edf3
+    style APIRoutes fill:#161b22,stroke:#30363d,color:#e6edf3
+    style Services fill:#161b22,stroke:#30363d,color:#e6edf3
+    style External fill:#161b22,stroke:#30363d,color:#e6edf3
+    </pre>
+  </div>
+
+  <h3>Stack technique</h3>
+  <div class="card-grid">
+    <div class="card">
+      <h4>Frontend</h4>
+      <table>
+        <tr><td>Framework</td><td><code>Next.js 14</code> (App Router)</td></tr>
+        <tr><td>UI</td><td><code>shadcn/ui</code> (Radix UI)</td></tr>
+        <tr><td>Styling</td><td><code>Tailwind CSS 3.4</code></td></tr>
+        <tr><td>Charts</td><td><code>Recharts</code></td></tr>
+        <tr><td>Icons</td><td><code>Lucide React</code></td></tr>
+        <tr><td>Fonts</td><td><code>Geist Sans + Mono</code></td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h4>Backend &amp; Data</h4>
+      <table>
+        <tr><td>Database</td><td><code>Supabase PostgreSQL</code></td></tr>
+        <tr><td>Auth</td><td><code>Supabase Auth</code> (email + Google OAuth)</td></tr>
+        <tr><td>RLS</td><td>Pool partagé + ownership strict</td></tr>
+        <tr><td>Chiffrement</td><td><code>AES-256-GCM</code> (clés API)</td></tr>
+        <tr><td>Hosting</td><td><code>Vercel</code> (crons inclus)</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h4>IA &amp; Intégrations</h4>
+      <table>
+        <tr><td>IA principale</td><td><code>Claude</code> (Anthropic SDK)</td></tr>
+        <tr><td>IA alternative</td><td><code>OpenAI</code> (GPT-5.x)</td></tr>
+        <tr><td>Enrichissement</td><td><code>Perplexity</code> (Sonar Pro)</td></tr>
+        <tr><td>LinkedIn</td><td><code>Unipile</code> (REST API)</td></tr>
+        <tr><td>Modèles</td><td>10 modèles disponibles</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <h3>Patterns architecturaux</h3>
+  <div class="card-grid">
+    <div class="card">
+      <h4>Server/Client Split</h4>
+      <p><code>page.tsx</code> (server component) fetch les données via Server Actions, puis passe en props à <code>*-client.tsx</code> (client component) qui gère l'UI et l'interactivité.</p>
+    </div>
+    <div class="card">
+      <h4>Hybrid API</h4>
+      <p><strong>Server Actions</strong> pour le CRUD (type-safe, avec cookies). <strong>Route Handlers</strong> pour IA (long-running), webhooks (service role), et crons (schedule).</p>
+    </div>
+    <div class="card">
+      <h4>supabaseOverride Pattern</h4>
+      <p>Les fonctions partagées (<code>callAI</code>, <code>getDecryptedApiKey</code>, <code>buildSystemPrompt</code>) acceptent un client Supabase optionnel pour le contexte cron (pas de cookies).</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================== -->
+<!-- SECTION 2 : PARCOURS D'UN LEAD             -->
+<!-- ========================================== -->
+<section id="lead-journey">
+  <h2>2. Parcours complet d'un lead</h2>
+
+  <div class="mermaid-wrapper">
+    <pre class="mermaid">
+flowchart TD
+    subgraph Import["IMPORT"]
+        CSV["Import CSV<br/><i>Pipeline page</i>"]
+        Manual["Création manuelle<br/><i>Pipeline page</i>"]
+        Webhook_Rel["Webhook relation.created<br/><i>Auto via Unipile</i>"]
+    end
+
+    Dedup{"Anti-doublon<br/><code>linkedin_url</code><br/>unique"}
+
+    subgraph Pipeline["PIPELINE"]
+        New["Lead créé<br/>stage: to_invite<br/>status: cold"]
+        Enrich["Enrichissement<br/><i>Perplexity + Unipile</i>"]
+        Score["Scoring IA<br/><i>Claude/GPT</i><br/>0-100 pts"]
+    end
+
+    subgraph Sequence["SÉQUENCE"]
+        AddSeq["Ajout à séquence<br/>sequence_leads.status: active"]
+
+        subgraph DailyLoop["Boucle quotidienne"]
+            CronGen["Cron 06h00<br/>Génère actions<br/>status: pending"]
+            UserVal["User valide<br/>status: validated<br/>+ scheduled_at"]
+            CronSend["Cron envoi (2min)<br/>status: sent<br/>via Unipile"]
+            NextStep["Step suivant<br/>après delay_days"]
+            CheckCond{"Conditions ?<br/>if_connected<br/>if_no_response"}
+        end
+    end
+
+    subgraph Outcomes["RÉSULTATS"]
+        Replied["Réponse reçue<br/>→ Inbox<br/>stage: responded"]
+        Completed["Séquence terminée<br/>sequence_leads: completed"]
+        Meeting["RDV planifié<br/>stage: meeting"]
+        Converted["Converti<br/>stage: closed<br/>status: converted"]
+        Lost["Perdu / Disqualifié<br/>status: lost"]
+    end
+
+    CSV --> Dedup
+    Manual --> Dedup
+    Webhook_Rel --> Dedup
+    Dedup -->|"Nouveau"| New
+    Dedup -->|"Doublon"| Reject["Rejeté"]
+
+    New -->|"Bouton Enrichir"| Enrich
+    Enrich -->|"Bouton Scorer"| Score
+    Score --> AddSeq
+    New -->|"Direct"| AddSeq
+
+    AddSeq --> CronGen
+    CronGen --> UserVal
+    UserVal --> CronSend
+    CronSend --> NextStep
+    NextStep --> CheckCond
+    CheckCond -->|"run"| CronGen
+    CheckCond -->|"wait"| NextStep
+    CheckCond -->|"skip"| NextStep
+
+    CronSend -->|"Webhook message.received"| Replied
+    NextStep -->|"Plus de steps"| Completed
+    Replied --> Meeting
+    Meeting --> Converted
+    Replied --> Lost
+    Completed --> Lost
+
+    style Import fill:#1a2332,stroke:#30363d,color:#e6edf3
+    style Pipeline fill:#1a2332,stroke:#30363d,color:#e6edf3
+    style Sequence fill:#1a2332,stroke:#30363d,color:#e6edf3
+    style DailyLoop fill:#0d1922,stroke:#1f4068,color:#e6edf3
+    style Outcomes fill:#1a2332,stroke:#30363d,color:#e6edf3
+    </pre>
+  </div>
+
+  <h3>Détail des étapes</h3>
+
+  <details>
+    <summary>A. Import → Pipeline</summary>
+    <div class="content">
+      <h4>Sources d'import</h4>
+      <ul>
+        <li><strong>CSV</strong> : Upload dans Pipeline, auto-détection séparateur (<code>,</code> ou <code>;</code>), mapping 20+ variations de headers, anti-doublon sur <code>linkedin_url</code></li>
+        <li><strong>Manuel</strong> : Formulaire dans Pipeline (firstName, lastName, linkedinUrl requis)</li>
+        <li><strong>Webhook</strong> : <code>relation.created</code> quand quelqu'un accepte une invitation</li>
+      </ul>
+      <h4>Anti-doublon</h4>
+      <p>Chaque lead est identifié par son <code>linkedin_url</code>. Si l'URL existe déjà, l'import est rejeté (pas de mise à jour).</p>
+      <h4>État initial</h4>
+      <p>Tout nouveau lead entre avec : <code>stage: to_invite</code>, <code>status: cold</code>, <code>score: 0</code>.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>B. Enrichissement + Scoring</summary>
+    <div class="content">
+      <h4>Enrichissement (Perplexity + Unipile)</h4>
+      <p>Route <code>POST /api/ai/enrich</code> — Deux sources combinées :</p>
+      <ul>
+        <li><strong>Unipile (LinkedIn)</strong> : profil complet, 5 derniers posts, expérience, date début poste</li>
+        <li><strong>Perplexity (web)</strong> : news &lt;3 mois, funding &lt;18 mois, CA/taille, contexte secteur</li>
+      </ul>
+      <p>Signal classifié en priorité : INBOUND → POST_DOULEUR → POST_SUJET → ACTUALITE → SIGNAL_FAIBLE → FROID</p>
+      <p>Auto-correction stage : si <code>network_distance === "FIRST"</code> et stage <code>to_invite/invited</code> → <code>connected</code></p>
+
+      <h4>Scoring IA (Claude/GPT)</h4>
+      <p>Route <code>POST /api/ai/score</code> — Score 0-100 basé sur 3 axes :</p>
+      <table>
+        <tr><th>Axe</th><th>Points max</th><th>Critères</th></tr>
+        <tr><td>Fit Score</td><td>40 pts</td><td>Profil solopreneur (10) + Secteur B2B (10) + Titre décisionnaire (10) + Signaux maturité ICP (10)</td></tr>
+        <tr><td>Intent Score</td><td>40 pts</td><td>Signal base (0-20) + Bonus email/posts/tenure (0-15) + Bonus stage replied (+5)</td></tr>
+        <tr><td>Timing Score</td><td>20 pts</td><td>Optimal (20) / Neutre (10) / Défavorable (0)</td></tr>
+      </table>
+      <p>Catégories : <span class="badge badge-red">HOT ≥70</span> <span class="badge badge-orange">WARM ≥45</span> <span class="badge badge-blue">COLD ≥25</span> <span class="badge badge-gray">NO_GO &lt;25</span></p>
+    </div>
+  </details>
+
+  <details>
+    <summary>C. Séquence → Actions quotidiennes</summary>
+    <div class="content">
+      <h4>Cron generate-actions (06h00 Paris)</h4>
+      <p>Parcourt toutes les séquences actives, pour chaque <code>sequence_lead</code> actif :</p>
+      <ol>
+        <li>Trouve le prochain step (<code>current_step + 1</code>)</li>
+        <li>Vérifie <code>delay_days</code> écoulé depuis le dernier envoi</li>
+        <li>Évalue la condition du step (<code>always</code>, <code>if_connected</code>, <code>if_no_response</code>, <code>if_responded</code>)</li>
+        <li>Vérifie l'idempotence (pas d'action existante pour ce step)</li>
+        <li>Vérifie le quota du jour</li>
+        <li>Génère le message (template interpolé OU appel IA agent <code>prospection</code>)</li>
+        <li>Crée l'action avec <code>status: pending</code></li>
+      </ol>
+
+      <h4>Résultats des conditions</h4>
+      <table>
+        <tr><th>Condition</th><th>Résultat</th><th>Effet</th></tr>
+        <tr><td><code>always</code></td><td><code>run</code></td><td>Génère l'action</td></tr>
+        <tr><td><code>if_connected</code> (pas connecté)</td><td><code>wait</code></td><td>Skip, réessaye demain</td></tr>
+        <tr><td><code>if_connected</code> (connecté)</td><td><code>run</code></td><td>Génère l'action</td></tr>
+        <tr><td><code>if_no_response</code> (a répondu)</td><td><code>skip</code></td><td>Skip permanent, avance le step</td></tr>
+        <tr><td><code>if_no_response</code> (pas de réponse)</td><td><code>run</code></td><td>Génère l'action</td></tr>
+        <tr><td><code>if_responded</code> (a répondu)</td><td><code>run</code></td><td>Génère l'action</td></tr>
+        <tr><td><code>if_responded</code> (pas de réponse)</td><td><code>wait</code></td><td>Skip, réessaye demain</td></tr>
+      </table>
+    </div>
+  </details>
+
+  <details>
+    <summary>D. Validation → Envoi</summary>
+    <div class="content">
+      <h4>Validation par l'utilisateur</h4>
+      <p>Dans <strong>Daily Actions</strong>, l'utilisateur voit les messages <code>pending</code>. Il peut :</p>
+      <ul>
+        <li><strong>Valider</strong> : <code>pending → validated</code>, calcul de <code>scheduled_at</code></li>
+        <li><strong>Éditer</strong> : modifie <code>final_message</code>, reste <code>pending</code></li>
+        <li><strong>Régénérer</strong> : appel IA pour un nouveau message</li>
+        <li><strong>Annuler</strong> : <code>pending → cancelled</code></li>
+        <li><strong>Reporter</strong> : nouvelle date pour <code>scheduled_at</code></li>
+      </ul>
+
+      <h4>Envoi par le cron (toutes les 2 min)</h4>
+      <ol>
+        <li>Jitter aléatoire 0-30s (anti-fingerprint)</li>
+        <li>Recovery des orphelins <code>processing</code> &gt; 10min → <code>validated</code></li>
+        <li>Lock atomique : <code>validated → processing</code> (empêche double envoi)</li>
+        <li>Pour chaque action : vérifie délai anti-détection, exécute via Unipile</li>
+        <li>Succès : <code>processing → sent</code> + avance la séquence</li>
+        <li>Erreur 429 : rate limit → stop toutes les actions user</li>
+        <li>Erreur 5xx : échec + stop</li>
+        <li>Autre erreur : échec + continue</li>
+      </ol>
+    </div>
+  </details>
+
+  <details>
+    <summary>E. Réponses → Inbox</summary>
+    <div class="content">
+      <h4>Webhook <code>message.received</code></h4>
+      <ul>
+        <li>Unipile envoie un webhook à chaque nouveau message</li>
+        <li>Message entrant (<code>is_sender: false</code>) :</li>
+        <li>→ Upsert conversation dans DB</li>
+        <li>→ Insert message avec <code>direction: inbound</code></li>
+        <li>→ Si le lead est en stage <code>invited</code>, <code>connected</code> ou <code>in_sequence</code> → stage passe à <code>responded</code></li>
+        <li>→ Si le lead est dans une séquence active → <code>sequence_leads.status = responded</code></li>
+      </ul>
+      <h4>Webhook <code>relation.created</code></h4>
+      <ul>
+        <li>Quand une invitation est acceptée</li>
+        <li>→ Si lead en stage <code>invited</code> → passe à <code>connected</code></li>
+      </ul>
+    </div>
+  </details>
+</section>
+
+<!-- ========================================== -->
+<!-- SECTION 3 : MACHINES À ÉTATS               -->
+<!-- ========================================== -->
+<section id="state-machines">
+  <h2>3. Machines à états</h2>
+
+  <details open>
+    <summary>Lead Stages (parcours de prospection)</summary>
+    <div class="content">
+      <div class="mermaid-wrapper">
+        <pre class="mermaid">
+stateDiagram-v2
+    [*] --> to_invite: Création lead
+
+    to_invite --> invited: executeLinkedInAction(invitation)
+    invited --> connected: Webhook relation.created
+    connected --> in_sequence: executeLinkedInAction(message)
+    in_sequence --> in_sequence: executeLinkedInAction(message) [idempotent]
+
+    invited --> responded: Webhook message.received (inbound)
+    connected --> responded: Webhook message.received (inbound)
+    in_sequence --> responded: Webhook message.received (inbound)
+
+    responded --> meeting: User update manuel
+    meeting --> closed: User update manuel
+
+    note right of to_invite: Stage initial
+    note right of responded: Sortie auto de séquence
+    note right of closed: Lead converti
+        </pre>
+      </div>
+
+      <table>
+        <tr><th>Stage</th><th>Label FR</th><th>Transition vers</th><th>Déclencheur</th></tr>
+        <tr><td><span class="badge badge-gray">to_invite</span></td><td>À inviter</td><td>invited</td><td><code>executeLinkedInAction(invitation)</code></td></tr>
+        <tr><td><span class="badge badge-blue">invited</span></td><td>Invitation envoyée</td><td>connected / responded</td><td>Webhook <code>relation.created</code> / <code>message.received</code></td></tr>
+        <tr><td><span class="badge badge-green">connected</span></td><td>Connecté</td><td>in_sequence / responded</td><td><code>executeLinkedInAction(message)</code> / Webhook</td></tr>
+        <tr><td><span class="badge badge-purple">in_sequence</span></td><td>En séquence</td><td>responded</td><td>Webhook <code>message.received</code></td></tr>
+        <tr><td><span class="badge badge-orange">responded</span></td><td>A répondu</td><td>meeting</td><td>User update manuel</td></tr>
+        <tr><td><span class="badge badge-pink">meeting</span></td><td>RDV planifié</td><td>closed</td><td>User update manuel</td></tr>
+        <tr><td><span class="badge badge-green">closed</span></td><td>Fermé</td><td>—</td><td>Terminal</td></tr>
+      </table>
+    </div>
+  </details>
+
+  <details>
+    <summary>Lead Status (température)</summary>
+    <div class="content">
+      <div class="mermaid-wrapper">
+        <pre class="mermaid">
+stateDiagram-v2
+    [*] --> cold: Création (défaut)
+
+    cold --> warm: Scoring IA (score 45-69)
+    cold --> hot: Scoring IA (score ≥ 70)
+    warm --> hot: Scoring IA (score ≥ 70)
+    warm --> cold: Scoring IA (score < 45)
+    hot --> warm: Scoring IA (score 45-69)
+
+    cold --> converted: User update
+    warm --> converted: User update
+    hot --> converted: User update
+
+    cold --> lost: User update
+    warm --> lost: User update
+    hot --> lost: User update
+
+    note right of cold: Score < 45 — Nurturing
+    note right of warm: Score 45-69 — Cette semaine
+    note right of hot: Score ≥ 70 — Contact 24h
+        </pre>
+      </div>
+      <p><strong>Note</strong> : Le status est mis à jour automatiquement par le scoring IA (<code>HOT→hot</code>, <code>WARM→warm</code>, <code>COLD→cold</code>), ou manuellement par l'utilisateur. Le scoring thresholds : <span class="badge badge-red">HOT ≥ 70</span> <span class="badge badge-orange">WARM ≥ 45</span> <span class="badge badge-blue">COLD ≥ 25</span> <span class="badge badge-gray">NO_GO &lt; 25</span></p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Action Status (cycle d'envoi)</summary>
+    <div class="content">
+      <div class="mermaid-wrapper">
+        <pre class="mermaid">
+stateDiagram-v2
+    [*] --> pending: Cron generate-actions
+
+    pending --> validated: User validateAction()
+    pending --> cancelled: User cancelAction()
+
+    validated --> processing: Cron send (lock atomique)
+    validated --> cancelled: User cancelAction()
+    validated --> failed: Pas de compte LinkedIn / Erreur
+
+    processing --> sent: executeLinkedInAction() OK
+    processing --> failed: Erreur Unipile (429/422/5xx)
+    processing --> validated: Recovery orphelins (>10min)
+
+    failed --> pending: rescheduleAction()
+
+    note right of processing: Lock atomique anti double-envoi
+    note right of sent: Terminal — action exécutée
+    note right of cancelled: Terminal
+        </pre>
+      </div>
+
+      <table>
+        <tr><th>Status</th><th>Label FR</th><th>Description</th></tr>
+        <tr><td><span class="badge badge-gray">pending</span></td><td>En attente</td><td>Action générée par cron, attend validation user</td></tr>
+        <tr><td><span class="badge badge-blue">validated</span></td><td>Validé</td><td>User a approuvé, <code>scheduled_at</code> calculé</td></tr>
+        <tr><td><span class="badge badge-purple">processing</span></td><td>En cours</td><td>Lock atomique, envoi en cours via Unipile</td></tr>
+        <tr><td><span class="badge badge-green">sent</span></td><td>Envoyé</td><td>Action exécutée avec succès</td></tr>
+        <tr><td><span class="badge badge-red">failed</span></td><td>Échoué</td><td>Erreur Unipile — peut être reschedulé</td></tr>
+        <tr><td><span class="badge badge-gray">cancelled</span></td><td>Annulé</td><td>User a annulé l'action</td></tr>
+      </table>
+    </div>
+  </details>
+
+  <details>
+    <summary>Sequence Lead Status (parcours dans une séquence)</summary>
+    <div class="content">
+      <div class="mermaid-wrapper">
+        <pre class="mermaid">
+stateDiagram-v2
+    [*] --> active: Ajout à la séquence
+
+    active --> completed: Plus de steps dans la séquence
+    active --> responded: Webhook message.received (inbound)
+    active --> paused: User pause
+    active --> exited: User retire le lead
+
+    paused --> active: User reprend
+
+    note right of active: Progresse via current_step
+    note right of completed: Tous les steps exécutés
+    note right of responded: Sortie automatique
+        </pre>
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary>Conversation Status</summary>
+    <div class="content">
+      <div class="mermaid-wrapper">
+        <pre class="mermaid">
+stateDiagram-v2
+    [*] --> unread: Webhook message inbound
+
+    unread --> read: User marque comme lu
+    unread --> read: Message outbound (envoi)
+    read --> unread: Nouveau message inbound
+        </pre>
+      </div>
+      <p>Le status conversation est binaire : <span class="badge badge-red">unread</span> quand un message entrant arrive, <span class="badge badge-green">read</span> quand l'user consulte ou envoie.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Sequence Status</summary>
+    <div class="content">
+      <div class="mermaid-wrapper">
+        <pre class="mermaid">
+stateDiagram-v2
+    [*] --> draft: Création
+
+    draft --> active: User publie
+    active --> paused: User pause
+    paused --> active: User reprend
+    active --> archived: User archive
+    paused --> archived: User archive
+
+    note right of active: Seul statut traité par les crons
+    note right of archived: Terminal
+        </pre>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ========================================== -->
+<!-- SECTION 4 : SÉQUENCES ET TIMING            -->
+<!-- ========================================== -->
+<section id="sequences">
+  <h2>4. Séquences &amp; Timing</h2>
+
+  <h3>Structure d'une séquence type</h3>
+  <div class="mermaid-wrapper">
+    <pre class="mermaid">
+flowchart LR
+    S1["Step 1<br/>🔍 Visit<br/>delay: 0j"]
+    S2["Step 2<br/>👋 Invitation<br/>delay: 0j<br/>condition: always"]
+    S3["Step 3<br/>💬 Message<br/>delay: 3j<br/>condition: if_connected"]
+    S4["Step 4<br/>💬 Follow-up<br/>delay: 5j<br/>condition: if_no_response"]
+    S5["Step 5<br/>💬 Relance finale<br/>delay: 7j<br/>condition: if_no_response"]
+
+    S1 -->|"1-3 min"| S2
+    S2 -->|"3 jours"| S3
+    S3 -->|"5 jours"| S4
+    S4 -->|"7 jours"| S5
+    S5 --> Done["Séquence terminée"]
+
+    style S1 fill:#1a2332,stroke:#58a6ff,color:#e6edf3
+    style S2 fill:#1a2332,stroke:#58a6ff,color:#e6edf3
+    style S3 fill:#1a2332,stroke:#3fb950,color:#e6edf3
+    style S4 fill:#1a2332,stroke:#d29922,color:#e6edf3
+    style S5 fill:#1a2332,stroke:#f85149,color:#e6edf3
+    </pre>
+  </div>
+
+  <h3>Types de steps</h3>
+  <div class="card-grid">
+    <div class="card">
+      <h4>🔍 Visit</h4>
+      <p>Visite le profil LinkedIn du lead via <code>getUserProfile()</code>. Pas de message envoyé. Sert à signaler l'intérêt.</p>
+    </div>
+    <div class="card">
+      <h4>👋 Invitation</h4>
+      <p>Envoie une demande de connexion via <code>sendInvitation()</code>. Message limité à <strong>300 caractères</strong>. Stage: <code>to_invite → invited</code>.</p>
+    </div>
+    <div class="card">
+      <h4>💬 Message</h4>
+      <p>Envoie un message dans la conversation via <code>createChat()</code> ou <code>sendMessage()</code>. Requiert que le lead soit connecté. Support fragments humanisés.</p>
+    </div>
+    <div class="card">
+      <h4>📧 InMail</h4>
+      <p>Message LinkedIn premium, même logique que <code>message</code> mais sans nécessiter la connexion.</p>
+    </div>
+  </div>
+
+  <h3>Quotas LinkedIn</h3>
+  <table>
+    <tr><th>Type</th><th>Quota / jour</th><th>Configurable</th></tr>
+    <tr><td>Invitations</td><td><strong>15</strong></td><td>Oui (Settings)</td></tr>
+    <tr><td>Messages</td><td><strong>10</strong></td><td>Oui (Settings)</td></tr>
+    <tr><td>Visites profil</td><td><strong>30</strong></td><td>Oui (Settings)</td></tr>
+  </table>
+
+  <h3>Anti-détection LinkedIn</h3>
+
+  <details open>
+    <summary>Matrice des délais entre actions</summary>
+    <div class="content">
+      <table>
+        <tr><th>Dernière action →<br/>Nouvelle action ↓</th><th>Message</th><th>Visit</th><th>Invitation</th></tr>
+        <tr><td><strong>Message</strong></td><td>15 min + jitter 0-3min</td><td>15 min + jitter</td><td>15 min + jitter</td></tr>
+        <tr><td><strong>Visit</strong></td><td>15 min + jitter</td><td>15 min + jitter</td><td><span class="badge badge-green">1-3 min</span> (naturel)</td></tr>
+        <tr><td><strong>Invitation</strong></td><td>15 min + jitter</td><td><span class="badge badge-green">1-3 min</span> (naturel)</td><td>15 min + jitter</td></tr>
+      </table>
+      <p><strong>Exception</strong> : Visite → Invitation en 1-3 min (comportement humain naturel : on visite un profil puis on envoie l'invitation).</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Algorithme de scheduling non-uniforme (burst pattern)</summary>
+    <div class="content">
+      <p>Le scheduling simule un comportement humain avec des <strong>bursts</strong> d'activité séparés par des pauses.</p>
+
+      <div class="mermaid-wrapper">
+        <pre class="mermaid">
+gantt
+    title Distribution temporelle des actions (exemple)
+    dateFormat HH:mm
+    axisFormat %H:%M
+
+    section Burst 1
+    Action 1 (message)     :a1, 09:00, 1m
+    Action 2 (visit)       :a2, 09:02, 1m
+    Action 3 (invitation)  :a3, 09:04, 1m
+
+    section Gap
+    Pause 24-48 min        :crit, g1, 09:05, 35m
+
+    section Burst 2
+    Action 4 (message)     :a4, 09:40, 1m
+    Action 5 (message)     :a5, 09:55, 1m
+
+    section Gap
+    Pause 24-48 min        :crit, g2, 09:56, 40m
+
+    section Burst 3
+    Action 6 (invitation)  :a6, 10:36, 1m
+    Action 7 (visit)       :a7, 10:38, 1m
+        </pre>
+      </div>
+
+      <h4>Algorithme</h4>
+      <pre><code>Pour chaque action à planifier :
+  1. Si dans un burst (2-3 actions) :
+     → Intervalle court : 2-3 min (intervalMin × 1.0-1.5)
+  2. Entre les bursts :
+     → Gap long : 24-48 min (intervalMax × 3-5)
+  3. Plancher anti-détection :
+     → Max(intervalle burst, délai anti-détection requis)
+  4. Clamp aux heures actives :
+     → Si overflow → reporter au prochain jour actif
+  5. Jitter 0-15 min au début de chaque journée</code></pre>
+    </div>
+  </details>
+
+  <details>
+    <summary>Fragmentation humanisée des messages</summary>
+    <div class="content">
+      <p>40% des messages de 3+ phrases sont fragmentés en 2-3 parties, envoyées avec un délai de 12-25 secondes entre chaque.</p>
+      <pre><code>Message original :
+"Bonjour Jean. Je vous contacte au sujet de JARVIS. C'est une plateforme
+pour les solopreneurs. Pouvez-vous y jeter un œil ?"
+
+→ Fragment 1 : "Bonjour Jean. Je vous contacte au sujet de JARVIS."
+   [12-25 sec de pause]
+→ Fragment 2 : "c'est une plateforme pour les solopreneurs."
+   [12-25 sec de pause]
+→ Fragment 3 : "Pouvez-vous y jeter un œil ?"
+
+Transformations subtiles :
+- 25% de chance : minuscule en début de fragment
+- 50% de chance : retrait du point final</code></pre>
+    </div>
+  </details>
+
+  <h3>Workflow quotidien type</h3>
+  <div class="timeline">
+    <div class="timeline-item active">
+      <div class="timeline-time">06:00 — Cron generate-actions</div>
+      <div class="timeline-content">Génération automatique des actions du jour (séquences actives → pending)</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-time">09:00 — User ouvre Daily Actions</div>
+      <div class="timeline-content">Valide les messages, édite si nécessaire. Calcul des <code>scheduled_at</code> avec distribution non-uniforme.</div>
+    </div>
+    <div class="timeline-item active">
+      <div class="timeline-time">09:00-19:00 — Cron send-actions (toutes les 2 min)</div>
+      <div class="timeline-content">Envois automatiques respectant anti-détection : 15min entre messages, 1-3min visite→invitation.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-time">~12:00 — Webhook message.received</div>
+      <div class="timeline-content">Notification nouvelle réponse → traitement dans Inbox. Lead passe à <code>responded</code>.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-time">18:00 — Récap Dashboard</div>
+      <div class="timeline-content">KPIs mis à jour : actions envoyées, réponses, leads chauds, taux de réponse.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================== -->
+<!-- SECTION 5 : SYSTÈME IA                     -->
+<!-- ========================================== -->
+<section id="ai-system">
+  <h2>5. Système IA</h2>
+
+  <h3>Architecture du service IA</h3>
+  <div class="mermaid-wrapper">
+    <pre class="mermaid">
+flowchart TD
+    subgraph Input["Entrée"]
+        UserReq["Requête API<br/>(lead data, messages)"]
+    end
+
+    subgraph ContextBuild["Construction du contexte"]
+        Prompt["getPrompt(agentId)<br/>User override DB → Default code"]
+        RAG_Build["buildRagContext(agentId)<br/>Charge blocs knowledge/*.json"]
+        LeadCtx["buildLeadContext(lead)<br/>Données lead formatées"]
+    end
+
+    subgraph SystemPrompt["System Prompt assemblé"]
+        SP["AGENT_PROMPT<br/>+<br/>RAG_CONTEXT<br/>(cached)"]
+        RC["RUNTIME_CONTEXT<br/>(dynamique, pas caché)"]
+    end
+
+    subgraph AIService["callAI() — Service unifié"]
+        Config["getUserAIConfig()<br/>provider, model, apiKey"]
+
+        Claude_Call["callClaude()<br/>+ prompt caching"]
+        OpenAI_Call["callOpenAI()"]
+        Perplexity_Call["callPerplexity()"]
+    end
+
+    subgraph Output["Sortie"]
+        Response["AIResponse<br/>{text, usage}"]
+        UsageLog["logUsage()<br/>→ ai_usage table<br/>(async, fire & forget)"]
+    end
+
+    UserReq --> Prompt
+    UserReq --> LeadCtx
+    Prompt --> SP
+    RAG_Build --> SP
+    LeadCtx --> RC
+    SP --> AIService
+    RC --> AIService
+    Config --> AIService
+
+    AIService --> Claude_Call
+    AIService --> OpenAI_Call
+    AIService --> Perplexity_Call
+
+    Claude_Call --> Response
+    OpenAI_Call --> Response
+    Perplexity_Call --> Response
+    Response --> UsageLog
+
+    style Input fill:#1a2332,stroke:#30363d,color:#e6edf3
+    style ContextBuild fill:#1a2332,stroke:#30363d,color:#e6edf3
+    style SystemPrompt fill:#0d1922,stroke:#58a6ff,color:#e6edf3
+    style AIService fill:#1a2332,stroke:#30363d,color:#e6edf3
+    style Output fill:#1a2332,stroke:#30363d,color:#e6edf3
+    </pre>
+  </div>
+
+  <h3>Les 4 agents IA</h3>
+  <div class="card-grid">
+    <div class="card">
+      <h4>🎯 Agent Prospection <span class="badge badge-blue">v4.3</span></h4>
+      <p><strong>Usage</strong> : Génération messages LinkedIn (invitations, messages, InMails)</p>
+      <p><strong>Output</strong> : Texte brut (300 chars invitations, 500 connectés)</p>
+      <p><strong>Modèle</strong> : Claude Sonnet / GPT (user choice)</p>
+      <p><strong>Templates</strong> : INBOUND, POST_DOULEUR, POST_SUJET, ACTUALITE, SIGNAL_FAIBLE, FROID</p>
+      <p><strong>Blocs RAG</strong> : positionnement, icp, offres, messaging, objections, use_cases, pain_points (7 blocs)</p>
+    </div>
+    <div class="card">
+      <h4>📊 Agent Scoring <span class="badge badge-green">v4.2</span></h4>
+      <p><strong>Usage</strong> : Qualification leads 0-100 (Fit + Intent + Timing)</p>
+      <p><strong>Output</strong> : JSON strict (score, catégorie, breakdown)</p>
+      <p><strong>Modèle</strong> : Claude Haiku (temp 0.3, déterministe)</p>
+      <p><strong>Anti-hallucination</strong> : Données manquantes = contribution 0</p>
+      <p><strong>Blocs RAG</strong> : positionnement, icp, pain_points, regles_decisionnelles (4 blocs)</p>
+    </div>
+    <div class="card">
+      <h4>🔍 Agent Enrichissement <span class="badge badge-purple">v4.3</span></h4>
+      <p><strong>Usage</strong> : Enrichissement via Unipile (LinkedIn) + Perplexity (web)</p>
+      <p><strong>Output</strong> : JSON (company, person, signal, confidence)</p>
+      <p><strong>Modèle</strong> : Perplexity Sonar Pro (facts only)</p>
+      <p><strong>Sources</strong> : Profil LinkedIn, 5 derniers posts, news web &lt;3 mois</p>
+      <p><strong>Blocs RAG</strong> : positionnement, icp (2 blocs)</p>
+    </div>
+    <div class="card">
+      <h4>💬 Agent Conversational <span class="badge badge-orange">v4.3</span></h4>
+      <p><strong>Usage</strong> : Cockpit IA — reporting pipeline, analyse lead, brief call, correction message</p>
+      <p><strong>Output</strong> : Prose (pas de JSON)</p>
+      <p><strong>Modèle</strong> : Claude Sonnet / GPT</p>
+      <p><strong>Modes</strong> : Reporting, Lead Analysis, Brief Call, Message Correction, Offer/Positioning</p>
+      <p><strong>Blocs RAG</strong> : <strong>TOUS</strong> les 14 blocs</p>
+    </div>
+  </div>
+
+  <h3>Routes API IA</h3>
+  <table>
+    <tr><th>Route</th><th>Agent</th><th>Input</th><th>Output</th><th>Features</th></tr>
+    <tr>
+      <td><code>POST /api/ai/generate</code></td>
+      <td>prospection</td>
+      <td>lead(s), actionType, currentMessage?</td>
+      <td>Texte message LinkedIn</td>
+      <td>Batch, régénération, humanization</td>
+    </tr>
+    <tr>
+      <td><code>POST /api/ai/chat</code></td>
+      <td>conversational</td>
+      <td>messages[] (multi-turn)</td>
+      <td>Réponse conversationnelle</td>
+      <td>Pipeline data temps réel, multi-mode</td>
+    </tr>
+    <tr>
+      <td><code>POST /api/ai/score</code></td>
+      <td>scoring</td>
+      <td>lead</td>
+      <td>JSON score + breakdown</td>
+      <td>Auto-sync DB, temp 0.3</td>
+    </tr>
+    <tr>
+      <td><code>POST /api/ai/enrich</code></td>
+      <td>enrichissement</td>
+      <td>lead(s)</td>
+      <td>JSON enrichment + signal</td>
+      <td>Batch, Unipile + Perplexity, auto-stage</td>
+    </tr>
+    <tr>
+      <td><code>POST /api/ai/suggest</code></td>
+      <td>conversational</td>
+      <td>conversation + lead</td>
+      <td>Texte suggestion réponse</td>
+      <td>Historique conversation</td>
+    </tr>
+  </table>
+
+  <h3>Catalogue de modèles</h3>
+  <table>
+    <tr><th>Modèle</th><th>Provider</th><th>Input ($/1M)</th><th>Output ($/1M)</th><th>Cache Read</th></tr>
+    <tr><td><code>claude-opus-4-6</code></td><td>Claude</td><td>$5.00</td><td>$25.00</td><td>$0.50</td></tr>
+    <tr><td><code>claude-sonnet-4-5</code></td><td>Claude</td><td>$3.00</td><td>$15.00</td><td>$0.30</td></tr>
+    <tr><td><code>claude-haiku-4-5</code></td><td>Claude</td><td>$1.00</td><td>$5.00</td><td>$0.10</td></tr>
+    <tr><td><code>gpt-5.2</code></td><td>OpenAI</td><td>$1.75</td><td>$14.00</td><td>$0.175</td></tr>
+    <tr><td><code>gpt-5</code></td><td>OpenAI</td><td>$1.25</td><td>$10.00</td><td>$0.125</td></tr>
+    <tr><td><code>gpt-5-mini</code></td><td>OpenAI</td><td>$0.25</td><td>$2.00</td><td>$0.025</td></tr>
+    <tr><td><code>gpt-4o</code></td><td>OpenAI</td><td>$2.50</td><td>$10.00</td><td>$1.25</td></tr>
+    <tr><td><code>gpt-4o-mini</code></td><td>OpenAI</td><td>$0.15</td><td>$0.60</td><td>$0.075</td></tr>
+    <tr><td><code>sonar-pro</code></td><td>Perplexity</td><td>$3.00</td><td>$15.00</td><td>—</td></tr>
+    <tr><td><code>sonar</code></td><td>Perplexity</td><td>$1.00</td><td>$1.00</td><td>—</td></tr>
+  </table>
+
+  <details>
+    <summary>Système RAG — 14 blocs de connaissances</summary>
+    <div class="content">
+      <h4>Base de connaissances (<code>knowledge/*.json</code>)</h4>
+      <table>
+        <tr><th>#</th><th>Bloc</th><th>Titre</th><th>Agents</th></tr>
+        <tr><td>1</td><td><code>positionnement</code></td><td>Vision, promesse, rôle Jarvis</td><td><span class="badge badge-blue">P</span> <span class="badge badge-green">S</span> <span class="badge badge-purple">E</span> <span class="badge badge-orange">C</span></td></tr>
+        <tr><td>2</td><td><code>icp</code></td><td>ICP solopreneur 5-10k€/mois</td><td><span class="badge badge-blue">P</span> <span class="badge badge-green">S</span> <span class="badge badge-purple">E</span> <span class="badge badge-orange">C</span></td></tr>
+        <tr><td>3</td><td><code>offres</code></td><td>Offre Jarvis Start (79€ + 500€ setup)</td><td><span class="badge badge-blue">P</span> <span class="badge badge-orange">C</span></td></tr>
+        <tr><td>4</td><td><code>use_cases</code></td><td>7 use cases pilotage, prospection...</td><td><span class="badge badge-blue">P</span> <span class="badge badge-orange">C</span></td></tr>
+        <tr><td>5</td><td><code>objections</code></td><td>10 objections + réponses</td><td><span class="badge badge-blue">P</span> <span class="badge badge-orange">C</span></td></tr>
+        <tr><td>6</td><td><code>regles_decisionnelles</code></td><td>Moteur décisionnel</td><td><span class="badge badge-green">S</span> <span class="badge badge-orange">C</span></td></tr>
+        <tr><td>7</td><td><code>pain_points</code></td><td>4 familles de douleurs</td><td><span class="badge badge-blue">P</span> <span class="badge badge-green">S</span> <span class="badge badge-orange">C</span></td></tr>
+        <tr><td>8</td><td><code>benchmark_marche</code></td><td>Réalités marché solopreneurs</td><td><span class="badge badge-orange">C</span></td></tr>
+        <tr><td>9</td><td><code>benchmark_concurrents</code></td><td>Concurrents (Zapier, Dust, Lemlist...)</td><td><span class="badge badge-orange">C</span></td></tr>
+        <tr><td>10</td><td><code>pricing</code></td><td>Stratégie pricing</td><td><span class="badge badge-orange">C</span></td></tr>
+        <tr><td>11</td><td><code>messaging</code></td><td>5 angles de messaging</td><td><span class="badge badge-blue">P</span> <span class="badge badge-orange">C</span></td></tr>
+        <tr><td>12</td><td><code>operating_rules</code></td><td>JOS (Jarvis Operating System)</td><td><span class="badge badge-orange">C</span></td></tr>
+        <tr><td>13</td><td><code>onboarding</code></td><td>Onboarding progressif</td><td><span class="badge badge-orange">C</span></td></tr>
+        <tr><td>14</td><td><code>architecture_core</code></td><td>Méta-consolidation blocs 1-6</td><td><span class="badge badge-orange">C</span></td></tr>
+      </table>
+      <p><span class="badge badge-blue">P</span> = Prospection (7 blocs) &nbsp; <span class="badge badge-green">S</span> = Scoring (4 blocs) &nbsp; <span class="badge badge-purple">E</span> = Enrichissement (2 blocs) &nbsp; <span class="badge badge-orange">C</span> = Conversational (14 blocs)</p>
+
+      <h4>Hiérarchie des prompts</h4>
+      <pre><code>1. user_prompts (Supabase)     → Priorité max (override utilisateur)
+2. PROMPTS_DEFAULTS (code)     → Fallback (lib/ai/prompts/defaults.ts)
+3. '' (string vide)            → Si agent non trouvé</code></pre>
+
+      <h4>Prompt caching (Claude uniquement)</h4>
+      <pre><code>System Prompt = [
+  { text: AGENT_PROMPT + RAG_CONTEXT,  cache_control: "ephemeral" },  ← CACHÉ
+  { text: RUNTIME_CONTEXT }                                           ← DYNAMIQUE
+]</code></pre>
+      <p>Le prompt agent + RAG (statique) est caché, le contexte lead (dynamique) est recalculé à chaque appel. Économie ~90% sur les tokens d'entrée cachés.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ========================================== -->
+<!-- SECTION 6 : CONFIGURATION                  -->
+<!-- ========================================== -->
+<section id="config">
+  <h2>6. Configuration utilisateur</h2>
+
+  <h3>Réglages par défaut</h3>
+  <div class="card-grid">
+    <div class="card">
+      <h4>Quotas LinkedIn</h4>
+      <table>
+        <tr><td>Invitations / jour</td><td><strong>15</strong></td></tr>
+        <tr><td>Messages / jour</td><td><strong>10</strong></td></tr>
+        <tr><td>Visites / jour</td><td><strong>30</strong></td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h4>Anti-détection</h4>
+      <table>
+        <tr><td>Intervalle min</td><td><strong>120s</strong> (2 min)</td></tr>
+        <tr><td>Intervalle max</td><td><strong>480s</strong> (8 min)</td></tr>
+        <tr><td>Messages ↔ Messages</td><td><strong>15 min</strong></td></tr>
+        <tr><td>Visite → Invitation</td><td><strong>1-3 min</strong></td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h4>Horaires actifs</h4>
+      <table>
+        <tr><td>Jours actifs</td><td><strong>Lun — Ven</strong></td></tr>
+        <tr><td>Plage horaire</td><td><strong>9h — 19h</strong></td></tr>
+        <tr><td>Timezone</td><td><strong>Europe/Paris</strong></td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h4>IA par défaut</h4>
+      <table>
+        <tr><td>Modèle</td><td><code>claude-sonnet-4-5</code></td></tr>
+        <tr><td>Température</td><td><strong>0.7</strong></td></tr>
+        <tr><td>Langue</td><td><strong>fr</strong></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <h3>Clés API nécessaires</h3>
+  <table>
+    <tr><th>Variable</th><th>Stockage</th><th>Chiffrement</th><th>Usage</th></tr>
+    <tr><td><code>NEXT_PUBLIC_SUPABASE_URL</code></td><td>Env var Vercel</td><td>—</td><td>URL projet Supabase</td></tr>
+    <tr><td><code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code></td><td>Env var Vercel</td><td>—</td><td>Clé publique Supabase</td></tr>
+    <tr><td><code>SUPABASE_SERVICE_ROLE_KEY</code></td><td>Env var Vercel</td><td>—</td><td>Clé service (crons, webhooks)</td></tr>
+    <tr><td><code>ENCRYPTION_KEY</code></td><td>Env var Vercel</td><td>—</td><td>Clé AES-256-GCM (64 hex chars)</td></tr>
+    <tr><td><code>UNIPILE_API_KEY</code></td><td>Env var Vercel</td><td>—</td><td>API LinkedIn (partagée)</td></tr>
+    <tr><td><code>CRON_SECRET</code></td><td>Env var Vercel</td><td>—</td><td>Auth crons Vercel</td></tr>
+    <tr><td>Claude API Key</td><td>DB <code>user_api_keys</code></td><td><span class="badge badge-green">AES-256-GCM</span></td><td>Par utilisateur</td></tr>
+    <tr><td>OpenAI API Key</td><td>DB <code>user_api_keys</code></td><td><span class="badge badge-green">AES-256-GCM</span></td><td>Par utilisateur</td></tr>
+    <tr><td>Perplexity API Key</td><td>DB <code>user_api_keys</code></td><td><span class="badge badge-green">AES-256-GCM</span></td><td>Par utilisateur</td></tr>
+  </table>
+
+  <h3>Prompts personnalisables</h3>
+  <p>Chaque utilisateur peut surcharger les prompts système des 4 agents dans <strong>Settings → Prompts</strong>. Les overrides sont stockés dans <code>user_prompts</code>. Un bouton "Reset to Default" supprime l'override et réactive le prompt code.</p>
+
+  <h3>RAG éditable</h3>
+  <p>Dans <strong>Settings → Connaissances</strong>, l'admin peut éditer le contenu des 14 blocs RAG. Les overrides sont stockés dans <code>user_rag_data</code> (JSON). Le mapping agent→blocs est visible en lecture seule.</p>
+</section>
+
+<!-- ========================================== -->
+<!-- SECTION 7 : PAGES FRONTEND                 -->
+<!-- ========================================== -->
+<section id="pages">
+  <h2>7. Pages Frontend</h2>
+
+  <div class="mermaid-wrapper">
+    <pre class="mermaid">
+flowchart LR
+    subgraph Auth["Auth"]
+        Login["/login"]
+        Signup["/signup"]
+    end
+
+    subgraph Dashboard["Dashboard"]
+        Home["/"]
+        Pipe["/pipeline"]
+        LeadDetail["/pipeline/:id"]
+        Act["/actions"]
+        Seq["/sequences"]
+        SeqDetail["/sequences/:id"]
+        Lists["/lists"]
+        Inb["/inbox"]
+        Cock["/cockpit"]
+    end
+
+    subgraph Settings["Settings"]
+        SetGen["/settings"]
+        SetAPI["/settings/api-keys"]
+        SetPrompt["/settings/prompts"]
+        SetTeam["/settings/team"]
+        SetUsage["/settings/usage"]
+        SetKnow["/settings/knowledge"]
+    end
+
+    Login -->|"Auth OK"| Home
+    Signup -->|"Email confirm"| Login
+    Home --> Pipe
+    Home --> Act
+    Pipe --> LeadDetail
+    Home --> Seq
+    Seq --> SeqDetail
+    Home --> Inb
+    Home --> Cock
+
+    style Auth fill:#1a2332,stroke:#f85149,color:#e6edf3
+    style Dashboard fill:#1a2332,stroke:#58a6ff,color:#e6edf3
+    style Settings fill:#1a2332,stroke:#d29922,color:#e6edf3
+    </pre>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h4>Dashboard <code>/</code></h4>
+      <p>KPIs personnels (actions, réponses, leads chauds, taux). Vue équipe avec leaderboard et pie chart. Funnel pipeline par stage.</p>
+    </div>
+    <div class="card">
+      <h4>Pipeline <code>/pipeline</code></h4>
+      <p>Table leads avec filtres avancés (statut, stage, score, tags, search). Import CSV avec anti-doublon. Vue table / kanban.</p>
+    </div>
+    <div class="card">
+      <h4>Fiche Lead <code>/pipeline/:id</code></h4>
+      <p>Profil complet : enrichissement, timeline actions, scoring breakdown. Boutons : enrichir, scorer, ajouter à séquence, message direct.</p>
+    </div>
+    <div class="card">
+      <h4>Daily Actions <code>/actions</code></h4>
+      <p>Cards de validation messages AI. Actions : valider, éditer, régénérer, annuler, reporter. Vue timeline du scheduling.</p>
+    </div>
+    <div class="card">
+      <h4>Séquences <code>/sequences</code></h4>
+      <p>Liste des séquences avec stats. Création, duplication, pause/activation. Détail : builder steps + ajout leads.</p>
+    </div>
+    <div class="card">
+      <h4>Inbox <code>/inbox</code></h4>
+      <p>Conversations LinkedIn. Envoi réponses via Unipile. Suggestion IA. Sync manuelle depuis Unipile.</p>
+    </div>
+    <div class="card">
+      <h4>Cockpit IA <code>/cockpit</code></h4>
+      <p>Chat avec l'agent conversational. Reporting pipeline, analyse leads, brief call, correction messages.</p>
+    </div>
+    <div class="card">
+      <h4>Settings</h4>
+      <p><strong>API Keys</strong> : Claude/OpenAI/Perplexity + connexion LinkedIn Unipile.<br/>
+      <strong>Prompts</strong> : Éditeur 4 agents + reset default.<br/>
+      <strong>Knowledge</strong> : 14 blocs RAG + mapping agents.<br/>
+      <strong>Usage</strong> : KPIs + breakdowns par agent/modèle.<br/>
+      <strong>Team</strong> : Vue équipe (3 users).</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================== -->
+<!-- SECTION 8 : BASE DE DONNÉES                -->
+<!-- ========================================== -->
+<section id="database">
+  <h2>8. Base de données</h2>
+
+  <h3>Schéma relationnel</h3>
+  <div class="mermaid-wrapper">
+    <pre class="mermaid">
+erDiagram
+    profiles ||--|| auth_users : "id = user.id"
+    profiles {
+        uuid id PK
+        text full_name
+        text avatar_url
+        timestamp created_at
+    }
+
+    user_api_keys ||--|| profiles : "user_id"
+    user_api_keys {
+        uuid user_id PK
+        text claude_key_encrypted
+        text openai_key_encrypted
+        text perplexity_key_encrypted
+    }
+
+    user_settings ||--|| profiles : "user_id"
+    user_settings {
+        uuid user_id PK
+        jsonb settings
+    }
+
+    user_prompts }o--|| profiles : "user_id"
+    user_prompts {
+        uuid id PK
+        uuid user_id FK
+        text agent_id
+        text content
+    }
+
+    user_rag_data }o--|| profiles : "user_id"
+    user_rag_data {
+        uuid id PK
+        uuid user_id FK
+        text data_type
+        jsonb content
+    }
+
+    linkedin_accounts }o--|| profiles : "user_id"
+    linkedin_accounts {
+        uuid id PK
+        uuid user_id FK
+        text unipile_account_id
+        text status
+    }
+
+    leads }o--|| profiles : "user_id"
+    leads {
+        uuid id PK
+        uuid user_id FK
+        text first_name
+        text last_name
+        text linkedin_url
+        integer score
+        text status
+        text stage
+        jsonb enrichment_data
+    }
+
+    lists }o--|| profiles : "user_id"
+    lists {
+        uuid id PK
+        uuid user_id FK
+        text name
+    }
+
+    list_leads }o--|| lists : "list_id"
+    list_leads }o--|| leads : "lead_id"
+    list_leads {
+        uuid list_id PK
+        uuid lead_id PK
+    }
+
+    sequences }o--|| profiles : "user_id"
+    sequences {
+        uuid id PK
+        uuid user_id FK
+        text name
+        text status
+    }
+
+    sequence_steps }o--|| sequences : "sequence_id"
+    sequence_steps {
+        uuid id PK
+        uuid sequence_id FK
+        text step_type
+        integer delay_days
+        text template
+        integer step_order
+    }
+
+    sequence_leads }o--|| sequences : "sequence_id"
+    sequence_leads }o--|| leads : "lead_id"
+    sequence_leads {
+        uuid id PK
+        uuid sequence_id FK
+        uuid lead_id FK
+        integer current_step
+        text status
+    }
+
+    actions }o--|| profiles : "user_id"
+    actions }o--|| leads : "lead_id"
+    actions }o--|| sequences : "sequence_id"
+    actions }o--|| sequence_steps : "step_id"
+    actions {
+        uuid id PK
+        uuid user_id FK
+        uuid lead_id FK
+        text action_type
+        text status
+        text generated_message
+        text final_message
+        timestamp scheduled_at
+        timestamp sent_at
+    }
+
+    conversations }o--|| profiles : "user_id"
+    conversations }o--|| leads : "lead_id"
+    conversations {
+        uuid id PK
+        uuid user_id FK
+        uuid lead_id FK
+        text unipile_chat_id
+        text status
+    }
+
+    messages }o--|| conversations : "conversation_id"
+    messages {
+        uuid id PK
+        uuid conversation_id FK
+        text direction
+        text content
+        timestamp timestamp
+    }
+
+    ai_usage }o--|| profiles : "user_id"
+    ai_usage {
+        uuid id PK
+        uuid user_id FK
+        text agent_id
+        text provider
+        text model
+        integer input_tokens
+        integer output_tokens
+        float estimated_cost_usd
+    }
+    </pre>
+  </div>
+
+  <h3>Tables principales — 16 tables</h3>
+  <table>
+    <tr><th>Table</th><th>Rôle</th><th>RLS</th></tr>
+    <tr><td><code>profiles</code></td><td>Profils utilisateurs (miroir auth.users)</td><td>Own read/write</td></tr>
+    <tr><td><code>user_api_keys</code></td><td>Clés API chiffrées AES-256-GCM</td><td>Own only</td></tr>
+    <tr><td><code>user_settings</code></td><td>Settings JSONB (horaires, quotas, modèle IA)</td><td>Own only</td></tr>
+    <tr><td><code>user_prompts</code></td><td>Overrides prompts par agent</td><td>Own only</td></tr>
+    <tr><td><code>user_rag_data</code></td><td>Overrides RAG par bloc</td><td>Own only</td></tr>
+    <tr><td><code>linkedin_accounts</code></td><td>Comptes LinkedIn Unipile</td><td>Own only</td></tr>
+    <tr><td><code>leads</code></td><td>Leads prospection</td><td>SELECT all, WRITE own</td></tr>
+    <tr><td><code>lists</code></td><td>Listes de leads</td><td>Own only</td></tr>
+    <tr><td><code>list_leads</code></td><td>Association list ↔ lead</td><td>Via list owner</td></tr>
+    <tr><td><code>sequences</code></td><td>Séquences de prospection</td><td>Own only</td></tr>
+    <tr><td><code>sequence_steps</code></td><td>Steps d'une séquence</td><td>Via sequence owner</td></tr>
+    <tr><td><code>sequence_leads</code></td><td>Tracking lead dans séquence</td><td>Via sequence owner</td></tr>
+    <tr><td><code>actions</code></td><td>Actions LinkedIn (pending → sent)</td><td>Own only</td></tr>
+    <tr><td><code>conversations</code></td><td>Conversations inbox</td><td>Own only</td></tr>
+    <tr><td><code>messages</code></td><td>Messages dans conversations</td><td>Via conversation owner</td></tr>
+    <tr><td><code>ai_usage</code></td><td>Tracking usage IA + coûts</td><td>Own only</td></tr>
+  </table>
+
+  <h3>Indexes critiques</h3>
+  <pre><code>idx_leads_user         → leads(user_id)
+idx_leads_status       → leads(status)
+idx_leads_score        → leads(score)
+idx_actions_user_status → actions(user_id, status)
+idx_actions_scheduled  → actions(scheduled_at)
+idx_conversations_user → conversations(user_id)
+idx_conversations_status → conversations(status)</code></pre>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<div style="text-align: center; padding: 4rem 2rem 3rem; border-top: 1px solid var(--border); margin-top: 4rem;">
+  <p style="color: var(--text-dim); font-size: 0.85rem;">
+    PROSPECTOR Architecture — Généré le 28 février 2026<br/>
+    Basé sur l'exploration exhaustive du codebase
+  </p>
+  <div style="margin-top: 1rem;">
+    <span class="badge badge-gray">MVP Complet</span>
+    <span class="badge badge-blue">16 tables</span>
+    <span class="badge badge-green">16 routes</span>
+    <span class="badge badge-purple">4 agents IA</span>
+    <span class="badge badge-orange">48 endpoints Unipile</span>
+  </div>
+</div>
+
+</main>
+
+<script>
+  // Initialize Mermaid with dark theme
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'dark',
+    themeVariables: {
+      darkMode: true,
+      background: '#161b22',
+      primaryColor: '#1f3a5f',
+      primaryTextColor: '#e6edf3',
+      primaryBorderColor: '#58a6ff',
+      lineColor: '#8b949e',
+      secondaryColor: '#1a2332',
+      tertiaryColor: '#0d1922',
+      noteTextColor: '#e6edf3',
+      noteBkgColor: '#161b22',
+      noteBorderColor: '#30363d',
+      fontFamily: '-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif',
+      fontSize: '14px',
+      edgeLabelBackground: '#161b22',
+      nodeTextColor: '#e6edf3',
+      mainBkg: '#1a2332',
+      nodeBorder: '#58a6ff',
+      clusterBkg: '#161b22',
+      clusterBorder: '#30363d',
+      titleColor: '#e6edf3',
+    },
+    flowchart: {
+      curve: 'monotoneX',
+      padding: 15,
+      htmlLabels: true,
+      useMaxWidth: true,
+    },
+    er: {
+      useMaxWidth: true,
+      fontSize: 12,
+    },
+    sequence: {
+      useMaxWidth: true,
+    },
+    gantt: {
+      useMaxWidth: true,
+      fontSize: 12,
+      barHeight: 20,
+      barGap: 4,
+    },
+  });
+
+  // Active nav link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav a:not(.nav-logo)');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 80;
+      if (pageYOffset >= sectionTop) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) {
+        link.classList.add('active');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

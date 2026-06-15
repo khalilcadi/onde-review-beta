@@ -1,0 +1,66 @@
+{
+  "bloc_id": "offre_produit",
+  "title": "Offre Produit — Ce que fait Smart.AI",
+  "sections": [
+    {
+      "section_id": "vue_ensemble",
+      "tags": ["all"],
+      "heading": "Smart.AI — vue d'ensemble",
+      "content": [
+        "Smart.AI installe l'infrastructure revenue qui permet aux agences B2B, cabinets de conseil et ESN de générer un pipeline prévisible — sans dépendre de l'énergie d'une seule personne.",
+        "Le système leur appartient à la livraison.",
+        "Sans infrastructure revenue : le fondateur est le seul commercial, la prospection dépend du réseau d'une personne, les outils ont été essayés sans résultat, aucune visibilité à 3 mois.",
+        "Avec Smart.AI : le pipeline tourne quand le fondateur est en réunion/vacances, PROSPECTOR détecte les signaux d'intention et prospecte automatiquement, le système appartient au client."
+      ]
+    },
+    {
+      "section_id": "composants",
+      "tags": ["all"],
+      "heading": "Les 4 composants de l'infrastructure Smart.AI",
+      "content": [
+        "JARVIS — le cerveau central. Orchestrateur multi-agents qui connaît l'offre, les ICP, les objections, le marché du client. RAG configurable. Scoring HOT/WARM/COLD. Génération de messages personnalisés.",
+        "PROSPECTOR — le bras opérationnel. Prospecte sur 3 pipelines en parallèle via LinkedIn, email et WhatsApp. Détecte les signaux d'intention. Séquence, score, et transmet uniquement les conversations à fort potentiel.",
+        "NEXUS CRM — le tableau de bord revenue. Alimenté automatiquement par PROSPECTOR à chaque interaction — aucune ressaisie. Alertes proactives : contrats à échéance, signaux clients. 3 bases isolées (clients, candidats, partenaires). Dashboard pipeline temps réel.",
+        "SmartData — entité juridique séparée. Gouvernance data, conformité RGPD/AI Act, Data-IA Passport, DPO certifié co-signataire."
+      ]
+    },
+    {
+      "section_id": "triple_pipeline_detail",
+      "tags": ["D1", "D2", "ESN"],
+      "heading": "Triple pipeline PROSPECTOR — détail ESN",
+      "content": [
+        "Pipeline 1 ACQUISITION CLIENTS : trouver de nouveaux clients sur signaux d'intention (DSI, Dir. IT, CTO, DG PME/ETI). Signaux : offre d'emploi IT, changement poste décideur, levée de fonds. Scoring automatique HOT/WARM/COLD.",
+        "Pipeline 2 RECRUTEMENT CONSULTANTS : sourcer profils (dev, chefs de projet, consultants IT, architectes, data engineers) AVANT que le besoin soit urgent. Alerte NEXUS CRM 45j avant fin de mission → PROSPECTOR lance le sourcing automatiquement. Base talents isolée de la base clients.",
+        "Pipeline 3 RELATION CLIENT : nurturing clients existants, alertes contrats à échéance (J-90 et J-45), alerte inactivité 90 jours, extension de mission proactive. Canaux : email + WhatsApp (opt-in) + LinkedIn.",
+        "Les 3 pipelines opèrent sur des bases NEXUS CRM isolées. Aucun concurrent n'adresse les 3 avec la même infrastructure."
+      ]
+    },
+    {
+      "section_id": "pricing",
+      "tags": ["all"],
+      "heading": "Pricing — Setup + Control Tower",
+      "content": [
+        "Setup : 6 000€ HT — payé en deux fois (50% signature, 50% livraison). Comprend : Audit Revenue (5 jours), déploiement JARVIS + PROSPECTOR + NEXUS CRM, 2 sessions de formation, documentation complète. Le système appartient au client à la livraison.",
+        "Control Tower : 1 500€ HT/mois — 3 mois minimum, résiliable à 30 jours. Pilotage continu, optimisation des séquences, reporting.",
+        "Calcul ROI : Setup 6 000€ / ticket moyen client = nombre de clients pour rembourser. Si ticket > 3 000€ : remboursé sur 1-2 clients. Si ticket < 1 500€ : ROI plus long, le dire honnêtement.",
+        "Garanties : clause de sortie post-Audit Revenue (5 premiers jours), hébergement France (OVHcloud/Scaleway), DPA inclus, système propriété du client."
+      ]
+    },
+    {
+      "section_id": "arc_framework",
+      "tags": ["all"],
+      "heading": "Framework A.R.C. — méthodologie Setup",
+      "content": [
+        "A — Audit Revenue (Jours 1-5) : cartographie ICP, leviers, canaux, configuration JARVIS sur l'offre/cibles/objections du client.",
+        "R — Revenue Engine (Jours 6-30) : paramétrage PROSPECTOR, premières séquences, validation avec le client, mise en ligne.",
+        "C — Control Tower (Mois 2+) : pilotage continu, optimisation, reporting, ajustements.",
+        "Si à l'issue du diagnostic (Audit Revenue) ça ne convainc pas le client, il s'arrête — le livrable reste sa propriété."
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "v1.0",
+    "source_docs": ["OFFRE_V10", "FRAMEWORK_ARC"],
+    "total_sections": 5
+  }
+}

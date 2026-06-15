@@ -1,0 +1,58 @@
+{
+  "bloc_id": "pain_points",
+  "title": "Pain Points — Douleurs immobilières par segment et croyances limitantes",
+  "sections": [
+    {
+      "section_id": "pp_generiques_b2b",
+      "tags": ["all", "A", "B", "C"],
+      "heading": "Pain points génériques — utilisateurs en recherche de bureaux",
+      "content": [
+        "Recherche chronophage : explorer les portails et plusieurs cabinets en parallèle de son activité, sans jamais avoir une vue complète du marché disponible.",
+        "Dépendance à une personne : le dirigeant ou l'office manager porte seul le projet immobilier entre deux priorités. S'il décroche, le projet stagne.",
+        "Vision partielle du marché : les portails et un cabinet isolé ne montrent qu'une partie de l'offre. Les opportunités off-market et celles des confrères passent sous le radar.",
+        "Loyer mal calibré : ne pas savoir si le loyer actuel ou proposé est dans le marché ; payer trop cher faute de comparables et de mise en concurrence.",
+        "Bail mal négocié : méconnaissance des usages du bail commercial (3/6/9, franchise, mesures d'accompagnement, charges, travaux) qui se paie sur toute la durée du bail.",
+        "Calendrier subi : déménagement déclenché trop tard par rapport à l'échéance du bail, d'où des décisions dans l'urgence et un mauvais rapport de force."
+      ]
+    },
+    {
+      "section_id": "pp_esn_intercontrat",
+      "tags": ["D1", "D2", "ESN"],
+      "heading": "Pain points propriétaires — coût de la vacance et double contrainte",
+      "content": [
+        "Coût réel de la vacance : chaque mois sans locataire représente un loyer et des charges non couverts. La plupart des propriétaires privés ne chiffrent pas ce coût et le subissent comme une fatalité. Montant selon surface et zone. [À VÉRIFIER]",
+        "Double contrainte : gérer l'actif ET le commercialiser en même temps. Le propriétaire alterne entre les deux en mode urgence, au détriment de la qualité de la commercialisation.",
+        "Bien qui ne se reloue pas faute de stratégie : l'actif était bon mais l'annonce, le positionnement de loyer ou la cible étaient mal calibrés. Les visites n'aboutissent pas.",
+        "Recommercialisation en mode pompier : on cherche un locataire quand le local est déjà vide, au lieu d'avoir anticipé le départ ou la fin de bail.",
+        "Croyance 'je peux commercialiser seul' : fondée sur la diffusion d'une annonce. Une commercialisation pilotée (positionnement, accès aux utilisateurs et aux confrères, négociation) produit un délai et un loyer différents."
+      ]
+    },
+    {
+      "section_id": "pp_esn_croyances",
+      "tags": ["D1", "D2", "ESN"],
+      "heading": "Croyances limitantes propriétaires — refondées",
+      "content": [
+        "'Je trouve un locataire seul avec une annonce' : une annonce capte les utilisateurs déjà en recherche active. Une commercialisation pilotée va aussi chercher la demande qui passe par les confrères et les utilisateurs en veille.",
+        "'Je n'ai pas besoin d'un conseil, je connais mon bien' : connaître son bien ne suffit pas à le positionner sur le marché. Le juste loyer et la bonne cible dépendent des transactions comparables récentes, pas de l'estimation du propriétaire.",
+        "'Tous les cabinets montrent les mêmes biens' : un conseil indépendant agrège l'ensemble du marché (sa base et celle des confrères, mise à jour quotidiennement) au lieu d'un seul stock.",
+        "'La vacance n'est pas un vrai problème' : un plateau vide coûte chaque mois en loyer et charges non perçus. Ce coût mérite d'être chiffré dès le premier rendez-vous. [À VÉRIFIER]",
+        "'Je ne veux pas déléguer la commercialisation' : le conseil ne décide pas à la place du propriétaire. Il positionne, sélectionne les candidats et négocie ; le propriétaire valide et signe."
+      ]
+    },
+    {
+      "section_id": "pp_commerciaux",
+      "tags": ["D2", "sales"],
+      "heading": "Pain points — équipes asset et property management",
+      "content": [
+        "Les équipes d'asset et property management consacrent une part importante de leur temps à la gestion plutôt qu'à la commercialisation fine plateau par plateau.",
+        "Beaucoup de visites pour peu de candidatures qualifiées, faute d'accès direct à la demande utilisateur locale.",
+        "Le problème n'est pas la compétence de l'asset manager, c'est le manque de relais terrain sur la demande et le réseau d'utilisateurs."
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "v1.0-FABEL",
+    "source_docs": ["fabelconseil.com"],
+    "total_sections": 4
+  }
+}

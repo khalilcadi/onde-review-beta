@@ -1,0 +1,87 @@
+{
+  "bloc_id": "messaging_angles",
+  "title": "Messaging Angles — Positions de rupture et accroches",
+  "sections": [
+    {
+      "section_id": "position_0_intention",
+      "tags": ["all", "D1", "D2", "ESN", "signal_B"],
+      "heading": "Position 0 — Prospection sur l'intention (position centrale)",
+      "content": [
+        "Le marché prospectait à l'aveugle. Smart.AI prospecte sur ce que le marché dit.",
+        "Chaque offre d'emploi publiée est un signal de croissance. Chaque changement de poste d'un DSI est une fenêtre de 7 jours. Chaque levée de fonds annonce des besoins techniques imminents.",
+        "Ces signaux existent en permanence — la plupart des structures ne les voient pas, ou les voient trop tard. PROSPECTOR les détecte et agit au bon moment.",
+        "Application : position centrale de différenciation sur tous les segments. Signal fort pour ESN/Conseil (D1/D2) où les signaux d'intention sont les déclencheurs du double pipeline.",
+        "Accroches : 'Le marché vous envoie des signaux en permanence. La question : est-ce que vous les voyez à temps ?' / 'On ne prospecte pas plus. On prospecte mieux — sur ce que le marché dit au bon moment.'"
+      ]
+    },
+    {
+      "section_id": "position_1_systeme",
+      "tags": ["all", "B", "signal_A"],
+      "heading": "Position 1 — Système vs volume",
+      "content": [
+        "Le marché dit : publie plus, automatise ta prospection. Smart.AI dit : le problème n'est pas le volume. C'est l'absence d'infrastructure revenue.",
+        "Envoyer 500 messages sans ciblage sur l'intention produit 500 rejets. Contacter 10 personnes au bon signal au bon moment produit 5 réponses.",
+        "Application : message d'ouverture Segment B & C. Angle de rupture pour fondateurs ayant déjà testé des outils sans résultats.",
+        "Accroches : 'Ce n'est pas un problème de volume. C'est un problème de système — et de signal.' / 'Les structures qui scalent n'ont pas plus de leads. Elles ont une meilleure infrastructure.'"
+      ]
+    },
+    {
+      "section_id": "position_2_reseau",
+      "tags": ["C", "D1", "D2"],
+      "heading": "Position 2 — Le réseau a une date d'expiration",
+      "content": [
+        "La recommandation est un excellent canal — jusqu'au jour où les mêmes 50 contacts ne donnent plus les mêmes résultats. Le réseau ne s'épuise pas, son périmètre se concentre.",
+        "Les meilleures opportunités sont chez des décideurs que vous ne connaissez pas encore — mais qui envoient des signaux d'intention clairs.",
+        "Application : déclencheur principal Segment C et D1/D2. Signal fort : 'Je génère tout mon business par le réseau depuis 18 mois, ça ralentit.'",
+        "Accroches : 'Le réseau du fondateur a une date d'expiration. Pas parce qu'il se détériore — parce qu'il se concentre.' / 'Vos prochains meilleurs clients ne sont pas dans votre réseau. Ils publient une offre d'emploi en ce moment.'"
+      ]
+    },
+    {
+      "section_id": "position_3_outil",
+      "tags": ["B", "signal_A"],
+      "heading": "Position 3 — Outil sans système = inutile",
+      "content": [
+        "Acheter Lemlist sans architecture ICP, c'est acheter une voiture sans savoir conduire. Acheter HubSpot sans quelqu'un pour le remplir, c'est acheter un CRM pour organiser le vide.",
+        "L'outil n'est jamais le problème — c'est l'architecture autour qui fait la différence.",
+        "Application : réponse à 'on a déjà essayé des outils'. Signal fort Segment B.",
+        "Accroches : 'Waalaxy envoie des messages. PROSPECTOR détecte des signaux, personnalise, score et suit. Ce n'est pas la même intervention.' / 'Le problème n'est pas l'outil. C'est l'absence d'architecture autour.'"
+      ]
+    },
+    {
+      "section_id": "position_4_personne",
+      "tags": ["A", "B", "C", "fondateur"],
+      "heading": "Position 4 — Système vs personne",
+      "content": [
+        "Si la structure ne génère pas de revenus quand le fondateur est en vacances, elle n'a pas un système. Elle a une personne.",
+        "Chaque heure que le fondateur passe à prospecter manuellement est une heure de moins sur la stratégie, le management, et l'offre.",
+        "Application : déclencheur émotionnel fort sur Segment A & B.",
+        "Accroches : 'Votre acquisition ne devrait pas dépendre de votre énergie. Elle devrait dépendre d'un système.' / 'Quand vous partez en vacances, est-ce que quelque chose continue à générer des opportunités pour vous ?'"
+      ]
+    },
+    {
+      "section_id": "position_5_crm",
+      "tags": ["all", "D1", "D2"],
+      "heading": "Position 5 — Le CRM ne vend pas, il enregistre",
+      "content": [
+        "Le CRM organise ce qui entre — il ne fait pas entrer. La plupart des CRM sont sous-alimentés parce que personne n'a le temps de les remplir correctement.",
+        "NEXUS CRM se remplit automatiquement à chaque interaction PROSPECTOR. Ce n'est pas un outil de saisie — c'est le tableau de bord d'un système qui alerte, anticipe et prospecte.",
+        "Application : objection 'on a déjà un CRM'. NEXUS CRM = CRM qui se remplit seul et alerte 45 jours avant une fin de contrat."
+      ]
+    },
+    {
+      "section_id": "vocabulaire",
+      "tags": ["all"],
+      "heading": "Vocabulaire — autorisé et interdit",
+      "content": [
+        "AUTORISÉ : infrastructure, système, pipeline, prévisible, structurer, anticiper, signaux d'intention, architecture, séquences, scoring, automatique.",
+        "INTERDIT en prospection froide : solution, accompagnement, levier, ROI, optimiser, booster, maximiser, innovant, révolutionnaire, disruptif, game-changer.",
+        "Ton général : sobre, factuel, business. Pas de superlatifs. Pas de promesses. Pas de langage marketing."
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "v1.0",
+    "source_docs": ["MANIFESTO_V5"],
+    "total_sections": 7
+  }
+}

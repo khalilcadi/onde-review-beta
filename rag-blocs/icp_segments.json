@@ -1,0 +1,120 @@
+{
+  "bloc_id": "icp_segments",
+  "title": "ICP Segments — Profils, JTBD, Signaux",
+  "sections": [
+    {
+      "section_id": "donnees_marche",
+      "tags": ["all", "market"],
+      "heading": "Données marché — sources 2024-2025",
+      "content": [
+        "15 000 cabinets conseil France (Syntec Conseil 2025). 0% croissance conseil 2024 — 6e pire année depuis 2001.",
+        "34,5 Mds€ CA ESN France 2024 (Numeum/EuroLand). -2,1% recul ESN prévu 2025. 7 000 postes perdus ESN 2024.",
+        "4 à 8x tensions recrutement ESN vs tous secteurs (KYU Associés 2024). 50,1% recrutements difficiles tous secteurs (France Travail BMO 2025).",
+        "26% TPE/PME utilisent l'IA en 2025 (x2 en 1 an). 11% seulement ont un usage IA avancé (France Num 2025). 61% PME manquent de compétences IA.",
+        "8-15k€ coût intercontrat par consultant par an (Syntec Numérique/Philix 2026). 80 000 entreprises Syntec France 2025.",
+        "Règle d'usage : ces chiffres sont utilisables dans les messages pour contextualiser sans paraître présomptueux. Toujours citer la source. Ne jamais présenter comme résultats Smart.AI."
+      ]
+    },
+    {
+      "section_id": "signaux_intention",
+      "tags": ["all", "signals"],
+      "heading": "Signaux d'intention — les 7 signaux PROSPECTOR",
+      "content": [
+        "Offre d'emploi publiée (IT ou commercial) — FORT — P1+P2 — PME/ETI qui recrute = croissance = besoin de prestation. Contacter dans les 48h.",
+        "Changement de poste décideur (DSI, DG, Dir. Commercial) — FORT — P1 — Fenêtre de 7-30j pour se positionner avant réinstallation des prestataires historiques.",
+        "Levée de fonds ou rachat — FORT — P1 — Startup/PME qui lève = recrutements + projets tech = besoin ESN ou conseil. Contacter dans les 48h.",
+        "Post LinkedIn sur problématique commerciale ou RH — MOYEN — P1 — Signal d'intention implicite. Contacter dans la semaine.",
+        "Actualité marché sectorielle (ralentissement, tension) — MOYEN — P1+P3 — Contexte difficile = moment pour optimiser.",
+        "Nouveau client annoncé par un client existant — MOYEN — P3 — Extension de mission potentielle. Contacter dans les 48h.",
+        "Contrat à échéance détecté (NEXUS CRM) — FORT — P3 — Anticiper 45-90j avant fin de contrat. J-90 puis J-45.",
+        "Priorité signal vs ICP : si signal détecté → message contextualisé sur le signal (taux réponse 3-5x supérieur). Si pas de signal → prospection sur connaissance fine ICP."
+      ]
+    },
+    {
+      "section_id": "segment_a",
+      "tags": ["A", "early", "fondateur"],
+      "heading": "Segment A — Early Stage (70-200k€)",
+      "content": [
+        "Priorité : secondaire. 3 conditions obligatoires avant qualification : (1) 3h/semaine disponibles pour le Setup, (2) budget 6 000€ sans tension, (3) douleur réelle et active.",
+        "Profil : CA 70-200k€, 1-4 personnes, 1-3 ans, CRM inexistant ou Notion, acquisition 100% réseau et recommandations.",
+        "Signal fort : mois à 0 client, client perdu sans remplacement, pipeline inexistant.",
+        "Réalité quotidienne : aucun prospect qualifié dans le pipe. Client perdu sans compensation. 3h sur LinkedIn hier soir pour 0 résultat. Devis tous les 2 mois par recommandation.",
+        "Blocage profond : pense que la solution c'est 'trouver plus de clients' sans comprendre que le problème est l'absence de système. Sous-estime le temps perdu en prospection non structurée. Croit que son secteur ne supporte pas le cold outreach.",
+        "JTBD : flux de prospects qualifiés sans y passer ses soirées. Éviter l'anxiété du pipeline vide. Être perçu comme un entrepreneur structuré, pas un prestataire qui attend.",
+        "Langage : mission, client, lancer, indépendant, structurer, réseau, recommandation, galère, déborder."
+      ]
+    },
+    {
+      "section_id": "segment_b",
+      "tags": ["B", "growth", "fondateur"],
+      "heading": "Segment B — Growth Stage (200-350k€)",
+      "content": [
+        "Priorité : primaire.",
+        "Profil : CA 200-350k€, 3-7 personnes, 2-5 ans, HubSpot ou Pipedrive partiellement alimenté. A de bons clients mais ne sait pas les reproduire — problème architectural, pas conjoncturel.",
+        "Signal fort : mention d'un outil abandonné (Lemlist, Waalaxy, Apollo) ou 'j'ai essayé des trucs'.",
+        "Réalité quotidienne : 3 prospects dans HubSpot, 2 n'ont pas répondu. Waalaxy paramétré il y a 4 mois, 200 messages, 4 réponses, 0 RDV. Meilleur client recommandé par un ami, aucune idée de comment reproduire. Croissance en plateau depuis 3 mois.",
+        "Blocage profond : a conclu que l'automatisation ne marche pas — alors que le vrai problème est l'absence d'architecture (pas de scoring ICP, pas de personnalisation, pas de suivi). Ne comprend pas que prospecter sur l'intention produit des résultats radicalement différents.",
+        "JTBD : pipeline prévisible basé sur un système. Éviter d'investir dans un outil qui ne fonctionne pas. Être perçu comme un dirigeant qui a réglé son acquisition.",
+        "Langage : pipeline, structurer, scaler, déléguer, process, croissance, MRR, closing, taux de conversion, système."
+      ]
+    },
+    {
+      "section_id": "segment_c",
+      "tags": ["C", "scale", "fondateur"],
+      "heading": "Segment C — Scale Stage (350-500k€)",
+      "content": [
+        "Priorité : primaire, ticket élevé.",
+        "Profil : CA 350-500k€, 6-12 personnes, 4 ans+, HubSpot ou Salesforce partiellement structuré. Fondateur principal commercial, parfois 1 commercial junior recruté sans succès.",
+        "Signal fort : 'Je suis encore le seul commercial de mon agence à 400k€'.",
+        "Réalité quotidienne : patron de 8 personnes qui génère 450k€/an, encore le seul à ramener des clients. Commercial recruté il y a 8 mois qui n'a pas performé. 30-40% du temps sur le commercial au lieu du management. Réseau qui apporte moins qu'il y a 2 ans.",
+        "Blocage profond : le commercial recruté a échoué faute d'infrastructure, pas faute de compétence. Le fondateur ne lâche pas le commercial parce qu'il n'a pas de solution concrète pour le remplacer. N'a pas encore compris que le problème est l'absence de système autour du commercial.",
+        "JTBD : infrastructure qui génère un pipeline indépendant du fondateur. Éviter d'être encore le seul commercial dans 2 ans. Être perçu comme un dirigeant qui a industrialisé, pas un vendeur avec une équipe autour.",
+        "Langage : scalabilité, délégation, acquisition, conversion, systématiser, recrutement commercial, goulot."
+      ]
+    },
+    {
+      "section_id": "segment_d1",
+      "tags": ["D1", "ESN", "cabinet", "5-49"],
+      "heading": "Segment D1 — ESN et Cabinet 5-49 personnes",
+      "content": [
+        "Priorité : primaire (ESN).",
+        "Profil : 5-49 consultants (internes CDI + freelances), TJM moyen 400-700€/jour, modèle commercial régie majoritairement. Taux intercontrat entre 8 et 20% — objectif sain < 10%. CRM absent (60%) ou Excel/Notion (30%). Pipeline = réseau personnel fondateur + bouche-à-oreille.",
+        "Signal fort : AO perdu faute de profil, associés qui vendent ET délivrent, pipeline dépendant du réseau.",
+        "Fondateur porte 3 rôles : DG + commercial + directeur de mission. L'absence de séparation entre ces rôles est la source de tous les problèmes.",
+        "Réalité quotidienne : 2 consultants finissent leur mission dans 3 semaines, rien pour les remplacer. Réunion client 9h, devis pour vendredi, 3 candidats à rappeler pour un poste ouvert depuis 6 semaines. AO perdu non pas pour l'offre technique mais parce que le bon profil n'était pas disponible au bon moment. 10 messages LinkedIn le soir, 1 réponse, 0 RDV.",
+        "Blocage profond : pense que la solution c'est travailler plus. A essayé Waalaxy (200 messages, 0 RDV) et conclu que 'la prospection automatisée ne marche pas dans son secteur'. Ne calcule jamais le coût réel de son temps (TJM 600€ × 2j/semaine de prospection = 1 200€/semaine pour 0 résultat). Sous-estime le coût de l'intercontrat. Pense que prospecter à froid va décrédibiliser son ESN.",
+        "JTBD : flux continu de clients sans que ça repose sur lui. Consultants disponibles quand opportunité arrive. Taux d'intercontrat sous 10%. Alertes proactives sur contrats à échéance. Être perçu comme un entrepreneur qui a industrialisé, pas un consultant senior avec une structure autour.",
+        "Citation terrain : 'Mon vrai problème ce n'est pas de trouver des clients. C'est d'anticiper la fin des missions assez tôt pour ne jamais avoir de bench.'",
+        "Calcul intercontrat : 10 consultants × 12% intercontrat × 7 000€/mois = 84 000€/an de marge perdue. 25 consultants = 252 000€/an. 50 consultants = 504 000€/an."
+      ]
+    },
+    {
+      "section_id": "segment_d2",
+      "tags": ["D2", "ESN", "50-249"],
+      "heading": "Segment D2 — ESN et Cabinet 50-249 personnes",
+      "content": [
+        "Signal fort : 'Mes commerciaux n'ouvrent pas assez de nouveaux comptes' ou 'BD team sous objectifs'.",
+        "Les commerciaux ont les relations mais il leur manque le flux d'opportunités qualifiées en continu.",
+        "Angle principal : munitions pour les commerciaux. PROSPECTOR leur donne les leads scorés sur signaux d'intention dans leur CRM existant (HubSpot ou Salesforce). Ils closent, PROSPECTOR chasse.",
+        "Les commerciaux passent 40-50% de leur temps à sourcer et relancer. Ce n'est pas un problème de compétence — c'est un manque d'infrastructure.",
+        "Registre plus formel. Décideurs : DG + Directeur Commercial. Hébergement France et DPA signé sont des arguments de poids sur ce segment."
+      ]
+    },
+    {
+      "section_id": "triple_pipeline",
+      "tags": ["D1", "D2", "ESN", "pipeline"],
+      "heading": "Triple pipeline PROSPECTOR — spécifique ESN",
+      "content": [
+        "Pipeline 1 ACQUISITION CLIENTS : trouver de nouveaux clients (DSI, Dir. IT, CTO, DG PME/ETI). Canaux : LinkedIn + Email. Signaux : offre d'emploi IT, changement de poste DSI, levée de fonds, post LinkedIn.",
+        "Pipeline 2 RECRUTEMENT CONSULTANTS : sourcer des profils consultants (dev, chefs de projet, consultants IT, architectes, data engineers) avant qu'un besoin soit urgent. Signaux : fin de mission approchante (NEXUS CRM 45j avant), offre d'emploi concurrent, profils disponibles.",
+        "Pipeline 3 RELATION CLIENT & PARTENAIRES : nurturing clients existants, alertes proactives (contrats à échéance, signaux clients, inactivité 90j), prospection partenaires (cabinets, intégrateurs, éditeurs). Canaux : Email + WhatsApp + LinkedIn.",
+        "Règle d'isolation des bases : les 3 pipelines opèrent sur des bases NEXUS CRM distinctes et isolées. Un prospect pipeline 1 ne reçoit jamais un message pipeline 2. Un client pipeline 3 ne reçoit jamais un message commercial pipeline 1 sans transition documentée."
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "v1.0",
+    "source_docs": ["ICP_V6", "FOCUS_ESN_V2"],
+    "total_sections": 8
+  }
+}

@@ -1,0 +1,302 @@
+{
+  "source_file": "BLOC_7_-_PAIN_POINTS_FRAMEWORK_.docx",
+  "bloc_id": "bloc_7",
+  "title": "BLOC 7 - PAIN POINTS FRAMEWORK",
+  "sections": [
+    {
+      "heading": "🧠 PAIN_POINTS_FRAMEWORK",
+      "content": [
+        "OUTLINE CONSOLIDÉ — Version finale (RAG-ready)"
+      ]
+    },
+    {
+      "heading": "1️⃣ Rôle stratégique du bloc (fondation du système)",
+      "content": [
+        "Objectif central",
+        "Donner à Jarvis une lecture claire, non culpabilisante et actionnable des douleurs réelles des solopreneurs (5–10k€/mois), afin de :",
+        "détecter le pain dominant",
+        "comprendre ce qui bloque réellement",
+        "choisir la bonne posture, le bon use case et le bon message",
+        "éviter toute dispersion ou mauvaise réponse"
+      ]
+    },
+    {
+      "heading": "👉 Ce bloc ne sert pas à analyser pour analyser.👉 Il sert à mieux décider.",
+      "content": []
+    },
+    {
+      "heading": "2️⃣ Principe fondateur (règle clé RAG)",
+      "content": [
+        "Un solopreneur n’a jamais “tous” les problèmes à la fois.Il a toujours un pain dominant qui écrase les autres.",
+        "Conséquence directe pour Jarvis :",
+        "1 pain = 1 focus",
+        "tout le reste est secondaire",
+        "aucune action sans pain identifié"
+      ]
+    },
+    {
+      "heading": "3️⃣ Les 4 grandes familles de pains",
+      "content": [
+        "(classification stable, non culpabilisante)",
+        "Ces familles ne sont ni hiérarchiques, ni fixes.Elles évoluent selon le moment business et la maturité."
+      ]
+    },
+    {
+      "heading": "🔹 A. Pains MENTAUX & ÉMOTIONNELS",
+      "content": [
+        "Ce que c’est vraiment",
+        "La fatigue invisible liée à la surcharge cognitive et décisionnelle.",
+        "Sous-pains typiques",
+        "charge mentale permanente",
+        "fatigue de décider seul",
+        "peur d’échouer",
+        "pression de “toujours faire plus”",
+        "comparaison constante (LinkedIn, X, etc.)",
+        "Signaux observables (pour Jarvis)",
+        "demandes floues",
+        "procrastination",
+        "recherche de validation",
+        "accumulation de contenus sans passage à l’action",
+        "Désir miroir (ce que la personne veut réellement)",
+        "clarté",
+        "respiration mentale",
+        "sentiment de contrôle"
+      ]
+    },
+    {
+      "heading": "🔹 B. Pains BUSINESS & CASH",
+      "content": [
+        "Ce que c’est vraiment",
+        "L’insécurité financière et la peur de l’instabilité.",
+        "Sous-pains typiques",
+        "CA irrégulier",
+        "pipeline fragile",
+        "dépendance à quelques clients",
+        "difficulté à vendre régulièrement",
+        "stress lié aux échéances",
+        "Signaux observables",
+        "focalisation court terme",
+        "peur d’investir",
+        "obsession du ROI immédiat",
+        "hésitation sur le pricing",
+        "Désir miroir",
+        "sécurité",
+        "visibilité",
+        "confiance financière"
+      ]
+    },
+    {
+      "heading": "🔹 C. Pains ORGANISATIONNELS & OPÉRATIONNELS",
+      "content": [
+        "Ce que c’est vraiment",
+        "Le chaos structurel du quotidien.",
+        "Sous-pains typiques",
+        "dispersion permanente",
+        "trop d’outils",
+        "absence de process",
+        "tout repose sur la tête du fondateur",
+        "automatisation prématurée",
+        "Signaux observables",
+        "“je fais tout”",
+        "changement fréquent de priorités",
+        "abandon des systèmes",
+        "envie de tout automatiser",
+        "Désir miroir",
+        "structure",
+        "simplicité",
+        "maîtrise du quotidien"
+      ]
+    },
+    {
+      "heading": "🔹 D. Pains IDENTITAIRES & EXISTENTIELS",
+      "content": [
+        "Ce que c’est vraiment",
+        "Les douleurs silencieuses, rarement verbalisées.",
+        "Sous-pains typiques",
+        "sentiment d’échec discret",
+        "doute sur la légitimité",
+        "honte de ne pas “réussir comme les autres”",
+        "solitude entrepreneuriale",
+        "Signaux observables",
+        "auto-dévalorisation",
+        "évitement des décisions structurantes",
+        "peur de se confronter aux chiffres",
+        "comparaison sociale excessive",
+        "Désir miroir",
+        "légitimité",
+        "reconnaissance",
+        "sérénité intérieure"
+      ]
+    },
+    {
+      "heading": "4️⃣ Évolution et masquage des pains (clé d’intelligence)",
+      "content": [
+        "Le pain exprimé n’est pas toujours le pain réel.",
+        "Exemples :",
+        "pain organisationnel déclaré → pain identitaire réel",
+        "pain cash déclaré → peur d’échouer",
+        "pain mental → surcharge chronique non reconnue"
+      ]
+    },
+    {
+      "heading": "👉 Jarvis doit :",
+      "content": [
+        "écouter le pain exprimé",
+        "inférer le pain dominant probable",
+        "creuser avant d’agir",
+        "IF pain_declared ≠ pain_probable",
+        "THEN clarifier_avant_action"
+      ]
+    },
+    {
+      "heading": "5️⃣ Maturité business & lecture des pains",
+      "content": [
+        "Sans rigidité, Jarvis peut utiliser ces signaux :",
+        "~5k€/mois → pains cash & identitaires souvent dominants",
+        "8–10k€/mois → pains mentaux & organisationnels dominants"
+      ]
+    },
+    {
+      "heading": "👉 Ce sont des indicateurs, pas des règles strictes.",
+      "content": []
+    },
+    {
+      "heading": "6️⃣ Priorisation stricte (anti-dispersion)",
+      "content": [
+        "Jarvis doit toujours appliquer :",
+        "Identifier 1 pain dominant",
+        "Ignorer les autres temporairement",
+        "Traiter le pain avant toute exécution",
+        "IF pains_detectes > 1",
+        "THEN prioriser pain_dominant"
+      ]
+    },
+    {
+      "heading": "👉 Sans pain clair → pas d’action.",
+      "content": []
+    },
+    {
+      "heading": "7️⃣ Mapping Pain → Moment Business (Bloc 6)",
+      "content": [
+        "Pain dominant",
+        "Moment business probable",
+        "Mental",
+        "SURCHARGE_MENTALE",
+        "Cash",
+        "STAGNATION",
+        "Organisationnel",
+        "CROISSANCE_NON_MAITRISEE",
+        "Identitaire",
+        "DOUTE_STRATEGIQUE"
+      ]
+    },
+    {
+      "heading": "👉 Ce mapping nourrit directement le moteur décisionnel.",
+      "content": []
+    },
+    {
+      "heading": "8️⃣ Mapping Pain → Use Case (Bloc 4E)",
+      "content": [
+        "Pain mental → Pilotage & allègement",
+        "Pain cash → Relances / sécurisation",
+        "Pain organisationnel → Structuration",
+        "Pain identitaire → Clarification stratégique"
+      ]
+    },
+    {
+      "heading": "👉 1 à 2 use cases maximum. Jamais plus.",
+      "content": []
+    },
+    {
+      "heading": "9️⃣ Règles d’erreur & anti-patterns",
+      "content": [
+        "Jarvis doit éviter :",
+        "traiter un pain business quand le pain est émotionnel",
+        "pousser à l’action quand l’énergie est basse",
+        "utiliser un discours ROI sur un pain identitaire",
+        "diagnostiquer trop finement à voix haute"
+      ]
+    },
+    {
+      "heading": "👉 Le diagnostic est interne.👉 L’expression reste simple et humaine.",
+      "content": []
+    },
+    {
+      "heading": "🔟 Sorties attendues (outputs RAG)",
+      "content": [
+        "Ce bloc doit permettre à Jarvis de produire :",
+        "une lecture simple du blocage réel",
+        "une normalisation (“ce que tu vis est courant”)",
+        "une direction claire (“voici ce qu’on traite maintenant”)"
+      ]
+    },
+    {
+      "heading": "👉 Jamais :",
+      "content": [
+        "de jargon psy",
+        "de jugement",
+        "de culpabilisation"
+      ]
+    },
+    {
+      "heading": "1️⃣1️⃣ Liens explicites avec les autres blocs",
+      "content": [
+        "Ce bloc alimente directement :"
+      ]
+    },
+    {
+      "heading": "Bloc 2 → empathie & posture",
+      "content": []
+    },
+    {
+      "heading": "Bloc 4E → choix du use case",
+      "content": []
+    },
+    {
+      "heading": "Bloc 5 → traitement des objections",
+      "content": []
+    },
+    {
+      "heading": "Bloc 6 → arbitrage décisionnel",
+      "content": [
+        "BENCHMARK_MARCHE → normalisation",
+        "MESSAGING_ANGLES → discours adapté"
+      ]
+    },
+    {
+      "heading": "1️⃣2️⃣ Critères de validation finale",
+      "content": [
+        "Ce bloc est validé si :",
+        "chaque pain est clair, distinct et humain",
+        "aucun pain n’est culpabilisant",
+        "Jarvis peut toujours choisir un seul focus",
+        "le framework reste simple et exploitable par une IA"
+      ]
+    },
+    {
+      "heading": "🧾 Synthèse finale (clé RAG)",
+      "content": [
+        "Le rôle de Jarvis n’est pas de traiter tous les problèmes.C’est d’identifier le bon problème à traiter maintenant."
+      ]
+    },
+    {
+      "heading": "✅ Conclusion",
+      "content": [
+        "Le framework est désormais :",
+        "complet",
+        "cohérent",
+        "RAG-ready",
+        "aligné avec toute l’architecture Jarvis"
+      ]
+    },
+    {
+      "heading": "👉 Tu peux valider cet outline sans risque.",
+      "content": []
+    }
+  ],
+  "metadata": {
+    "converted_at": "2026-02-06T07:46:32.134Z",
+    "total_sections": 32,
+    "total_paragraphs": 140
+  }
+}

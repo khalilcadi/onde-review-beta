@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm install:*)",
+      "Bash(npx tsx:*)",
+      "Bash(DRY_RUN=1 npx tsx scripts/khalil-cleanup-pipeline.ts)",
+      "WebFetch(domain:docs.icypeas.com)",
+      "WebFetch(domain:developer.icypeas.com)",
+      "WebFetch(domain:icypeas.com)",
+      "WebFetch(domain:app.icypeas.com)",
+      "WebFetch(domain:api-doc.icypeas.com)",
+      "WebSearch",
+      "mcp__plugin_supabase_supabase__list_projects",
+      "mcp__plugin_supabase_supabase__execute_sql",
+      "WebFetch(domain:developer.unipile.com)"
+    ]
+  }
+}

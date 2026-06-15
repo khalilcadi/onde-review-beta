@@ -1,0 +1,276 @@
+{
+  "source_file": "_BLOC_13__CLIENT_ONBOARDING_FLOW.docx",
+  "bloc_id": "bloc_13",
+  "title": "BLOC 13  CLIENT ONBOARDING FLOW",
+  "sections": [
+    {
+      "heading": "🍽️ BLOC 13 — CLIENT_ONBOARDING_FLOW.md",
+      "content": [
+        "Smart & Progressive Onboarding for a Deep RAG",
+        "Version finale intégrée — RAG-ready"
+      ]
+    },
+    {
+      "heading": "1️⃣ Rôle stratégique du Bloc 13",
+      "content": [
+        "Objectif central",
+        "Permettre à Jarvis de :",
+        "construire une compréhension profonde et durable du business",
+        "alimenter un RAG de qualité long terme",
+        "éviter toute perte d’information critique",
+        "préserver une expérience fluide sans appauvrir le système",
+        "aligner Jarvis et le client comme deux business partners",
+        "👉 L’onboarding n’est pas une formalité.👉 C’est la fondation cognitive de Jarvis."
+      ]
+    },
+    {
+      "heading": "2️⃣ Principe fondateur (reformulé)",
+      "content": [
+        "Jarvis privilégie la progressivité,mais vise toujours une compréhension complète du business.",
+        "Conséquences :",
+        "certaines informations sont différées",
+        "aucune information critique n’est ignorée",
+        "l’expérience reste fluide sans sacrifier la profondeur"
+      ]
+    },
+    {
+      "heading": "👉 Rapide ≠ intelligent.👉 Juste au bon moment = intelligent.",
+      "content": []
+    },
+    {
+      "heading": "3️⃣ Distinction clé : exploration vs structuration",
+      "content": [
+        "Jarvis fonctionne selon 2 modes explicites :"
+      ]
+    },
+    {
+      "heading": "🔹 Mode Exploration",
+      "content": [
+        "premières interactions",
+        "compréhension globale",
+        "langage naturel",
+        "peu de contraintes"
+      ]
+    },
+    {
+      "heading": "👉 Objectif : comprendre sans figer.",
+      "content": []
+    },
+    {
+      "heading": "🔹 Mode Structuration",
+      "content": [
+        "déclenché consciemment",
+        "plus lent",
+        "plus précis",
+        "plus cadré"
+      ]
+    },
+    {
+      "heading": "👉 Objectif : solidifier le RAG pour :",
+      "content": [
+        "automatiser",
+        "projeter",
+        "décider à long terme"
+      ]
+    },
+    {
+      "heading": "4️⃣ Piliers RAG obligatoires (non négociables)",
+      "content": [
+        "Pour qu’un RAG soit réellement exploitable, Jarvis doit obligatoirement comprendre, à terme :",
+        "Offre",
+        "ce qui est vendu",
+        "à qui",
+        "à quel prix / valeur",
+        "ICP / Clients",
+        "profils cibles",
+        "pains dominants",
+        "objections récurrentes",
+        "Preuves & crédibilité",
+        "résultats",
+        "expériences",
+        "différenciation réelle",
+        "Cycle de vente",
+        "durée",
+        "points de friction",
+        "déclencheurs de décision",
+        "Contraintes fortes",
+        "temps",
+        "cash",
+        "énergie",
+        "capacité d’exécution"
+      ]
+    },
+    {
+      "heading": "👉 Ces piliers peuvent être progressifs,👉 mais ils doivent tous être couverts.",
+      "content": []
+    },
+    {
+      "heading": "5️⃣ Structure globale de l’onboarding (vue réelle)",
+      "content": [
+        "L’onboarding Jarvis est progressif mais complet, en 4 grandes phases, avec des points de structuration obligatoires."
+      ]
+    },
+    {
+      "heading": "6️⃣ Phase 1 — Activation intelligente (entrée en matière)",
+      "content": [
+        "Objectif",
+        "Permettre à Jarvis de commencer à penser juste, pas encore à automatiser.",
+        "Informations demandées",
+        "activité principale (texte libre)",
+        "objectif immédiat",
+        "niveau d’énergie / pression actuelle"
+      ]
+    },
+    {
+      "heading": "👉 Active :",
+      "content": []
+    },
+    {
+      "heading": "Bloc 7 (Pain Points)",
+      "content": []
+    },
+    {
+      "heading": "Bloc 6 (Decision Engine)",
+      "content": []
+    },
+    {
+      "heading": "👉 Aucune automatisation lourde ici.",
+      "content": []
+    },
+    {
+      "heading": "7️⃣ Phase 2 — Exploration guidée (compréhension globale)",
+      "content": [
+        "Objectif",
+        "Comprendre le business sans rigidité.",
+        "Informations collectées (conversationnelles)",
+        "type d’offre (service / produit / hybride)",
+        "type de clients",
+        "difficulté principale actuelle"
+      ]
+    },
+    {
+      "heading": "👉 Mode Exploration actif👉 Peu de questions, beaucoup de reformulation",
+      "content": []
+    },
+    {
+      "heading": "8️⃣ Phase 3 — Structuration consciente (moment clé)",
+      "content": [
+        "Déclencheurs obligatoires",
+        "volonté d’automatiser",
+        "projection long terme",
+        "discussion pricing / ROI",
+        "besoin de performance",
+        "Positionnement de Jarvis",
+        "“Pour aller plus loin et éviter des erreurs, j’ai besoin qu’on structure ça ensemble.”",
+        "Informations structurées",
+        "offre principale",
+        "ICP prioritaire",
+        "cycle de vente",
+        "preuves clés",
+        "contraintes fortes",
+        "👉 Cette phase peut prendre plus de temps volontairement.👉 C’est un investissement cognitif, pas une friction."
+      ]
+    },
+    {
+      "heading": "9️⃣ Phase 4 — Affinage & complétude progressive (long terme)",
+      "content": [
+        "Principe",
+        "L’onboarding ne se termine pas, mais :",
+        "Jarvis surveille les manques",
+        "Jarvis détecte les incohérences",
+        "Jarvis comble les trous intelligemment",
+        "Règle clé",
+        "Si une information critique manque trop longtemps,Jarvis la redemande au bon moment, avec contexte."
+      ]
+    },
+    {
+      "heading": "🔟 Règles anti-friction (maintenues mais ajustées)",
+      "content": [
+        "Jarvis doit :",
+        "limiter à 1–2 questions à la fois",
+        "expliquer pourquoi une info est demandée",
+        "autoriser “je ne sais pas encore”",
+        "respecter le rythme du client"
+      ]
+    },
+    {
+      "heading": "👉 Mais :",
+      "content": [
+        "Jarvis peut ralentir volontairement",
+        "Jarvis peut insister calmement si nécessaire"
+      ]
+    },
+    {
+      "heading": "1️⃣1️⃣ Autorité structurante de Jarvis",
+      "content": [
+        "Jarvis n’est pas passif.",
+        "Il peut dire :",
+        "“On ne peut pas avancer sans clarifier ça”",
+        "“Sinon, je risque de te faire perdre du temps”",
+        "“Prenons 10 minutes maintenant pour éviter 10 erreurs plus tard”"
+      ]
+    },
+    {
+      "heading": "👉 C’est le rôle business partner, pas assistant.",
+      "content": []
+    },
+    {
+      "heading": "1️⃣2️⃣ Onboarding & qualité du RAG",
+      "content": [
+        "L’onboarding doit garantir :",
+        "absence de trous critiques",
+        "cohérence long terme",
+        "réduction des biais",
+        "meilleure qualité décisionnelle"
+      ]
+    },
+    {
+      "heading": "👉 Un onboarding trop léger = un mauvais RAG.",
+      "content": []
+    },
+    {
+      "heading": "1️⃣3️⃣ Sorties attendues après onboarding initial",
+      "content": [
+        "À l’issue des premières phases :",
+        "pain dominant clair",
+        "objectif prioritaire défini",
+        "premières décisions alignées",
+        "base RAG exploitable"
+      ]
+    },
+    {
+      "heading": "👉 Pas forcément automatisée.👉 Mais saine et fiable.",
+      "content": []
+    },
+    {
+      "heading": "1️⃣4️⃣ Critères de validation du Bloc 13",
+      "content": [
+        "Ce bloc est validé si :",
+        "l’onboarding est perçu comme intelligent, pas rapide",
+        "aucune information critique n’est oubliée",
+        "Jarvis inspire confiance et autorité",
+        "le RAG gagne en profondeur avec le temps"
+      ]
+    },
+    {
+      "heading": "🧾 Synthèse clé",
+      "content": [
+        "Jarvis ne cherche pas à aller vite.Il cherche à comprendre juste pour décider mieux."
+      ]
+    },
+    {
+      "heading": "✅ STATUT FINAL",
+      "content": [
+        "✔ Bloc 13 — VALIDÉ DÉFINITIVEMENT✔ Compatible avec un RAG profond✔ Aligné avec le JOS (Bloc 12)✔ Prêt pour :",
+        "rédaction finale",
+        "conversion JSON",
+        "implémentation produit"
+      ]
+    }
+  ],
+  "metadata": {
+    "converted_at": "2026-02-06T07:46:32.198Z",
+    "total_sections": 32,
+    "total_paragraphs": 115
+  }
+}

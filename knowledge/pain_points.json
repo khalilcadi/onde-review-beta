@@ -1,0 +1,58 @@
+{
+  "bloc_id": "pain_points",
+  "title": "Pain Points — Douleurs par segment et croyances limitantes",
+  "sections": [
+    {
+      "section_id": "pp_generiques_b2b",
+      "tags": ["all", "A", "B", "C"],
+      "heading": "Pain points génériques structures B2B",
+      "content": [
+        "Acquisition irrégulière : pipeline imprévisible, mois creux entre deux recommandations, aucune visibilité sur les 45 prochains jours.",
+        "Dépendance fondateur : le fondateur est le seul commercial. S'il s'arrête, le pipeline se vide. Chaque heure de prospection manuelle = une heure de moins sur la stratégie et le management.",
+        "Outils abandonnés : Lemlist, Waalaxy, Apollo testés et abandonnés. Pas parce qu'ils sont mauvais — parce qu'un outil sans architecture (scoring ICP, séquences personnalisées, suivi) ne produit pas un système.",
+        "Pipeline invisible : CRM vide ou mal alimenté, décisions à l'intuition, aucune donnée fiable sur le pipeline. Le CRM ne vend pas — il enregistre ce qui entre. Si personne ne le remplit, il ne sert à rien.",
+        "Réseau en concentration : la recommandation fonctionne — jusqu'au jour où les mêmes 50 contacts ne donnent plus les mêmes résultats. Le réseau ne s'épuise pas, son périmètre se concentre.",
+        "Commercial recruté sans succès : la personne n'a pas performé, mais le vrai problème est l'absence d'infrastructure autour — pas un problème de recrutement."
+      ]
+    },
+    {
+      "section_id": "pp_esn_intercontrat",
+      "tags": ["D1", "D2", "ESN"],
+      "heading": "Pain points ESN — intercontrat et double problème",
+      "content": [
+        "Coût réel de l'intercontrat : un consultant en bench coûte environ 7 000€ de marge perdue par mois (TJM moyen 570€, charges maintenues sans CA). La plupart des DG d'ESN n'ont pas fait ce calcul et absorbent le coût comme un fixe.",
+        "Double problème ESN : pipeline commercial (trouver des clients) ET sourcing consultant (avoir le bon profil au bon moment). Ces deux problèmes se cannibalisent — le fondateur alterne entre les deux en mode urgence.",
+        "AO perdu faute de profil : l'offre technique était bonne mais le bon consultant n'était pas disponible au bon moment. Le concurrent qui avait le profil à 100% a gagné.",
+        "Recrutement en mode pompier : quand un consultant finit sa mission, l'ESN cherche en urgence au lieu d'avoir anticipé 45 jours avant. Time-to-hire : 45-90 jours en moyenne.",
+        "Croyance 'le cold outreach ne marche pas dans notre secteur' : fondée sur une expérience de messages LinkedIn non ciblés en volume. La prospection sur signaux d'intention (DSI qui change de poste, PME qui recrute) produit des résultats radicalement différents — taux de réponse 3-5x supérieur."
+      ]
+    },
+    {
+      "section_id": "pp_esn_croyances",
+      "tags": ["D1", "D2", "ESN"],
+      "heading": "Croyances limitantes ESN — refondées",
+      "content": [
+        "'Nos clients viennent par recommandation' → Le warm outreach sur signal d'intention ouvre des marchés que le réseau ne couvre pas. Un DSI qui change de poste est une opportunité à contacter dans les 7 jours — pas via le réseau dans 3 mois.",
+        "'On n'a pas le temps de gérer un nouveau système' → Le Setup prend 3h côté client sur 6 semaines. Après, PROSPECTOR tourne sans intervention. Le temps passé aujourd'hui à prospecter manuellement (2 jours/semaine) disparaît.",
+        "'On a déjà essayé Waalaxy, zéro résultat' → Waalaxy envoie des messages en volume. PROSPECTOR détecte des signaux d'intention et envoie le bon message au bon prospect au bon moment. La différence entre un outil de diffusion et une architecture de prospection.",
+        "'Le bench n'est pas vraiment un problème pour nous' → Avec X consultants à TJM 570€, un taux d'intercontrat de 12% représente environ X × 0,12 × 7 000€ de marge perdue par an. Ce chiffre vaut la peine d'être vérifié — l'Audit Revenue est fait pour ça.",
+        "'On ne veut pas externaliser notre prospection' → PROSPECTOR ne remplace pas la relation client — il prépare les conversations. Le fondateur valide, fait les RDV, close. PROSPECTOR fait le reste."
+      ]
+    },
+    {
+      "section_id": "pp_commerciaux",
+      "tags": ["D2", "sales"],
+      "heading": "Pain points — commerciaux internes",
+      "content": [
+        "Les commerciaux passent 40-50% de leur temps à sourcer et relancer au lieu de closer.",
+        "3h de sourcing pour 30 secondes de réponse négative — c'est la réalité de la plupart des commerciaux B2B.",
+        "Le problème n'est pas la compétence du commercial — c'est le manque d'infrastructure autour. Sans leads scorés sur signaux d'intention, le commercial improvise."
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "v1.0",
+    "source_docs": ["ICP_V6", "FOCUS_ESN_V2"],
+    "total_sections": 4
+  }
+}

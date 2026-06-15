@@ -1,0 +1,122 @@
+{
+  "bloc_id": "icp_segments",
+  "title": "ICP Segments — Profils propriétaires/utilisateurs, JTBD, Signaux immobiliers",
+  "sections": [
+    {
+      "section_id": "donnees_marche",
+      "tags": ["all", "market"],
+      "heading": "Données marché — bureaux Paris / Île-de-France 2024-2025",
+      "content": [
+        "Demande placée : environ 1,3 million de m² de bureaux commercialisés en Île-de-France sur les 9 premiers mois de 2024, en baisse d'environ 9% sur un an et de 17% sous la moyenne décennale (Savills / Knight Frank, 2024).",
+        "Marché à deux vitesses : taux de vacance francilien à un niveau inédit d'environ 10,3% fin 2024, mais seulement 2 à 3,6% dans le QCA parisien contre plus de 13% dans certains arrondissements périphériques. Près de 85% de l'offre immédiate se concentre en périphérie (JLL ; Arthur Loyd, 2024).",
+        "Loyers prime au plus haut : loyer prime facial d'environ 1 000 à 1 250 €/m²/an dans le QCA parisien fin 2024, en hausse sur un an, avec des mesures d'accompagnement autour de 30% (JLL ; Cushman & Wakefield ; Savills, 2024).",
+        "Pénurie d'offre dans Paris central : l'offre disponible reste structurellement faible dans le QCA (manque d'offre, PLU bioclimatique), ce qui maintient la tension sur les bureaux de qualité en centre-ville (Arthur Loyd, 2024).",
+        "Vague d'échéances de baux : 2025-2026 est alimentée par l'échéance de baux signés vers 2016, année de forte demande placée (environ 2,45 millions de m²). De nombreuses entreprises doivent arbitrer renouvellement, renégociation ou déménagement (JLL, 2025).",
+        "Offre obsolète : l'offre immédiate francilienne dépasse 5 millions de m², dont environ 70% de seconde main ; une partie estimée à 1,1 million de m² ne correspond plus aux critères des utilisateurs (Savills, 2024).",
+        "Règle d'usage : ces chiffres servent à contextualiser sans paraître présomptueux. Toujours citer la source. Ne jamais les présenter comme des résultats Fabel Conseil."
+      ]
+    },
+    {
+      "section_id": "signaux_intention",
+      "tags": ["all", "signals"],
+      "heading": "Signaux d'intention — les signaux de projet immobilier à détecter",
+      "content": [
+        "Levée de fonds ou forte croissance d'une entreprise — FORT — P1 — croissance d'effectif = besoin d'une surface plus grande. Contacter sous 48h.",
+        "Vague de recrutements ou hausse rapide d'effectif (offres d'emploi multiples) — FORT — P1 — saturation des bureaux actuels imminente. Contacter dans la semaine.",
+        "Bail commercial arrivant à échéance (échéances 3/6/9 ans, baux signés vers 2016) — FORT — P1 — fenêtre de renégociation ou de déménagement. Anticiper 12-18 mois avant l'échéance.",
+        "Bureaux vacants ou mis en location/vente par un propriétaire — FORT — P2 — mandat de commercialisation potentiel. Contacter sous 48h.",
+        "Déménagement, nouvelle implantation ou ouverture de bureau annoncés — MOYEN — P1 — projet immobilier en cours. Contacter dans la semaine.",
+        "Restructuration, plan d'économies ou réduction d'effectif — MOYEN — P1 — besoin de réduire la surface ou de sous-louer. Contacter dans la semaine.",
+        "Fusion, acquisition ou rachat — MOYEN — P1+P2 — regroupement de sites ou libération de surfaces. Contacter dans la semaine.",
+        "Priorité signal vs ICP : si signal détecté, message contextualisé sur le signal. Si pas de signal, prospection sur connaissance fine de la zone (QCA, Centre Est, Rive Gauche, Ouest) et du segment de surface (0-3000 m²)."
+      ]
+    },
+    {
+      "section_id": "segment_a",
+      "tags": ["A", "early", "fondateur"],
+      "heading": "Segment A — TPE / startup (première implantation, petite surface)",
+      "content": [
+        "Priorité : secondaire. Conditions de qualification : projet réel et daté (échéance de bail ou croissance), décideur unique joignable, budget cohérent avec le marché parisien.",
+        "Profil : TPE, startup ou profession libérale cherchant une première implantation ou un petit plateau (0-150 m²), à Paris ou en périphérie Ouest. Décideur = fondateur ou office manager, pas de direction immobilière.",
+        "Signal fort : première levée de fonds, sortie d'un espace de coworking, équipe qui dépasse la capacité du local actuel.",
+        "Réalité quotidienne : le fondateur cherche seul sur les portails, visite des biens hors budget ou inadaptés, manque de temps, méconnaissance des usages du bail commercial (3/6/9, dépôt de garantie, charges).",
+        "Blocage profond : pense pouvoir tout gérer via les portails gratuits ; sous-estime la complexité du bail commercial et le temps de recherche ; croit qu'un conseil coûte cher alors qu'en location la prestation est souvent à la charge du propriétaire.",
+        "JTBD : trouver rapidement un bureau adapté sans perdre de temps, éviter un bail mal négocié, sécuriser une implantation crédible pour recevoir clients et candidats.",
+        "Langage : coworking, premier bureau, bail, plateau, mètres carrés, budget, croissance."
+      ]
+    },
+    {
+      "section_id": "segment_b",
+      "tags": ["B", "growth", "fondateur"],
+      "heading": "Segment B — PME en croissance (utilisateur, besoin récurrent)",
+      "content": [
+        "Priorité : primaire.",
+        "Profil : PME en croissance cherchant 150-500 m² à Paris (QCA, Centre Est, Rive Gauche) ou en périphérie Ouest. Décideur = dirigeant, DAF ou office manager. Croissance d'effectif régulière.",
+        "Signal fort : levée de fonds, recrutements en série, bureaux actuels saturés, bail proche de l'échéance.",
+        "Réalité quotidienne : équipe à l'étroit, recherche menée en parallèle de l'activité, plusieurs cabinets contactés sans vision consolidée du marché, arbitrage rester / renégocier / déménager non tranché.",
+        "Blocage profond : a consulté des portails et quelques cabinets sans obtenir une vue complète du marché ; ne sait pas si son loyer actuel est dans le marché ; sous-estime les délais d'un déménagement (recherche, négociation, travaux).",
+        "JTBD : une vue complète des offres disponibles, un conseil indépendant pour arbitrer, sécuriser le calendrier (échéance de bail, travaux, déménagement).",
+        "Langage : croissance, déménagement, renégociation, surface, loyer, charges, calendrier, implantation."
+      ]
+    },
+    {
+      "section_id": "segment_c",
+      "tags": ["C", "scale", "fondateur"],
+      "heading": "Segment C — Société établie (utilisateur, grand projet)",
+      "content": [
+        "Priorité : primaire, ticket élevé.",
+        "Profil : société établie ou groupe cherchant 500-1500 m² (jusqu'à 3000), projet de regroupement de sites, restructuration ou recherche de gain de productivité. Décideur = direction générale + DAF, parfois direction immobilière.",
+        "Signal fort : regroupement de plusieurs implantations, bail d'envergure à échéance, réorganisation post-fusion, recherche d'optimisation des coûts immobiliers.",
+        "Réalité quotidienne : arbitrage stratégique entre rester (avec travaux) et déménager, enjeux financiers et RH importants, plusieurs interlocuteurs internes, besoin d'un reporting structuré pour la direction.",
+        "Blocage profond : pense gérer le projet en interne ou avec un seul conseil ; n'a pas de vision complète des opportunités off-market ; sous-estime l'effet de levier d'une mise en concurrence des propriétaires sur le loyer et les mesures d'accompagnement.",
+        "JTBD : un projet immobilier piloté de bout en bout, un effet de levier en négociation (loyer, franchise, accompagnement), un reporting clair pour décider, sécuriser un actif adapté à la stratégie.",
+        "Langage : regroupement, restructuration, optimisation, mesures d'accompagnement, reporting, stratégie immobilière, mise en concurrence."
+      ]
+    },
+    {
+      "section_id": "segment_d1",
+      "tags": ["D1", "ESN", "cabinet", "5-49"],
+      "heading": "Segment D1 — Propriétaire privé / family office (coeur de cible commercialisation)",
+      "content": [
+        "Priorité : primaire (mandats de commercialisation).",
+        "Profil : propriétaire privé, family office ou petit investisseur détenant un ou quelques actifs de bureaux à Paris (0-3000 m²), cherchant à louer, relouer ou vendre. Pas d'équipe de commercialisation dédiée.",
+        "Signal fort : local vacant ou bientôt libéré (départ d'un locataire, fin de bail), bureaux mis en ligne sur les portails, actif à céder.",
+        "Le propriétaire porte plusieurs rôles : gestion + commercialisation + négociation. L'absence de stratégie de commercialisation prolonge la vacance.",
+        "Réalité quotidienne : un plateau vacant qui ne génère aucun loyer chaque mois, une annonce diffusée sans stratégie, des visites peu qualifiées, une valorisation du loyer mal calibrée par rapport au marché.",
+        "Blocage profond : pense pouvoir commercialiser seul ou via une simple annonce ; sous-estime le coût de la vacance (loyers et charges non couverts) ; ne calibre pas le loyer sur le marché réel ; ignore une partie de la demande qui passe par les confrères.",
+        "JTBD : réduire le taux de vacance et le délai de commercialisation, trouver un locataire ou acquéreur fiable, valoriser l'actif au juste prix du marché, déléguer la commercialisation et la négociation.",
+        "Citation terrain : 'Mon problème ce n'est pas le bien, c'est de le relouer vite et au bon prix sans y passer mon temps.'",
+        "Coût de la vacance : chaque mois sans locataire représente un loyer et des charges non couverts. Sur un plateau parisien, le montant se calcule vite — à chiffrer dès le premier rendez-vous. Montant selon surface et zone. [À VÉRIFIER]"
+      ]
+    },
+    {
+      "section_id": "segment_d2",
+      "tags": ["D2", "ESN", "50-249"],
+      "heading": "Segment D2 — Propriétaire institutionnel (foncière, SCPI, asset manager)",
+      "content": [
+        "Signal fort : 'notre taux de vacance se dégrade sur certains actifs' ou 'nous devons recommercialiser un immeuble libéré'.",
+        "Profil : propriétaire institutionnel (foncière, SCPI, asset manager, compagnie d'assurance) détenant un portefeuille de bureaux à Paris et en périphérie, avec une direction d'asset management.",
+        "L'asset manager a les process mais a besoin d'un partenaire local fin sur la demande utilisateur et la commercialisation plateau par plateau.",
+        "Angle principal : relais de commercialisation terrain. Fabel apporte la connaissance fine de la demande, l'accès aux utilisateurs et aux confrères, et un reporting structuré ; l'asset manager arbitre et décide.",
+        "Décideurs : directeur de l'asset management + property manager. Indépendance de Fabel, transparence du reporting et accès à l'ensemble du marché sont des arguments de poids.",
+        "Registre plus formel. Sensibilité à la valorisation des actifs, au taux d'occupation et aux échéances de baux du portefeuille."
+      ]
+    },
+    {
+      "section_id": "triple_pipeline",
+      "tags": ["D1", "D2", "ESN", "pipeline"],
+      "heading": "Double marché propriétaire/utilisateur — modèle Fabel",
+      "content": [
+        "Pipeline 1 ACQUISITION UTILISATEURS : gagner des mandats de recherche auprès des entreprises (dirigeant, DAF, office manager, direction immobilière). Canaux : LinkedIn + email. Signaux : levée de fonds, croissance d'effectif, bail à échéance, déménagement annoncé.",
+        "Pipeline 2 ACQUISITION PROPRIÉTAIRES : gagner des mandats de commercialisation auprès des bailleurs (privés, family offices, institutionnels). Signaux : local vacant ou libéré, bureaux mis en ligne, actif à céder, fin de bail d'un locataire.",
+        "Pipeline 3 RELATION ET SUIVI : suivi des clients accompagnés, alertes sur les baux à échéance (3/6/9 ans), réactivation des contacts dormants, rapprochement entre la base propriétaires et la base utilisateurs (coeur du métier de conseil).",
+        "Règle de séparation des approches : un utilisateur (P1) et un propriétaire (P2) ne reçoivent pas le même message. Le rapprochement offre/demande se fait au moment de la mission, pas en prospection froide."
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "v1.0-FABEL",
+    "source_docs": ["fabelconseil.com", "JLL 2024-2025", "Savills 2024", "Knight Frank 2024", "Cushman & Wakefield 2024", "Arthur Loyd 2024"],
+    "total_sections": 8
+  }
+}

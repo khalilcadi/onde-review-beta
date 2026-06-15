@@ -1,0 +1,87 @@
+{
+  "bloc_id": "messaging_angles",
+  "title": "Messaging Angles — Positions de rupture et accroches",
+  "sections": [
+    {
+      "section_id": "position_0_intention",
+      "tags": ["all", "D1", "D2", "ESN", "signal_B"],
+      "heading": "Position 0 — Prospecter sur le signal immobilier (position centrale)",
+      "content": [
+        "La plupart des conseils démarchent à l'aveugle. Fabel contacte au moment où un projet immobilier se déclenche.",
+        "Une levée de fonds annonce un besoin de surface. Un bail qui arrive à échéance ouvre une fenêtre de renégociation. Un plateau qui se libère est un mandat de commercialisation potentiel.",
+        "Ces signaux existent en permanence — la plupart des acteurs les voient trop tard. Contacter au bon moment change tout.",
+        "Application : position centrale de différenciation sur tous les segments. Signal fort côté propriétaires (D1/D2) sur les actifs qui se libèrent.",
+        "Accroches : 'Votre bail arrive à échéance dans 12-18 mois — c'est maintenant que se décide votre rapport de force.' / 'On ne démarche pas plus. On contacte quand le projet immobilier est réel.'"
+      ]
+    },
+    {
+      "section_id": "position_1_systeme",
+      "tags": ["all", "B", "signal_A"],
+      "heading": "Position 1 — Vue complète du marché vs annonce isolée",
+      "content": [
+        "Le marché dit : regarde les portails, contacte quelques cabinets. Fabel dit : le problème n'est pas le nombre d'annonces, c'est l'accès à l'ensemble du marché.",
+        "Chercher sur deux portails montre une partie de l'offre. Agréger sa base, celle des confrères et les opportunités off-market montre le marché réel.",
+        "Application : message d'ouverture segments B et C. Angle de rupture pour utilisateurs ayant déjà cherché seuls sans vue d'ensemble.",
+        "Accroches : 'Ce n'est pas un problème de quantité d'annonces. C'est un problème d'accès à l'ensemble du marché.' / 'Vous voyez ce qui est publié. Nous voyons aussi ce qui ne l'est pas encore.'"
+      ]
+    },
+    {
+      "section_id": "position_2_reseau",
+      "tags": ["C", "D1", "D2"],
+      "heading": "Position 2 — Le réseau direct ne couvre pas le marché",
+      "content": [
+        "Le bouche-à-oreille et les portails couvrent une partie du marché — jusqu'au jour où le bon bien ou le bon locataire n'y figure pas. Le réseau direct se concentre, le marché reste plus large.",
+        "Les meilleures opportunités (côté bureaux comme côté locataires) passent souvent par les confrères et le off-market, hors du réseau direct.",
+        "Application : déclencheur principal segment C et propriétaires D1/D2. Signal fort : 'je diffuse mon annonce depuis des semaines, peu de visites qualifiées.'",
+        "Accroches : 'Votre meilleur locataire ne regarde peut-être pas votre annonce. Il passe par un confrère.' / 'Le bon bien n'est pas toujours publié. Il se trouve avant.'"
+      ]
+    },
+    {
+      "section_id": "position_3_outil",
+      "tags": ["B", "signal_A"],
+      "heading": "Position 3 — Annonce sans stratégie = peu de résultat",
+      "content": [
+        "Publier une annonce sans positionnement de loyer ni cible, c'est attendre que le bon candidat passe par hasard. Multiplier les portails sans stratégie, c'est multiplier les visites non qualifiées.",
+        "L'annonce n'est jamais le problème — c'est l'absence de stratégie de commercialisation et de négociation autour qui fait la différence.",
+        "Application : réponse à 'j'ai déjà mis une annonce'. Signal fort segment B et propriétaires.",
+        "Accroches : 'Un portail diffuse une annonce. Un conseil positionne, qualifie la demande, négocie et reporte — ce n'est pas la même intervention.' / 'Le problème n'est pas l'annonce. C'est l'absence de stratégie autour.'"
+      ]
+    },
+    {
+      "section_id": "position_4_personne",
+      "tags": ["A", "B", "C", "fondateur"],
+      "heading": "Position 4 — Projet piloté vs projet subi",
+      "content": [
+        "Si le projet immobilier s'arrête quand le dirigeant est pris ailleurs, ce n'est pas un projet piloté. C'est un projet subi.",
+        "Chaque heure passée à visiter des biens hors cible est une heure de moins sur l'activité.",
+        "Application : déclencheur fort segments A et B.",
+        "Accroches : 'Votre projet immobilier ne devrait pas dépendre du temps libre du dirigeant.' / 'Pendant que vous gérez votre activité, qui filtre le marché pour vous ?'"
+      ]
+    },
+    {
+      "section_id": "position_5_crm",
+      "tags": ["all", "D1", "D2"],
+      "heading": "Position 5 — L'échéance de bail, pas seulement la transaction",
+      "content": [
+        "La plupart des relations s'arrêtent à la signature du bail. Le vrai enjeu revient à chaque échéance : 3, 6 ou 9 ans plus tard, la question du renouvellement ou du déménagement se repose.",
+        "Fabel suit les échéances de baux et anticipe les fenêtres de renégociation. Ce n'est pas seulement conclure une transaction — c'est accompagner dans la durée.",
+        "Application : objection 'on a déjà fait appel à un cabinet'. Fabel = vue marché + négociation + suivi des échéances, pas seulement une transaction ponctuelle."
+      ]
+    },
+    {
+      "section_id": "vocabulaire",
+      "tags": ["all"],
+      "heading": "Vocabulaire — autorisé et interdit",
+      "content": [
+        "AUTORISÉ : marché, demande placée, taux de vacance, valorisation, loyer de marché, mesures d'accompagnement, off-market, échéance de bail, commercialisation, mise en concurrence, reporting, indépendant.",
+        "INTERDIT en prospection froide : opportunité exceptionnelle, bien rare, coup de coeur, leader, n°1, meilleur cabinet, imbattable, clé en main, garanti, révolutionnaire, booster.",
+        "Ton général : sobre, factuel, business. Pas de superlatifs. Pas de promesses chiffrées. Pas de langage marketing."
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "v1.0-FABEL",
+    "source_docs": ["fabelconseil.com"],
+    "total_sections": 7
+  }
+}

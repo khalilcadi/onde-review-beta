@@ -1,0 +1,416 @@
+[
+  {
+    "id": "244990c8-5283-44bb-b355-de0d3659d5a5",
+    "created_at": "2026-03-13T10:46:57.06374",
+    "agent_id": "prospection",
+    "provider": "claude",
+    "input_tokens": 1271,
+    "output_tokens": 123,
+    "cached_tokens": 16060,
+    "estimated_cost": 0,
+    "input_text": "[Context]\n## Lead\n- Nom : MJ Harpon\n- Titre : 👉 Founder & CEO @ Donutz Digital | Scaling European Brands with PPC, SEO & Social | Growth Partner, Not Just an Agency 👉 Donutzdigital.com\n- Entreprise : N/A\n- LinkedIn : undefined\n- Score : 58 (N/A)\n- Stage : N/A\n- Tags : N/A\n- Notes : Aucune\n\n## Entreprise\n- Taille : N/A\n- Secteur : Digital marketing (PPC, SEO, Social Ads)\n- CA estimé : N/A\n- Financement : N/A\n- Localisation : France, Lituanie, Irlande\n- News récentes : N/A\n\n## Profil LinkedIn\n- Headline : 👉 Founder & CEO @ Donutz Digital | Scaling European Brands with PPC, SEO & Social | Growth Partner, Not Just an Agency 👉 Donutzdigital.com\n- Bio : We help ambitious brands scale across Europe with performance-driven digital marketing.\n\nWe don’t operate in silos. We combine strategy, media, and creative into one system, so our clients scale faster, with clarity and transparency.\n\n🌍 Based in France, Lithuania, and Ireland, we partner with European brands ready to expand cross-border.\n\n⚡ Expertise:\n\n     - Google Ads (Performance Max, Search, Shopping)\n     - Paid Social (Meta, TikTok, LinkedIn Ads)\n     - SEO (technical + content + internat...\n- Compétences : Social Ads, Digital marketing, Marketing sur les moteurs de recherche (SEM), Online Marketing, Google Adwords\n- Créateur de contenu LinkedIn\n- Réseau : FIRST_DEGREE degré\n- Followers : 4 173\n- 44 connexions en commun\n- Formation : ISC Paris — MBA, Entrepreneur | Polytech Orléans — Engineer's degree, Mechanical, Energy\n\n## Parcours\n- Expérience :\n  - Founder & CEO — Donutz Digital\n\n## Signal enrichissement\n- Type : POST_SUJET\n- Détail : Fondateur d'agence digitale (PPC, SEO, Social) avec forte activité LinkedIn. Publie régulièrement sur la croissance, l'acquisition et l'optimisation commerciale. Profil Growth Stage aligné avec ICP B — douleur potentielle sur la structuration de l'acquisition et la scalabilité.\n- Interaction Smart.AI : false\n\n## Posts récents\n- A while back, we almost didn't make it.\n\nThe French market was declining. Budgets were collapsing. We were losing deals; not because we weren't good, ... (5 réactions, 1 commentaires — 2026-03-12)\n- \"L'IA ne remplacera jamais un site à 20K.\"\n\nVraiment ?\n\nLa vraie question, c'est plutôt :\n\nest-ce que tous les sites vendus 20K valent vraiment ce pri... (7 réactions, 2 commentaires — 2026-03-10)\n- La newsletter Donutz Digital du Lundi ! 😉 \nhttps://lnkd.in/e-fJNgzu (6 réactions, 0 commentaires — 2026-03-09)\n- ☯️ Are you ready to open your chakras with me? 🧘 \n\n(best with headphones 🎧 ) \n\nInhale…😮‍💨  exhale… 🌬️ \n\nAnd let’s cleanse your soul from bad agen... (28 réactions, 5 commentaires — 2026-03-05)\n- Your car touch-screen 📱🚗 has just become an ad placement and it sucks 🤮\n\nI'm always blown away by the lack of creativity of car makers when it come... (9 réactions, 0 commentaires — 2026-03-02)\n- How we helped Givers 6x their leads using CRM data integration\n\nIn lead generation, CRM data integration is absolutely key. It's what turns Google Ads... (4 réactions, 0 commentaires — 2026-02-28)\n- Ma stratégie GEO est bidon.\n\nMais elle marche.\n\n1.\tJ’optimise mon site pour le SEO (les bases, rien de fou).\n\n2.\tJe me concentre à fond sur UN seul th... (21 réactions, 5 commentaires — 2026-02-25)\n\n## Résumé enrichissement\nAucune information publique vérifiable trouvée sur Donutz Digital (actualités, CA, financement). Agence de marketing digital européenne correspondant au profil fondateur d'agence B2B (segment B ou C potentiel).\n\n## Action\n- Type : message\n\n---\n\n[user]\nGénère un message de type \"message\" sur LinkedIn pour MJ Harpon (👉 Founder & CEO @ Donutz Digital | Scaling European Brands with PPC, SEO & Social | Growth Partner, Not Just an Agency 👉 Donutzdigital.com @ ).\n\nRetourne UNIQUEMENT le message, sans explication.",
+    "output_text": "MJ,\n\nVotre post sur le pivot vers l'international quand le marché français déclinait m'a fait réfléchir — c'est exactement le genre de moment où l'acquisition doit tenir sans reposer uniquement sur le fondateur.\n\nAvec une agence présente sur trois pays, comment vous gérez la génération de nouveaux clients aujourd'hui — c'est encore principalement vous qui portez ça, ou vous avez réussi à structurer quelque chose qui tourne sans vous ?",
+    "metadata": {
+      "actionType": "message"
+    },
+    "lead": null
+  },
+  {
+    "id": "c4f88295-825b-45b2-ae5b-9e9f25d2aea7",
+    "created_at": "2026-03-13T08:40:13.534861",
+    "agent_id": "prospection",
+    "provider": "claude",
+    "input_tokens": 1179,
+    "output_tokens": 104,
+    "cached_tokens": 17930,
+    "estimated_cost": 0,
+    "input_text": "[Context]\n## Lead\n- Nom : MJ Harpon\n- Titre : N/A\n- Entreprise : N/A\n- LinkedIn : undefined\n- Score : 58 (N/A)\n- Stage : N/A\n- Tags : N/A\n- Notes : Aucune\n\n## Entreprise\n- Taille : N/A\n- Secteur : Digital marketing (PPC, SEO, Social Ads)\n- CA estimé : N/A\n- Financement : N/A\n- Localisation : France, Lituanie, Irlande\n- News récentes : N/A\n\n## Profil LinkedIn\n- Headline : 👉 Founder & CEO @ Donutz Digital | Scaling European Brands with PPC, SEO & Social | Growth Partner, Not Just an Agency 👉 Donutzdigital.com\n- Bio : We help ambitious brands scale across Europe with performance-driven digital marketing.\n\nWe don’t operate in silos. We combine strategy, media, and creative into one system, so our clients scale faster, with clarity and transparency.\n\n🌍 Based in France, Lithuania, and Ireland, we partner with European brands ready to expand cross-border.\n\n⚡ Expertise:\n\n     - Google Ads (Performance Max, Search, Shopping)\n     - Paid Social (Meta, TikTok, LinkedIn Ads)\n     - SEO (technical + content + internat...\n- Compétences : Social Ads, Digital marketing, Marketing sur les moteurs de recherche (SEM), Online Marketing, Google Adwords\n- Créateur de contenu LinkedIn\n- Réseau : FIRST_DEGREE degré\n- Followers : 4 173\n- 44 connexions en commun\n- Formation : ISC Paris — MBA, Entrepreneur | Polytech Orléans — Engineer's degree, Mechanical, Energy\n\n## Parcours\n- Expérience :\n  - Founder & CEO — Donutz Digital\n\n## Signal enrichissement\n- Type : POST_SUJET\n- Détail : Fondateur d'agence digitale (PPC, SEO, Social) avec forte activité LinkedIn. Publie régulièrement sur la croissance, l'acquisition et l'optimisation commerciale. Profil Growth Stage aligné avec ICP B — douleur potentielle sur la structuration de l'acquisition et la scalabilité.\n- Interaction Smart.AI : false\n\n## Posts récents\n- A while back, we almost didn't make it.\n\nThe French market was declining. Budgets were collapsing. We were losing deals; not because we weren't good, ... (5 réactions, 1 commentaires — 2026-03-12)\n- \"L'IA ne remplacera jamais un site à 20K.\"\n\nVraiment ?\n\nLa vraie question, c'est plutôt :\n\nest-ce que tous les sites vendus 20K valent vraiment ce pri... (7 réactions, 2 commentaires — 2026-03-10)\n- La newsletter Donutz Digital du Lundi ! 😉 \nhttps://lnkd.in/e-fJNgzu (6 réactions, 0 commentaires — 2026-03-09)\n- ☯️ Are you ready to open your chakras with me? 🧘 \n\n(best with headphones 🎧 ) \n\nInhale…😮‍💨  exhale… 🌬️ \n\nAnd let’s cleanse your soul from bad agen... (28 réactions, 5 commentaires — 2026-03-05)\n- Your car touch-screen 📱🚗 has just become an ad placement and it sucks 🤮\n\nI'm always blown away by the lack of creativity of car makers when it come... (9 réactions, 0 commentaires — 2026-03-02)\n- How we helped Givers 6x their leads using CRM data integration\n\nIn lead generation, CRM data integration is absolutely key. It's what turns Google Ads... (4 réactions, 0 commentaires — 2026-02-28)\n- Ma stratégie GEO est bidon.\n\nMais elle marche.\n\n1.\tJ’optimise mon site pour le SEO (les bases, rien de fou).\n\n2.\tJe me concentre à fond sur UN seul th... (21 réactions, 5 commentaires — 2026-02-25)\n\n## Résumé enrichissement\nAucune information publique vérifiable trouvée sur Donutz Digital (actualités, CA, financement). Agence de marketing digital européenne correspondant au profil fondateur d'agence B2B (segment B ou C potentiel).\n\n## Action\n- Type : message\n\n---\n\n[user]\nGénère un message de type \"message\" sur LinkedIn pour MJ Harpon ( @ ).\n\nRetourne UNIQUEMENT le message, sans explication.",
+    "output_text": "MJ, vous publiez régulièrement sur l'optimisation de l'acquisition et la croissance cross-border — deux sujets qui résonnent avec ce qu'on observe chez beaucoup d'agences européennes.\n\nUne question directe : votre propre acquisition chez Donutz est structurée comme un système reproductible, ou elle repose encore principalement sur votre réseau et votre activité LinkedIn ?",
+    "metadata": {
+      "actionType": "message"
+    },
+    "lead": null
+  },
+  {
+    "id": "a65ddf3f-1ca8-4c2b-9b23-e27577ff2a5c",
+    "created_at": "2026-03-12T18:25:54.869849",
+    "agent_id": "prospection",
+    "provider": "claude",
+    "input_tokens": 1188,
+    "output_tokens": 56,
+    "cached_tokens": 17930,
+    "estimated_cost": 0,
+    "input_text": "[Context]\n## Lead\n- Nom : MJ Harpon\n- Titre : N/A\n- Entreprise : N/A\n- LinkedIn : undefined\n- Score : 52 (N/A)\n- Stage : N/A\n- Tags : N/A\n- Notes : Aucune\n\n## Entreprise\n- Taille : N/A\n- Secteur : Digital marketing (PPC, SEO, Paid Social)\n- CA estimé : N/A\n- Financement : N/A\n- Localisation : France, Lituanie, Irlande\n- News récentes : N/A\n\n## Profil LinkedIn\n- Headline : 👉 Founder & CEO @ Donutz Digital | Scaling European Brands with PPC, SEO & Social | Growth Partner, Not Just an Agency 👉 Donutzdigital.com\n- Bio : We help ambitious brands scale across Europe with performance-driven digital marketing.\n\nWe don’t operate in silos. We combine strategy, media, and creative into one system, so our clients scale faster, with clarity and transparency.\n\n🌍 Based in France, Lithuania, and Ireland, we partner with European brands ready to expand cross-border.\n\n⚡ Expertise:\n\n     - Google Ads (Performance Max, Search, Shopping)\n     - Paid Social (Meta, TikTok, LinkedIn Ads)\n     - SEO (technical + content + internat...\n- Compétences : Social Ads, Digital marketing, Marketing sur les moteurs de recherche (SEM), Online Marketing, Google Adwords\n- Créateur de contenu LinkedIn\n- Réseau : FIRST_DEGREE degré\n- Followers : 4 173\n- 44 connexions en commun\n- Formation : ISC Paris — MBA, Entrepreneur | Polytech Orléans — Engineer's degree, Mechanical, Energy\n\n## Parcours\n- Expérience :\n  - Founder & CEO — Donutz Digital\n\n## Signal enrichissement\n- Type : POST_SUJET\n- Détail : Fondateur d'agence digitale (PPC, SEO, Social) qui publie régulièrement sur la croissance, l'acquisition et l'optimisation commerciale. Posts récents montrent des frustrations sur la structuration (marché français en déclin, perte de deals) et des réflexions sur l'efficacité des systèmes — angles pertinents pour Smart.AI.\n- Interaction Smart.AI : false\n\n## Posts récents\n- A while back, we almost didn't make it.\n\nThe French market was declining. Budgets were collapsing. We were losing deals; not because we weren't good, ... (4 réactions, 1 commentaires — 2026-03-12)\n- \"L'IA ne remplacera jamais un site à 20K.\"\n\nVraiment ?\n\nLa vraie question, c'est plutôt :\n\nest-ce que tous les sites vendus 20K valent vraiment ce pri... (7 réactions, 2 commentaires — 2026-03-10)\n- La newsletter Donutz Digital du Lundi ! 😉 \nhttps://lnkd.in/e-fJNgzu (6 réactions, 0 commentaires — 2026-03-09)\n- ☯️ Are you ready to open your chakras with me? 🧘 \n\n(best with headphones 🎧 ) \n\nInhale…😮‍💨  exhale… 🌬️ \n\nAnd let’s cleanse your soul from bad agen... (28 réactions, 5 commentaires — 2026-03-05)\n- Your car touch-screen 📱🚗 has just become an ad placement and it sucks 🤮\n\nI'm always blown away by the lack of creativity of car makers when it come... (9 réactions, 0 commentaires — 2026-03-02)\n- How we helped Givers 6x their leads using CRM data integration\n\nIn lead generation, CRM data integration is absolutely key. It's what turns Google Ads... (4 réactions, 0 commentaires — 2026-02-28)\n- Ma stratégie GEO est bidon.\n\nMais elle marche.\n\n1.\tJ’optimise mon site pour le SEO (les bases, rien de fou).\n\n2.\tJe me concentre à fond sur UN seul th... (21 réactions, 5 commentaires — 2026-02-25)\n\n## Résumé enrichissement\nFondateur & CEO de Donutz Digital, agence de marketing digital performance pour marques européennes. Aucune information publique vérifiable trouvée sur CA, financement ou actualités récentes (3 derniers mois).\n\n## Action\n- Type : message\n\n---\n\n[user]\nGénère un message de type \"message\" sur LinkedIn pour MJ Harpon ( @ ).\n\nRetourne UNIQUEMENT le message, sans explication.",
+    "output_text": "MJ, question directe : quand vous avez perdu ces deals sur le marché français — c'était un problème de prix, de positionnement, ou de pipeline qui s'est vidé trop vite pour ajuster ?",
+    "metadata": {
+      "actionType": "message"
+    },
+    "lead": null
+  },
+  {
+    "id": "80ef9f8a-b604-4541-88ef-a9b68c8a3119",
+    "created_at": "2026-03-12T18:24:46.78256",
+    "agent_id": "prospection",
+    "provider": "claude",
+    "input_tokens": 635,
+    "output_tokens": 62,
+    "cached_tokens": 17930,
+    "estimated_cost": 0,
+    "input_text": "[Context]\n## Lead\n- Nom : Yann Roger\n- Titre : N/A\n- Entreprise : N/A\n- LinkedIn : undefined\n- Score : 32 (N/A)\n- Stage : N/A\n- Tags : N/A\n- Notes : Aucune\n\n## Entreprise\n- Taille : N/A\n- Secteur : Publicité digitale (Social Ads · SEA · Tracking)\n- CA estimé : N/A\n- Financement : N/A\n- Localisation : Saint-Brieuc, France\n- News récentes : N/A\n\n## Profil LinkedIn\n- Headline : CEO @The Browz | Social Ads · SEA · Tracking\n- Bio : Fondateur et dirigeant de l’agence The Browz, spécialisée en publicité digitale et tracking de données. \n- Compétences : Publicité sur Instagram, Publicité en ligne, Publicité sur les réseaux sociaux, Optimisation des moteurs de recherche (SEO), SEA\n- Créateur de contenu LinkedIn\n- Réseau : FIRST_DEGREE degré\n- Followers : 6 017\n- 163 connexions en commun\n- Formation : ESP Ecole Supérieure de Publicité, Communication et Marketing — Master 2 - Stratégie Digitale & E-Business | ESP Ecole Supérieure de Publicité, Communication et Marketing — Master 1 - Innovation, Communication et Digital\n\n## Parcours\n- Expérience :\n  - CEO — The Browz\n- Intérêts : coaching professionnel, formation, santé et business, ergonomie en entreprise\n\n## Signal enrichissement\n- Type : SIGNAL_FAIBLE\n- Détail : Fondateur d'agence digitale (The Browz) avec positionnement clair en ads/tracking. Profil potentiellement ICP Segment B/C (agence établie), mais absence totale d'activité LinkedIn récente et aucune actualité détectable limitent la capacité à personnaliser l'approche.\n- Interaction Smart.AI : false\n\n## Résumé enrichissement\nYann Roger, CEO de The Browz (agence pub digitale), actif comme coach formateur à Saint-Brieuc. Peu d'infos publiques sur l'entreprise (CA, news, financement absents) ; enrichissement insuffisant pour prospection.\n\n## Action\n- Type : message\n\n---\n\n[user]\nGénère un message de type \"message\" sur LinkedIn pour Yann Roger ( @ ).\n\nRetourne UNIQUEMENT le message, sans explication.",
+    "output_text": "Yann, question directe : est-ce que l'acquisition de The Browz repose encore principalement sur votre réseau et vos recommandations, ou vous avez déjà structuré un système qui génère des opportunités en continu ?",
+    "metadata": {
+      "actionType": "message"
+    },
+    "lead": null
+  },
+  {
+    "id": "670ab798-ef3b-4c35-adc6-345f4423e984",
+    "created_at": "2026-03-12T18:24:37.675915",
+    "agent_id": "prospection",
+    "provider": "claude",
+    "input_tokens": 635,
+    "output_tokens": 58,
+    "cached_tokens": 17930,
+    "estimated_cost": 0,
+    "input_text": "[Context]\n## Lead\n- Nom : Yann Roger\n- Titre : N/A\n- Entreprise : N/A\n- LinkedIn : undefined\n- Score : 32 (N/A)\n- Stage : N/A\n- Tags : N/A\n- Notes : Aucune\n\n## Entreprise\n- Taille : N/A\n- Secteur : Publicité digitale (Social Ads · SEA · Tracking)\n- CA estimé : N/A\n- Financement : N/A\n- Localisation : Saint-Brieuc, France\n- News récentes : N/A\n\n## Profil LinkedIn\n- Headline : CEO @The Browz | Social Ads · SEA · Tracking\n- Bio : Fondateur et dirigeant de l’agence The Browz, spécialisée en publicité digitale et tracking de données. \n- Compétences : Publicité sur Instagram, Publicité en ligne, Publicité sur les réseaux sociaux, Optimisation des moteurs de recherche (SEO), SEA\n- Créateur de contenu LinkedIn\n- Réseau : FIRST_DEGREE degré\n- Followers : 6 017\n- 163 connexions en commun\n- Formation : ESP Ecole Supérieure de Publicité, Communication et Marketing — Master 2 - Stratégie Digitale & E-Business | ESP Ecole Supérieure de Publicité, Communication et Marketing — Master 1 - Innovation, Communication et Digital\n\n## Parcours\n- Expérience :\n  - CEO — The Browz\n- Intérêts : coaching professionnel, formation, santé et business, ergonomie en entreprise\n\n## Signal enrichissement\n- Type : SIGNAL_FAIBLE\n- Détail : Fondateur d'agence digitale (The Browz) avec positionnement clair en ads/tracking. Profil potentiellement ICP Segment B/C (agence établie), mais absence totale d'activité LinkedIn récente et aucune actualité détectable limitent la capacité à personnaliser l'approche.\n- Interaction Smart.AI : false\n\n## Résumé enrichissement\nYann Roger, CEO de The Browz (agence pub digitale), actif comme coach formateur à Saint-Brieuc. Peu d'infos publiques sur l'entreprise (CA, news, financement absents) ; enrichissement insuffisant pour prospection.\n\n## Action\n- Type : message\n\n---\n\n[user]\nGénère un message de type \"message\" sur LinkedIn pour Yann Roger ( @ ).\n\nRetourne UNIQUEMENT le message, sans explication.",
+    "output_text": "Yann, question directe : est-ce que votre propre acquisition chez The Browz fonctionne aussi bien que les campagnes que vous gérez pour vos clients, ou c'est un sujet qui traîne ?",
+    "metadata": {
+      "actionType": "message"
+    },
+    "lead": null
+  },
+  {
+    "id": "c8be5957-5779-4b6d-8831-5e9b29928fe8",
+    "created_at": "2026-03-10T10:21:24.544786",
+    "agent_id": "prospection",
+    "provider": "claude",
+    "input_tokens": 905,
+    "output_tokens": 72,
+    "cached_tokens": 18747,
+    "estimated_cost": 0,
+    "input_text": "[Context]\n## Lead\n- Nom : Yann Roger\n- Titre : CEO @The Browz | Social Ads · SEA · Tracking\n- Entreprise : N/A\n- LinkedIn : undefined\n- Score : 32 (N/A)\n- Stage : N/A\n- Tags : N/A\n- Notes : Aucune\n\n## Entreprise\n- Taille : N/A\n- Secteur : Publicité digitale (Social Ads, SEA, Tracking)\n- CA estimé : N/A\n- Financement : N/A\n- Localisation : N/A\n- News récentes : N/A\n\n## Profil LinkedIn\n- Headline : CEO @The Browz | Social Ads · SEA · Tracking\n- Bio : Fondateur et dirigeant de l’agence The Browz, spécialisée en publicité digitale et tracking de données. \n- Compétences : Publicité sur Instagram, Publicité en ligne, Publicité sur les réseaux sociaux, Optimisation des moteurs de recherche (SEO), SEA\n- Créateur de contenu LinkedIn\n- Réseau : FIRST_DEGREE degré\n- Followers : 6 015\n- 163 connexions en commun\n- Formation : ESP Ecole Supérieure de Publicité, Communication et Marketing — Master 2 - Stratégie Digitale & E-Business | ESP Ecole Supérieure de Publicité, Communication et Marketing — Master 1 - Innovation, Communication et Digital\n\n## Parcours\n- Expérience :\n  - CEO — The Browz\n  - Coach formateur certifié — Indépendant\n- Intérêts : coaching professionnel, formation en entreprise, management d'équipe, gestion de la croissance d'entreprise\n\n## Signal enrichissement\n- Type : SIGNAL_FAIBLE\n- Détail : Fondateur d'une agence digitale (The Browz) spécialisée en ads et tracking. Profil potentiellement saturé opérationnellement (gestion agence + clients) mais sans signaux d'engagement récent ou de douleur exprimée.\n- Interaction Smart.AI : false\n\n## Résumé enrichissement\nYann Roger est CEO de The Browz (agence publicité digitale) et coach formateur indépendant axé sur management et croissance d'entreprise. Peu d'infos publiques sur l'entreprise ; profil entrepreneurial avec activité coaching visible en ligne.\n\n## Action\n- Type : message\n\nMessage précédent (à régénérer) :\nYann, beaucoup de fondateurs d'agence que je croise cumulent la gestion clients, le pilotage d'équipe et le développement commercial — et finissent par porter seuls toutes les décisions opérationnelles. C'est quelque chose que vous vivez aussi chez The Browz ?\n\nFeedback utilisateur :\npose une question moins frontale\n\n---\n\n[user]\nRégénère ce message LinkedIn pour Yann Roger (CEO @The Browz | Social Ads · SEA · Tracking @ ).\n\nMessage actuel à améliorer :\n\"\"\"\nYann, beaucoup de fondateurs d'agence que je croise cumulent la gestion clients, le pilotage d'équipe et le développement commercial — et finissent par porter seuls toutes les décisions opérationnelles. C'est quelque chose que vous vivez aussi chez The Browz ?\n\"\"\"\n\n\nFeedback utilisateur : \"pose une question moins frontale\"\nApplique ce feedback en priorité pour la nouvelle version.\n\nGénère une NOUVELLE version différente du message, en appliquant le feedback. \n\nRetourne UNIQUEMENT le nouveau message, sans explication.",
+    "output_text": "Yann, j'observe que la plupart des dirigeants d'agence digitale jonglent entre plusieurs casquettes au quotidien. Chez The Browz, vous avez structuré l'organisation pour alléger cette charge ou c'est encore un sujet ouvert ?",
+    "metadata": {
+      "actionType": "message"
+    },
+    "lead": null
+  },
+  {
+    "id": "0c866935-b225-491f-8fc1-5f247cf14976",
+    "created_at": "2026-03-10T10:21:12.54859",
+    "agent_id": "prospection",
+    "provider": "claude",
+    "input_tokens": 669,
+    "output_tokens": 78,
+    "cached_tokens": 18747,
+    "estimated_cost": 0,
+    "input_text": "[Context]\n## Lead\n- Nom : Yann Roger\n- Titre : CEO @The Browz | Social Ads · SEA · Tracking\n- Entreprise : N/A\n- LinkedIn : undefined\n- Score : 32 (N/A)\n- Stage : N/A\n- Tags : N/A\n- Notes : Aucune\n\n## Entreprise\n- Taille : N/A\n- Secteur : Publicité digitale (Social Ads, SEA, Tracking)\n- CA estimé : N/A\n- Financement : N/A\n- Localisation : N/A\n- News récentes : N/A\n\n## Profil LinkedIn\n- Headline : CEO @The Browz | Social Ads · SEA · Tracking\n- Bio : Fondateur et dirigeant de l’agence The Browz, spécialisée en publicité digitale et tracking de données. \n- Compétences : Publicité sur Instagram, Publicité en ligne, Publicité sur les réseaux sociaux, Optimisation des moteurs de recherche (SEO), SEA\n- Créateur de contenu LinkedIn\n- Réseau : FIRST_DEGREE degré\n- Followers : 6 015\n- 163 connexions en commun\n- Formation : ESP Ecole Supérieure de Publicité, Communication et Marketing — Master 2 - Stratégie Digitale & E-Business | ESP Ecole Supérieure de Publicité, Communication et Marketing — Master 1 - Innovation, Communication et Digital\n\n## Parcours\n- Expérience :\n  - CEO — The Browz\n  - Coach formateur certifié — Indépendant\n- Intérêts : coaching professionnel, formation en entreprise, management d'équipe, gestion de la croissance d'entreprise\n\n## Signal enrichissement\n- Type : SIGNAL_FAIBLE\n- Détail : Fondateur d'une agence digitale (The Browz) spécialisée en ads et tracking. Profil potentiellement saturé opérationnellement (gestion agence + clients) mais sans signaux d'engagement récent ou de douleur exprimée.\n- Interaction Smart.AI : false\n\n## Résumé enrichissement\nYann Roger est CEO de The Browz (agence publicité digitale) et coach formateur indépendant axé sur management et croissance d'entreprise. Peu d'infos publiques sur l'entreprise ; profil entrepreneurial avec activité coaching visible en ligne.\n\n## Action\n- Type : message\n\n---\n\n[user]\nGénère un message de type \"message\" sur LinkedIn pour Yann Roger (CEO @The Browz | Social Ads · SEA · Tracking @ ).\n\nRetourne UNIQUEMENT le message, sans explication.",
+    "output_text": "Yann, beaucoup de fondateurs d'agence que je croise cumulent la gestion clients, le pilotage d'équipe et le développement commercial — et finissent par porter seuls toutes les décisions opérationnelles. C'est quelque chose que vous vivez aussi chez The Browz ?",
+    "metadata": {
+      "actionType": "message"
+    },
+    "lead": null
+  },
+  {
+    "id": "2173f8f0-cb8c-43a5-8bc4-e1032f5560d4",
+    "created_at": "2026-03-10T10:20:54.122858",
+    "agent_id": "prospection",
+    "provider": "claude",
+    "input_tokens": 669,
+    "output_tokens": 87,
+    "cached_tokens": 18747,
+    "estimated_cost": 0,
+    "input_text": "[Context]\n## Lead\n- Nom : Yann Roger\n- Titre : CEO @The Browz | Social Ads · SEA · Tracking\n- Entreprise : N/A\n- LinkedIn : undefined\n- Score : 32 (N/A)\n- Stage : N/A\n- Tags : N/A\n- Notes : Aucune\n\n## Entreprise\n- Taille : N/A\n- Secteur : Publicité digitale (Social Ads, SEA, Tracking)\n- CA estimé : N/A\n- Financement : N/A\n- Localisation : N/A\n- News récentes : N/A\n\n## Profil LinkedIn\n- Headline : CEO @The Browz | Social Ads · SEA · Tracking\n- Bio : Fondateur et dirigeant de l’agence The Browz, spécialisée en publicité digitale et tracking de données. \n- Compétences : Publicité sur Instagram, Publicité en ligne, Publicité sur les réseaux sociaux, Optimisation des moteurs de recherche (SEO), SEA\n- Créateur de contenu LinkedIn\n- Réseau : FIRST_DEGREE degré\n- Followers : 6 015\n- 163 connexions en commun\n- Formation : ESP Ecole Supérieure de Publicité, Communication et Marketing — Master 2 - Stratégie Digitale & E-Business | ESP Ecole Supérieure de Publicité, Communication et Marketing — Master 1 - Innovation, Communication et Digital\n\n## Parcours\n- Expérience :\n  - CEO — The Browz\n  - Coach formateur certifié — Indépendant\n- Intérêts : coaching professionnel, formation en entreprise, management d'équipe, gestion de la croissance d'entreprise\n\n## Signal enrichissement\n- Type : SIGNAL_FAIBLE\n- Détail : Fondateur d'une agence digitale (The Browz) spécialisée en ads et tracking. Profil potentiellement saturé opérationnellement (gestion agence + clients) mais sans signaux d'engagement récent ou de douleur exprimée.\n- Interaction Smart.AI : false\n\n## Résumé enrichissement\nYann Roger est CEO de The Browz (agence publicité digitale) et coach formateur indépendant axé sur management et croissance d'entreprise. Peu d'infos publiques sur l'entreprise ; profil entrepreneurial avec activité coaching visible en ligne.\n\n## Action\n- Type : message\n\n---\n\n[user]\nGénère un message de type \"message\" sur LinkedIn pour Yann Roger (CEO @The Browz | Social Ads · SEA · Tracking @ ).\n\nRetourne UNIQUEMENT le message, sans explication.",
+    "output_text": "Yann, beaucoup de fondateurs d'agence que je rencontre gèrent à la fois la croissance de leur structure et l'accompagnement de leurs clients — et finissent par porter seuls toutes les décisions opérationnelles, du commercial à la production.\n\nC'est quelque chose que vous vivez aussi chez The Browz ?",
+    "metadata": {
+      "actionType": "message"
+    },
+    "lead": null
+  },
+  {
+    "id": "595e7f6c-607e-48ce-a722-7c1fe6b6c7ad",
+    "created_at": "2026-03-10T04:00:42.009423",
+    "agent_id": "prospection",
+    "provider": "claude",
+    "input_tokens": 1189,
+    "output_tokens": 133,
+    "cached_tokens": 18747,
+    "estimated_cost": 0,
+    "input_text": "[Context]\n## Lead\n- Nom : Jennifer Perrault\n- Titre : Neuroatypique ? Sors du cycle 1000 idées ↔ Épuisement ↔ Stagnation | Coach pour entrepreneur-es HPI - TSA - TDAH | Intelligence Emotionnelle | HEC Executive Coaching certifiée | +15 ans Finance & Entrepreneuriat\n- Entreprise : N/A\n- LinkedIn : https://www.linkedin.com/in/jennifer-perrault-coach/\n- Score : 72 (warm)\n- Stage : to_invite\n- Tags : N/A\n- Notes : Aucune\n\n## Entreprise\n- Taille : 1 (indépendant)\n- Secteur : Coaching professionnel (leadership, carrière, intelligence émotionnelle)\n- CA estimé : N/A\n- Financement : N/A\n- Localisation : France\n- News récentes : N/A\n\n## Profil LinkedIn\n- Headline : Neuroatypique ? Sors du cycle 1000 idées ↔ Épuisement ↔ Stagnation | Coach pour entrepreneur-es HPI - TSA - TDAH | Intelligence Emotionnelle | HEC Executive Coaching certifiée | +15 ans Finance & Entrepreneuriat\n- Bio : Tu te lèves avec 1000 actions en tête pour ton business, une to-do à la Rocky Balboa\nA 10h15 il y a déjà eu 3 plot-twists et 5 heures de perdues. \nLe soir arrive, tu regardes ta to-do. Forfait par K.O. Comme hier. \n\nTu as essayé les matrices, les apps, les podcasts des discipline bros, et tu n’en sors pas. \nLe temps file, l’anxiété monte, ce qui était fun au départ devient un poids. \n\nEt tous les jours, tu lis les posts d’entrepreneur.es en mouvement. \nQui bougent, qui avancent, qui eux réussiss...\n- Compétences : Coaching pour dirigeants, Accompagnement et tutorat, Mentorat, Pratiques narratives, Culture d’entreprise\n- Profil ouvert (InMail possible)\n- Réseau : FIRST_DEGREE degré\n- Followers : 1 346\n- 68 connexions en commun\n- Formation : HEC Paris — Executive coaching certificate, Coaching | Audencia — Master spécialisé, Direction financière\n\n## Parcours\n- Expérience :\n  - Coach professionnelle — Nahara Coaching / Nahara Consulting\n  - Experte en finance d'entreprise\n- Intérêts : coaching pour neuroatypiques (HPI, TSA, TDAH), intelligence émotionnelle, leadership, développement personnel pour entrepreneurs\n\n## Signal enrichissement\n- Type : POST_DOULEUR\n- Détail : Jennifer coache des entrepreneurs neuroatypiques saturés par la dispersion et l'épuisement — profil ICP direct de Jarvis (solopreneurs 5-10k€/mois en charge mentale chronique). Son headline et about expriment exactement les douleurs que Jarvis résout : cycle idées → épuisement → stagnation, charge cognitive, priorisation impossible, besoin de structure personnalisée.\n- Interaction Smart.AI : false\n\n## Posts récents\n- Post sur la double vérité émotionnelle chez les neuroatypiques : capacité à reconnaître ses torts tout en validant sa souffrance, sans laisser l'autre invalider sa réalité. (6 réactions, 0 commentaires — 2026-03-07)\n- Post sur les défis parentaux avec des enfants neuroatypiques qui questionnent les normes sociales (horaires scolaires) — thème : acceptation de la différence et adaptation familiale. (11 réactions, 0 commentaires — 2026-02-16)\n\n## Résumé enrichissement\nCoach indépendante pour entrepreneurs neuroatypiques via Nahara Coaching, avec +15 ans en finance et certification HEC Executive Coaching. Spécialisée dans la sortie du cycle idées-épuisement-stagnation, profil ICP solopreneur saturé mentalement cherchant structure.\n\n## Action\n- Type : message\n\n---\n\n[user]\nGénère un message de type \"message\" sur LinkedIn pour Jennifer Perrault (Neuroatypique ? Sors du cycle 1000 idées ↔ Épuisement ↔ Stagnation | Coach pour entrepreneur-es HPI - TSA - TDAH | Intelligence Emotionnelle | HEC Executive Coaching certifiée | +15 ans Finance & Entrepreneuriat @ null).\n\nRetourne UNIQUEMENT le message, sans explication.",
+    "output_text": "Jennifer, vous accompagnez des entrepreneurs neuroatypiques coincés dans le cycle idées → épuisement → stagnation. Ce que vous décrivez (1000 actions en tête, to-do abandonnée, charge cognitive permanente), beaucoup de solopreneurs le vivent sans être diagnostiqués — et sans structure adaptée, ils tournent en rond pendant des mois.\n\nVous avez déjà observé ce pattern chez vos clients : quand la charge mentale devient structurelle, les outils classiques ne suffisent plus ?",
+    "metadata": {
+      "cron": "generate-actions",
+      "leadId": "544af15b-8d44-4edb-8eab-62b5dfe7833b",
+      "stepId": "3aee8d18-1cdb-4497-a90a-22b02562e696",
+      "sequenceId": "4265d9b6-21ce-485d-b53a-307a1fb2dac2"
+    },
+    "lead": null
+  },
+  {
+    "id": "16529577-3785-4306-8d27-5b4edf663f14",
+    "created_at": "2026-03-10T04:00:36.677237",
+    "agent_id": "prospection",
+    "provider": "claude",
+    "input_tokens": 965,
+    "output_tokens": 100,
+    "cached_tokens": 18747,
+    "estimated_cost": 0,
+    "input_text": "[Context]\n## Lead\n- Nom : Caroline PLEE\n- Titre : Entrepreneurs ambitieux?\nGagne en clarté mentale et confiance grâce à une identité alignée | Consultante et Coach en psychologie | Experte en transformation intérieure | Méthode psycho-émotionnelle​\n=​> Questionnaire\n- Entreprise : N/A\n- LinkedIn : https://www.linkedin.com/in/caroline-pl%C3%A9e/\n- Score : 62 (warm)\n- Stage : to_invite\n- Tags : N/A\n- Notes : Aucune\n\n## Entreprise\n- Taille : 1 (indépendante)\n- Secteur : Coaching et consulting en psychologie pour entrepreneurs\n- CA estimé : N/A\n- Financement : N/A\n- Localisation : Toulouse, France\n- News récentes :\n  - Intégration à la liste 'À la Reconquête! de Toulouse' pour les municipales 2026 (annoncée le 25 février 2026)\n\n## Profil LinkedIn\n- Headline : Entrepreneurs ambitieux?\nGagne en clarté mentale et confiance grâce à une identité alignée | Consultante et Coach en psychologie | Experte en transformation intérieure | Méthode psycho-émotionnelle​\n=​> Questionnaire\n- Bio : • Marre de tout porter, de tout décider, de devoir toujours être fort(e) ?\nMarre de confondre performance et paix intérieure, réussite et sérénité ?\n\nSi le stress, la charge mentale, l’hyper-contrôle ou la perte de sens t’accompagnent au quotidien, alors tu viens de mettre le pied au bon endroit.\n\n• Moi, c’est Caroline Plée, Consultante en psychologie des entrepreneurs et créatrice de la méthode ELP (Éveil – Libération – Puissance).\n\nJ’accompagne les entrepreneurs en surcharge mentale et émotion...\n- Compétences : Stress, Burn-out, Depression, TCA, Coaching de vie\n- Réseau : FIRST_DEGREE degré\n- Followers : 1 866\n- 101 connexions en commun\n- Formation : Ecole française d’EFT — Certificat praticienne EFT | Closing mastery\n\n## Parcours\n- Expérience :\n  - Consultante et Coach en psychologie — Indépendante\n  - Conférencière — GO Entrepreneurs / École Polytechnique\n- Intérêts : psychologie des entrepreneurs, gestion de la charge mentale, transformation intérieure, leadership émotionnel\n\n## Signal enrichissement\n- Type : POST_DOULEUR\n- Détail : Coach en psychologie des entrepreneurs adressant directement la surcharge mentale, la charge décisionnelle et la perte de clarté — douleurs centrales de l'ICP solopreneur. Profil complémentaire potentiel pour partenariat ou co-prospection auprès de solopreneurs en saturation.\n- Interaction Smart.AI : false\n\n## Résumé enrichissement\nCoach indépendante en psychologie pour entrepreneurs, spécialisée dans la charge mentale et l'équilibre intérieur - profil ICP parfait pour JARVIS (solopreneur saturée émotionnellement). Engagement récent en politique locale à Toulouse (liste municipale 2026).\n\n## Action\n- Type : message\n\n---\n\n[user]\nGénère un message de type \"message\" sur LinkedIn pour Caroline PLEE (Entrepreneurs ambitieux?\nGagne en clarté mentale et confiance grâce à une identité alignée | Consultante et Coach en psychologie | Experte en transformation intérieure | Méthode psycho-émotionnelle​\n=​> Questionnaire @ null).\n\nRetourne UNIQUEMENT le message, sans explication.",
+    "output_text": "Caroline, j'ai remarqué votre approche sur la charge mentale des entrepreneurs — c'est exactement ce qui ressort systématiquement quand on parle aux solopreneurs entre 5 et 10k€/mois : cette surcharge décisionnelle silencieuse qui finit par saturer tout le reste.\n\nVous devez observer ça en permanence dans vos accompagnements, non ?",
+    "metadata": {
+      "cron": "generate-actions",
+      "leadId": "758a7b2e-38f6-48d1-9e4f-9b5517847495",
+      "stepId": "3aee8d18-1cdb-4497-a90a-22b02562e696",
+      "sequenceId": "4265d9b6-21ce-485d-b53a-307a1fb2dac2"
+    },
+    "lead": {
+      "id": "758a7b2e-38f6-48d1-9e4f-9b5517847495",
+      "first_name": "Caroline",
+      "last_name": "PLEE",
+      "title": "Entrepreneurs ambitieux?\nGagne en clarté mentale et confiance grâce à une identité alignée | Consultante et Coach en psychologie | Experte en transformation intérieure | Méthode psycho-émotionnelle​\n=​> Questionnaire",
+      "company": null,
+      "linkedin_url": "https://www.linkedin.com/in/caroline-pl%C3%A9e/",
+      "score": 62,
+      "status": "warm",
+      "stage": "to_invite",
+      "tags": [],
+      "notes": null,
+      "enrichment_data": {
+        "person": {
+          "education": [],
+          "interests": [
+            "psychologie des entrepreneurs",
+            "gestion de la charge mentale",
+            "transformation intérieure",
+            "leadership émotionnel"
+          ],
+          "experience": [
+            {
+              "title": "Consultante et Coach en psychologie",
+              "company": "Indépendante",
+              "endDate": null,
+              "startDate": null
+            },
+            {
+              "title": "Conférencière",
+              "company": "GO Entrepreneurs / École Polytechnique",
+              "endDate": null,
+              "startDate": null
+            }
+          ],
+          "publicSpeaking": [
+            "Conférencière à GO Entrepreneurs",
+            "Intervenante à l'École Polytechnique",
+            "Auteur du livre 'Devenez solide et serein face à l'adversité' (Éditions EMS)"
+          ]
+        },
+        "signal": {
+          "type": "POST_DOULEUR",
+          "detail": "Coach en psychologie des entrepreneurs adressant directement la surcharge mentale, la charge décisionnelle et la perte de clarté — douleurs centrales de l'ICP solopreneur. Profil complémentaire potentiel pour partenariat ou co-prospection auprès de solopreneurs en saturation.",
+          "smartai_interaction": false
+        },
+        "company": {
+          "news": [
+            "Intégration à la liste 'À la Reconquête! de Toulouse' pour les municipales 2026 (annoncée le 25 février 2026)"
+          ],
+          "size": "1 (indépendante)",
+          "funding": null,
+          "revenue": null,
+          "industry": "Coaching et consulting en psychologie pour entrepreneurs",
+          "location": "Toulouse, France"
+        },
+        "sources": [
+          "linkedin.com (données fournies)",
+          "go-entrepreneurs.com",
+          "editions-ems.fr",
+          "lopinion.com"
+        ],
+        "summary": "Coach indépendante en psychologie pour entrepreneurs, spécialisée dans la charge mentale et l'équilibre intérieur - profil ICP parfait pour JARVIS (solopreneur saturée émotionnellement). Engagement récent en politique locale à Toulouse (liste municipale 2026).",
+        "confidence": "medium",
+        "scoring_detail": {
+          "categorie": "WARM",
+          "fit_score": 30,
+          "cas_limite": true,
+          "confidence": "medium",
+          "intent_bonus": 12,
+          "intent_score": 22,
+          "timing_score": 10,
+          "ajustement_ia": "+5",
+          "justification": "Coach indépendante adressant directement les pain points centraux de l'ICP (surcharge mentale, charge décisionnelle) avec profil complémentaire fort pour partenariat ou co-prospection — signal POST_DOULEUR validé, engagement local récent, mais absence de données commerciales (CA, ancienneté poste, posts récents) limite la confiance.",
+          "intent_bonus_stage": 0,
+          "intent_signal_base": 10
+        },
+        "linkedin_profile": {
+          "about": "• Marre de tout porter, de tout décider, de devoir toujours être fort(e) ?\nMarre de confondre performance et paix intérieure, réussite et sérénité ?\n\nSi le stress, la charge mentale, l’hyper-contrôle ou la perte de sens t’accompagnent au quotidien, alors tu viens de mettre le pied au bon endroit.\n\n• Moi, c’est Caroline Plée, Consultante en psychologie des entrepreneurs et créatrice de la méthode ELP (Éveil – Libération – Puissance).\n\nJ’accompagne les entrepreneurs en surcharge mentale et émotionnelle, ceux qui se surinvestissent dans leur entreprise et s’oublient eux-mêmes, à restaurer leur autorité intérieure pour retrouver :\n- une clarté mentale,\n- une stabilité émotionnelle durable,\n- une capacité décisionnelle souveraine en retrouvant leur plein potentiel.\n\n\n• ELP, c’est une méthode exclusive en 4 temps, née de plusieurs années d’expérience en coaching, kinésiologie, EFT et naturopathie.\nUn processus complet pour réconcilier performance et équilibre intérieur.\n\nOn va d’abord plonger dans ce qui te pèse (tes traumas inconscients, tes schémas internes et tes mécanismes de suradaptation) et qui sabotent ton leadership, pour ensuite libérer, réharmoniser et révéler ton plein potentiel.\n\n• Après 15 ans de luttes intérieures, de troubles (dépression, maladies autodestructrices, addictions) et de reconstruction, j’ai compris que la vraie puissance ne vient pas de la maîtrise, mais de la connexion à soi.\n\nAujourd’hui, je transmets ce que j’ai appris, expérimenté, intégré et surtout transcendé.\nPas pour te “réparer”. Mais pour t’aider à te retrouver pleinement.\n\n• Concrètement, qu’est-ce que ça change pour toi ?\n\n> Reprendre le contrôle de ton énergie et apprivoiser tes émotions,\n> Reconnecter à ta puissance intérieure,\n> Retrouver clarté, équilibre et stabilité émotionnelle,\n> Aligner ton business à qui tu es vraiment,\n> Performer sans t’épuiser, diriger avec conscience et impact.\n\n• Tu n’es pas ton stress.\nTu es ce que tu en fais.\nEt si, cette fois, on révélait ton plein potentiel en te tournant vers ton intérieur ? \n\n📞 Réserve ton appel découverte dès maintenant dans la section dédiée (lien en sélection).\n📩 Ou contacte moi directement : p_caroline@hotmail.fr",
+          "skills": [
+            {
+              "name": "Stress",
+              "endorsed": false,
+              "insights": [
+                "Endorsed by 1 person in the last 6 months"
+              ],
+              "endorsement_id": 8,
+              "endorsement_count": 1
+            },
+            {
+              "name": "Burn-out",
+              "endorsed": false,
+              "insights": [
+                "SAIEF EDDINE LOUATI🧭 has given an endorsement for this skill"
+              ],
+              "endorsement_id": 5,
+              "endorsement_count": 1
+            },
+            {
+              "name": "Depression",
+              "endorsed": false,
+              "insights": [
+                "SAIEF EDDINE LOUATI🧭 has given an endorsement for this skill"
+              ],
+              "endorsement_id": 6,
+              "endorsement_count": 1
+            },
+            {
+              "name": "TCA",
+              "endorsed": false,
+              "insights": [],
+              "endorsement_id": 7,
+              "endorsement_count": 1
+            },
+            {
+              "name": "Coaching de vie",
+              "endorsed": false,
+              "insights": [],
+              "endorsement_id": 2,
+              "endorsement_count": 1
+            },
+            {
+              "name": "Eft",
+              "endorsed": false,
+              "insights": [],
+              "endorsement_id": 3,
+              "endorsement_count": 1
+            },
+            {
+              "name": "Kinésiologie",
+              "endorsed": false,
+              "insights": [],
+              "endorsement_id": 4,
+              "endorsement_count": 1
+            },
+            {
+              "name": "Business developer",
+              "endorsed": false,
+              "insights": [],
+              "endorsement_id": 986267772,
+              "endorsement_count": 1
+            },
+            {
+              "name": "Closing",
+              "endorsed": false,
+              "insights": [],
+              "endorsement_id": 986244253,
+              "endorsement_count": 1
+            },
+            {
+              "name": "High ticket closer",
+              "endorsed": false,
+              "insights": [
+                "2 educational experiences at Closing mastery"
+              ],
+              "endorsement_id": 1,
+              "endorsement_count": 3
+            }
+          ],
+          "headline": "Entrepreneurs ambitieux?\nGagne en clarté mentale et confiance grâce à une identité alignée | Consultante et Coach en psychologie | Experte en transformation intérieure | Méthode psycho-émotionnelle​\n=​> Questionnaire",
+          "location": "Greater Toulouse Metropolitan Area",
+          "websites": [
+            "https://tally.so/r/aQ9ryE"
+          ],
+          "education": [
+            {
+              "end": "2/1/2021",
+              "start": "2/1/2020",
+              "degree": "Certificat praticienne EFT",
+              "school": "Ecole française d’EFT"
+            },
+            {
+              "end": "8/1/2023",
+              "start": "6/1/2023",
+              "school": "Closing mastery",
+              "skills": [
+                "High ticket closer"
+              ],
+              "activities": "High ticket Closer"
+            },
+            {
+              "end": "6/1/2023",
+              "start": "9/1/2021",
+              "degree": "Certificat de kinesiologue",
+              "school": "Ecole de kinesiologie"
+            },
+            {
+              "end": "1/1/2021",
+              "grade": "Niveau 1",
+              "start": "1/1/2020",
+              "degree": "Praticienne Reiki, Soins energetiques",
+              "school": "Nita Mokanu"
+            },
+            {
+              "end": "1/1/2020",
+              "start": "1/1/2020",
+              "degree": "Certification professeur d’Ashtanga Vinyasa Yin Yoga, Formation de professeur de Yoga / thérapie par le yoga",
+              "school": "Bliss Yoga"
+            },
+            {
+              "end": "1/1/2019",
+              "start": "1/1/2019",
+              "degree": "Professeur de Pole Dance, Pole dance",
+              "school": "Studio Evolution"
+            },
+            {
+              "end": "1/1/2011",
+              "start": "1/1/2008",
+              "degree": "DE D'orthoptiste",
+              "school": "Ecole d'orthoptie de Toulouse"
+            },
+            {
+              "end": null,
+              "start": "6/1/2023",
+              "school": "Closing mastery",
+              "skills": [
+                "High ticket closer"
+              ]
+            },
+            {
+              "end": null,
+              "start": null,
+              "school": "Closing mastery"
+            }
+          ],
+          "languages": [
+            {
+              "name": "Espagnol",
+              "proficiency": "Native or bilingual proficiency"
+            }
+          ],
+          "is_creator": false,
+          "is_premium": false,
+          "contact_info": {
+            "emails": [
+              "p_caroline@hotmail.fr"
+            ]
+          },
+          "follower_count": 1866,
+          "creator_website": null,
+          "is_open_profile": false,
+          "network_distance": "FIRST_DEGREE",
+          "connections_count": 1577,
+          "profile_picture_url": "https://media.licdn.com/dms/image/v2/D4E03AQEkc9tW5IXp4w/profile-displayphoto-shrink_100_100/B4EZkD6wP6GcAU-/0/1756707358418?e=1774483200&v=beta&t=3JdSMp6ivIleH1fUsZez4DbZ7qWcpjlMcsVkM-veAMU",
+          "shared_connections_count": 101,
+          "profile_picture_url_large": "https://media.licdn.com/dms/image/v2/D4E03AQEkc9tW5IXp4w/profile-displayphoto-shrink_800_800/B4EZkD6wP6GcAc-/0/1756707358438?e=1774483200&v=beta&t=7YAQ-S7HUeoWLHB-aSO6sKCr8Nbjt2DMEhx95fk6LHE"
+        }
+      }
+    }
+  }
+]

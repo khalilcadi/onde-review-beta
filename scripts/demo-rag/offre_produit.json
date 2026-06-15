@@ -1,0 +1,67 @@
+{
+  "bloc_id": "offre_produit",
+  "title": "Offre Produit — Ce que fait Fabel Conseil",
+  "sections": [
+    {
+      "section_id": "vue_ensemble",
+      "tags": ["all"],
+      "heading": "Fabel Conseil — vue d'ensemble",
+      "content": [
+        "Fabel Conseil est une société indépendante de conseil en immobilier d'entreprise, spécialisée sur la vente et la location de bureaux à Paris (QCA, Centre Est, Rive Gauche) et en périphérie Ouest, sur un segment de surface de 0 à 3000 m².",
+        "Fabel accompagne deux types de clients : les propriétaires (commercialisation et valorisation d'actifs) et les utilisateurs (recherche et implantation de bureaux). Acteur indépendant qui défend les seuls intérêts de ses clients.",
+        "Sans conseil dédié : recherche chronophage, vision partielle du marché, loyer mal calibré et bail mal négocié pour l'utilisateur ; vacance prolongée et commercialisation au hasard pour le propriétaire.",
+        "Avec Fabel : accès à l'ensemble des offres du marché via une base de données mise à jour quotidiennement avec les confrères, stratégie de commercialisation ciblée, négociation financière et juridique, reporting transparent."
+      ]
+    },
+    {
+      "section_id": "composants",
+      "tags": ["all"],
+      "heading": "Les 4 piliers de l'accompagnement Fabel",
+      "content": [
+        "Conseil aux utilisateurs — recherche de bureaux et conseil en implantation : définition de la problématique (croissance, restructuration, productivité), accès à l'ensemble des offres du marché, sélection et visites, jusqu'à l'accord final.",
+        "Conseil aux propriétaires — commercialisation d'actifs : stratégie de commercialisation ciblée, valorisation au loyer de marché, actions marketing, objectif de taux de vacance faible.",
+        "Négociation financière et juridique : accompagnement dans la négociation du bail (3/6/9, franchise, mesures d'accompagnement, charges) ou de la vente, en défense des intérêts du client jusqu'à l'accord.",
+        "Base de données et réseau de confrères : accès à l'ensemble des offres du marché parisien (vente et location), base mise à jour quotidiennement avec les confrères, opportunités off-market."
+      ]
+    },
+    {
+      "section_id": "triple_pipeline_detail",
+      "tags": ["D1", "D2", "ESN"],
+      "heading": "Modèle de conseil Fabel — double marché propriétaire/utilisateur",
+      "content": [
+        "Marché 1 UTILISATEURS : mandats de recherche auprès des entreprises sur signaux de projet (croissance, levée de fonds, bail à échéance, déménagement). Cibles : dirigeant, DAF, office manager, direction immobilière.",
+        "Marché 2 PROPRIÉTAIRES : mandats de commercialisation auprès des bailleurs (privés, family offices, institutionnels) sur signaux d'actif disponible (vacance, fin de bail, cession). Stratégie de commercialisation et valorisation.",
+        "Marché 3 RELATION ET SUIVI : suivi des clients accompagnés, alertes sur les échéances de baux, réactivation des contacts, rapprochement entre la base propriétaires et la base utilisateurs.",
+        "Les approches propriétaire et utilisateur sont distinctes en prospection ; le rapprochement offre/demande se fait au moment de la mission."
+      ]
+    },
+    {
+      "section_id": "pricing",
+      "tags": ["all"],
+      "heading": "Modèle d'honoraires",
+      "content": [
+        "Location : honoraires de commercialisation calculés en pourcentage du loyer annuel, le plus souvent à la charge du propriétaire. Taux exact non public. [À VÉRIFIER]",
+        "Vente : honoraires de transaction en pourcentage du prix de vente, selon mandat. Taux exact non public. [À VÉRIFIER]",
+        "Fabel exerce sous carte professionnelle de transactions immobilières (carte T n° T13242). Modalités de mandat (exclusif ou non), durée et conditions à confirmer. [À VÉRIFIER]",
+        "Côté utilisateur, la prestation de recherche est souvent rémunérée par le propriétaire à la signature ; à confirmer selon le mandat. [À VÉRIFIER]"
+      ]
+    },
+    {
+      "section_id": "arc_framework",
+      "tags": ["all"],
+      "heading": "Méthode Fabel — du brief à l'accord final",
+      "content": [
+        "1. Définition de la problématique : cadrage du projet (croissance, restructuration, valorisation), contraintes, budget, zone et surface.",
+        "2. Stratégie ciblée : analyse du marché, des opportunités et des contraintes ; positionnement du loyer ou du prix.",
+        "3. Mise en marché ou recherche : commercialisation de l'actif (propriétaire) ou sourcing des offres via la base de données et le réseau de confrères (utilisateur).",
+        "4. Reporting : suivi transparent et régulier de l'avancement du processus.",
+        "5. Négociation jusqu'à l'accord final : négociation financière et juridique du bail ou de la vente, en défense des intérêts du client."
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "v1.0-FABEL",
+    "source_docs": ["fabelconseil.com"],
+    "total_sections": 5
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "bloc_id": "qualification",
+  "title": "Qualification — Objections, Closing, Suivi",
+  "sections": [
+    {
+      "section_id": "obj_prix",
+      "tags": ["all", "objection"],
+      "heading": "Objections — Prix",
+      "content": [
+        "'Les honoraires d'un conseil, c'est trop cher.' — Avant de parler du montant, regarder ce que coûte le statu quo : pour un propriétaire, des mois de vacance ; pour un utilisateur, un loyer mal négocié sur 3/6/9 ans. Les honoraires se comparent à ces montants. En location, la prestation est souvent à la charge du propriétaire.",
+        "'Je préfère chercher ou commercialiser seul pour ne rien payer.' — Le temps passé et la vision partielle du marché ont un coût caché : un bien hors cible, un loyer mal calibré, un délai allongé. Le conseil agrège l'ensemble du marché et négocie.",
+        "'Je veux une estimation avant de m'engager.' — Possible de cadrer la problématique et de donner une lecture de marché dès le premier rendez-vous, sans engagement. Modalités de mandat à confirmer. [À VÉRIFIER]"
+      ]
+    },
+    {
+      "section_id": "obj_resultats",
+      "tags": ["all", "objection"],
+      "heading": "Objections — Résultats",
+      "content": [
+        "'Vous me garantissez de trouver ou de relouer en combien de temps ?' — Pas de délai garanti contractuellement sur un marché segmenté — toute promesse ferme devrait alerter. Le cadrage permet de fixer un délai cible réaliste selon la zone, la surface et le positionnement.",
+        "'J'ai déjà travaillé avec un cabinet, sans résultat.' — Signal important. Demander : mandat exclusif ou diffusé partout ? À quelle étape ça a bloqué (positionnement du loyer, qualité des candidats, négociation) ? Le plus souvent, c'est l'absence de stratégie de commercialisation.",
+        "Ne jamais promettre un nombre de visites ou un délai ferme sans l'avoir calibré lors du cadrage."
+      ]
+    },
+    {
+      "section_id": "obj_confiance",
+      "tags": ["all", "objection"],
+      "heading": "Objections — Confiance et indépendance",
+      "content": [
+        "'Pourquoi vous plutôt qu'un grand réseau national ?' — Fabel est un acteur indépendant et spécialisé sur Paris QCA, Centre Est, Rive Gauche et l'Ouest, avec accès à l'ensemble du marché via les confrères. Un interlocuteur dédié qui défend les seuls intérêts de son client.",
+        "'Je dois en parler à mon associé ou ma direction.' — Proposer une note d'une page : problématique, lecture de marché, stratégie proposée et modalités. La direction a les éléments pour décider sans autre rendez-vous.",
+        "'Je n'ai pas le temps de gérer une recherche ou une commercialisation.' — C'est l'objet du mandat : Fabel filtre le marché, qualifie les candidats et ne sollicite le client que sur les décisions. Le temps de tri disparaît côté client.",
+        "'Vous avez des références ?' — Fabel a accompagné des entreprises sur leurs implantations parisiennes (par exemple la recherche de plus grands locaux pour une société en croissance). Références communicables sur demande. [À VÉRIFIER]"
+      ]
+    },
+    {
+      "section_id": "obj_esn",
+      "tags": ["D1", "D2", "ESN", "objection"],
+      "heading": "Objections spécifiques propriétaires",
+      "content": [
+        "'Je commercialise déjà via une annonce.' — Une annonce capte les utilisateurs en recherche active. Fabel va aussi chercher la demande qui passe par les confrères et les utilisateurs en veille, et pilote le positionnement.",
+        "'J'ai déjà mandaté un autre cabinet.' — Beaucoup de propriétaires diffusent leur bien à plusieurs. La question est la stratégie : positionnement du loyer, qualification des candidats, reporting. Un mandat piloté change le délai et le résultat.",
+        "'Je connais la valeur de mon bien.' — La valeur de marché se lit dans les transactions comparables récentes et le taux de vacance de la zone, pas dans l'estimation du propriétaire. Fabel apporte cette lecture."
+      ]
+    },
+    {
+      "section_id": "obj_conformite",
+      "tags": ["all", "D2", "objection"],
+      "heading": "Objections — Conformité et données",
+      "content": [
+        "'Qu'est-ce que vous faites de mes données ou de celles de mes contacts ?' — Données traitées dans le cadre de la réglementation (RGPD et loi Informatique et Libertés), conservées le temps nécessaire au traitement, droit d'accès, de rectification et de suppression respecté.",
+        "'Vous exercez sous quel cadre réglementaire ?' — Fabel exerce sous carte professionnelle de transactions immobilières (carte T) et est tenu aux obligations correspondantes. Détails du mandat et des garanties à confirmer. [À VÉRIFIER]"
+      ]
+    },
+    {
+      "section_id": "questions_diagnostic",
+      "tags": ["all"],
+      "heading": "Questions de diagnostic — cadrage du projet",
+      "content": [
+        "'Quel est votre projet et son échéance ?' — Objectif : maturité et urgence (échéance de bail, croissance, vacance). Signal positif : échéance datée dans les 6-18 mois.",
+        "'Quelle surface et quelle zone visez-vous ?' — Objectif : cadrer le besoin sur le périmètre Fabel (0-3000 m², QCA, Centre Est, Rive Gauche, Ouest).",
+        "'Êtes-vous propriétaire ou utilisateur sur ce projet ?' — Objectif : orienter vers le bon marché (commercialisation ou recherche).",
+        "'Connaissez-vous votre loyer actuel par rapport au marché ?' — Objectif : détecter un loyer mal calibré (utilisateur) ou une valorisation à revoir (propriétaire).",
+        "'Depuis combien de temps cherchez-vous ou votre bien est-il vacant ?' — Objectif : quantifier la douleur (temps perdu ou vacance subie).",
+        "'Quel est votre budget ou votre objectif de loyer ?' — Objectif : vérifier la cohérence avec le marché de la zone."
+      ]
+    },
+    {
+      "section_id": "questions_esn",
+      "tags": ["D1", "D2", "ESN"],
+      "heading": "Questions de diagnostic spécifiques propriétaires",
+      "content": [
+        "'Combien de surface vacante avez-vous, et depuis quand ?' — Quantifier le coût de la vacance, base de la mission de commercialisation.",
+        "'Sur vos dernières commercialisations, qu'est-ce qui a bloqué ?' — Distinguer positionnement du loyer, qualité des candidats ou négociation.",
+        "'Comment commercialisez-vous aujourd'hui (annonce, cabinet, interne) ?' — Évaluer la dépendance à une annonce isolée.",
+        "'Avez-vous une visibilité sur les échéances de baux de vos locataires ?' — Évaluer l'anticipation des départs et des renouvellements.",
+        "'Avez-vous des contraintes de confidentialité sur les données de vos actifs ou locataires ?' — Identifier les attentes de discrétion (institutionnels)."
+      ]
+    },
+    {
+      "section_id": "closing",
+      "tags": ["all"],
+      "heading": "Closing — formulations",
+      "content": [
+        "Règle : le closing est une demande directe après avoir établi la valeur. La proposition d'un premier rendez-vous de cadrage sans engagement sert à enclencher, pas à ouvrir.",
+        "Transition RDV : 'Vu votre projet, ça vaut le coup d'en parler 20 minutes. Je vous fais une lecture du marché sur votre zone ?'",
+        "Prospect hésite : 'On commence par un cadrage, sans engagement. Si la lecture du marché ne vous apporte rien, vous ne donnez pas suite.'",
+        "Priorité objections : double objection = traiter la confiance AVANT le prix. Une seule objection traitée par message écrit."
+      ]
+    },
+    {
+      "section_id": "suivi",
+      "tags": ["all"],
+      "heading": "Messages de suivi post-RDV",
+      "content": [
+        "Post-RDV 24h : 'Merci pour l'échange. Ce que j'ai retenu de votre projet : [1 phrase sur la problématique]. Je vous reviens sous 48h avec une première lecture du marché ou une sélection. [Prénom du conseiller], Fabel Conseil'",
+        "Relance J+5 : 'Je reviens vers vous — j'ai avancé sur [le projet]. Est-ce toujours d'actualité, ou le calendrier a-t-il évolué ? [Prénom du conseiller], Fabel Conseil'",
+        "Fermeture J+14 prospect froid : 'Je ne veux pas vous encombrer — dernier message de ma part. Si un projet immobilier se présente, vous savez où me trouver. [Prénom du conseiller], Fabel Conseil'",
+        "Fermeture J+14 prospect chaud : 'Notre échange était positif. La décision est-elle de ne pas avancer, ou est-ce une question de timing (échéance de bail) ? Un mot suffit. [Prénom du conseiller], Fabel Conseil'",
+        "Prospect qui demande à ne plus être contacté : retirer immédiatement, marquer opt-out définitif. Réponse : 'Noté, je vous retire de ma liste. Bonne continuation. [Prénom du conseiller], Fabel Conseil'"
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "v1.0-FABEL",
+    "source_docs": ["fabelconseil.com"],
+    "total_sections": 9
+  }
+}

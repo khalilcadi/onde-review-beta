@@ -1,0 +1,109 @@
+{
+  "bloc_id": "qualification",
+  "title": "Qualification — Objections, Closing, Suivi",
+  "sections": [
+    {
+      "section_id": "obj_prix",
+      "tags": ["all", "objection"],
+      "heading": "Objections — Prix",
+      "content": [
+        "'C'est trop cher — 6 000€ c'est au-dessus de notre budget.' → Avant de parler du budget, regarder ensemble ce que ça coûte de ne pas avoir le système. Combien d'heures par semaine sur la prospection ? Combien de clients ratés faute de pipeline ? Setup remboursé sur 1-2 clients signés. Clause de sortie si le diagnostic ne convainc pas.",
+        "'Je préférerais un abonnement mensuel sans Setup.' → Le Setup représente un vrai travail de configuration (Audit Revenue, déploiement, formation). Ce n'est pas un accès logiciel. Étalement possible mais 50/50 signature/livraison est le minimum.",
+        "'Je veux voir des résultats avant de m'engager.' → C'est pour ça qu'il y a une clause de sortie post-diagnostic. Les 5 premiers jours = Audit Revenue. Si ça ne convainc pas, arrêt possible. Risque réel = 3 000€ investis dans un diagnostic qu'on garde de toute façon."
+      ]
+    },
+    {
+      "section_id": "obj_resultats",
+      "tags": ["all", "objection"],
+      "heading": "Objections — Résultats",
+      "content": [
+        "'Vous me garantissez combien de RDV par mois ?' → Pas de garantie contractuelle — toute société qui le fait en prospection IA devrait alerter. L'Audit Revenue calibre un objectif réaliste documenté. Si résultats en dessous après 3 mois → identification des causes et ajustement.",
+        "'On a essayé des outils similaires — zéro résultat.' → Signal le plus important. Demander : qu'est-ce qui a été essayé exactement, et à quelle étape ça a bloqué ? Dans 9 cas sur 10, c'est l'absence d'architecture autour (pas de scoring ICP, pas de séquences personnalisées, pas de suivi).",
+        "Ne jamais mentionner 5-10 RDV/mois sans qualifier d'objectif de conception calibré lors du diagnostic."
+      ]
+    },
+    {
+      "section_id": "obj_confiance",
+      "tags": ["all", "objection"],
+      "heading": "Objections — Confiance et nouveauté",
+      "content": [
+        "'Vous êtes une nouvelle structure — comment je peux vous faire confiance ?' → Traiter EN PREMIER si combiné avec objection prix. Smart.AI est en phase pilote — ne pas prétendre le contraire. Ce que ça signifie : tarif qui reflète ce stade, attention dédiée, protections contractuelles (50/50, système propriété client, résiliation 30j après 3 mois).",
+        "'Je dois en parler à mon associé / DAF.' → Proposer un résumé d'une page : périmètre exact, ROI estimé et calcul, garanties contractuelles. L'associé a les éléments pour décider sans autre appel.",
+        "'On n'a pas le temps de s'impliquer dans un Setup.' → Si moins de 3h/semaine disponibles pendant 6-8 semaines : le dire directement, le Setup ne peut pas bien fonctionner. Ce que ça demande : deux sessions de cadrage, deux sessions de validation. Smart.AI gère 95% de l'implémentation.",
+        "'Est-ce que vous avez des références ?' → Phase pilote avec premiers clients — pas de référence publique aujourd'hui. Proposer d'être client pilote avec les protections contractuelles. Ne pas promettre de référence dans un délai précis."
+      ]
+    },
+    {
+      "section_id": "obj_esn",
+      "tags": ["D1", "D2", "ESN", "objection"],
+      "heading": "Objections spécifiques ESN",
+      "content": [
+        "'Nos clients viennent par recommandation — le cold outreach va nous décrédibiliser.' → PROSPECTOR est différent du cold outreach classique. DSI qui change de poste = signal idéal pour message contextualisé. PME qui publie offre IT = intention d'achat potentielle. Prospection sur signaux réels — pas en volume aveugle. Taux réponse 3-5x supérieur.",
+        "'Le bench n'est pas vraiment un problème pour nous.' → Calculer en temps réel : nb consultants × taux intercontrat estimé × 7 000€/mois. Vérifier sur la réalité du client lors de l'Audit Revenue.",
+        "'On a déjà un process de recrutement.' → PROSPECTOR ne remplace pas le process — il l'alimente en profils qualifiés avant que le besoin soit urgent. NEXUS CRM alerte 45 jours avant fin de mission. Profils chauds au lieu du mode pompier."
+      ]
+    },
+    {
+      "section_id": "obj_conformite",
+      "tags": ["all", "D2", "objection"],
+      "heading": "Objections — Conformité et données",
+      "content": [
+        "'Qu'est-ce qui se passe avec mes données prospects ?' → Données stockées en France (OVHcloud/Scaleway). DPA signé avec le Setup. Smart.AI = sous-traitant. Conservation 24 mois après dernier contact. Procédure d'effacement sur demande.",
+        "'L'AI Act — on doit être en conformité.' → JARVIS et PROSPECTOR classifiés risque limité au sens AI Act. Obligation principale : transparence sur l'origine automatisée des messages, intégrée dans les séquences."
+      ]
+    },
+    {
+      "section_id": "questions_diagnostic",
+      "tags": ["all"],
+      "heading": "Questions de diagnostic — Audit Revenue",
+      "content": [
+        "'Comment vous trouvez vos clients aujourd'hui ?' → Objectif : dépendance réseau vs système. Signal positif : uniquement réseau/recommandation.",
+        "'C'est quoi votre CA et votre cible à 12 mois ?' → Objectif : taille et ambition. Signal positif : CA > 150k€ + ambition réelle.",
+        "'Vous avez un CRM ? Alimenté comment ?' → Objectif : maturité commerciale. Signal positif : CRM absent ou mal alimenté.",
+        "'Combien d'heures par semaine sur la prospection ?' → Objectif : quantifier la douleur. Signal positif : 6h+ par semaine.",
+        "'Votre taux de transformation RDV → client ?' → Objectif : qualité des RDV. Signal d'alerte si < 10% → problème d'offre, hors scope.",
+        "'Votre ticket moyen sur un nouveau client ?' → Objectif : calculer le ROI. Signal positif : ticket > 3 000€."
+      ]
+    },
+    {
+      "section_id": "questions_esn",
+      "tags": ["D1", "D2", "ESN"],
+      "heading": "Questions de diagnostic spécifiques ESN",
+      "content": [
+        "'Votre taux d'intercontrat actuel ?' → Quantifier la douleur bench — base du calcul ROI recrutement.",
+        "'Sur vos 3 derniers AO perdus, c'était pourquoi ?' → Distinguer pipeline commercial vs disponibilité consultant.",
+        "'Vos commerciaux passent combien de temps à sourcer vs à être en RDV ?' → Quantifier la perte d'efficacité sur D2.",
+        "'Vous avez de la visibilité sur les fins de mission à 45-90 jours ?' → Évaluer la maturité de la gestion du bench.",
+        "'Vous avez des contraintes de confidentialité sur les données de vos clients ?' → Identifier si SmartData nécessaire."
+      ]
+    },
+    {
+      "section_id": "closing",
+      "tags": ["all"],
+      "heading": "Closing — formulations",
+      "content": [
+        "Règle : le closing est une demande directe après avoir établi la valeur. La clause de sortie est l'argument de closing le plus puissant — utiliser en dernier, pas en ouverture.",
+        "Transition RDV : 'Vu ce que vous décrivez, ça peut valoir le coup de regarder ça ensemble. 20 minutes pour poser les choses ?'",
+        "Prospect hésite : 'On commence par l'Audit Revenue — 5 jours. Si ça ne vous convainc pas, vous vous arrêtez. Le livrable reste votre propriété.'",
+        "Priorité objections : double objection = traiter confiance AVANT prix. Max 1 objection par message écrit."
+      ]
+    },
+    {
+      "section_id": "suivi",
+      "tags": ["all"],
+      "heading": "Messages de suivi post-RDV",
+      "content": [
+        "Post-RDV 24h : 'Merci pour l'échange. Ce que j'ai retenu de votre situation : [1 phrase douleur principale]. Comme convenu, je vous prépare [la proposition] dans les 48h. Ludwig'",
+        "Relance J+5 : 'Je reviens rapidement — j'ai préparé [la proposition]. Est-ce que c'est toujours le bon moment, ou il s'est passé quelque chose qui a changé la donne ? Ludwig'",
+        "Fermeture J+14 prospect froid : 'Je ne veux pas vous encombrer — c'est mon dernier message. Si la situation évolue, vous savez où me trouver. Ludwig'",
+        "Fermeture J+14 prospect chaud : 'Notre échange était positif. Est-ce que la décision est prise de ne pas avancer, ou est-ce une question de timing ? Un mot suffit. Ludwig'",
+        "Prospect agressif/opt-out : retirer immédiatement, marquer opt-out définitif. Réponse : 'Noté — je vous retire de ma liste immédiatement. Bonne continuation, Ludwig'"
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "v1.0",
+    "source_docs": ["DOC11_QUALIFIED_MESSAGING_V4"],
+    "total_sections": 9
+  }
+}

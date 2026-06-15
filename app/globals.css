@@ -1,0 +1,171 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* ===== LIGHT MODE — Warm Stone Palette ===== */
+    --background: 60 9% 96%;            /* #F5F5F4 (stone-100) */
+    --background-card: 60 9% 98%;       /* #FAFAF9 (stone-50) */
+    --foreground: 24 10% 10%;           /* #1C1917 (stone-900) */
+
+    --card: 60 9% 98%;                  /* #FAFAF9 */
+    --card-foreground: 24 10% 10%;      /* #1C1917 */
+    --popover: 60 9% 98%;              /* #FAFAF9 */
+    --popover-foreground: 24 10% 10%;   /* #1C1917 */
+
+    --primary: 24 10% 10%;             /* #1C1917 (stone-900) */
+    --primary-foreground: 60 9% 98%;   /* #FAFAF9 */
+
+    --secondary: 60 5% 90%;            /* #E7E5E4 (stone-300) */
+    --secondary-foreground: 24 10% 10%;
+
+    --muted: 60 5% 90%;                /* #E7E5E4 (stone-300) */
+    --muted-foreground: 25 6% 45%;     /* #78716C (stone-500 — WCAG 4.5:1) */
+
+    --accent: 217 91% 60%;             /* #2563EB (blue-600) */
+    --accent-foreground: 0 0% 100%;
+    --accent-hover: 217 91% 53%;       /* blue-700 */
+    --accent-light: 217 91% 97%;       /* ~10% blue on stone-50 */
+
+    --destructive: 0 72% 45%;          /* #C81E1E (red-700 — WCAG 5.1:1 with white) */
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 160 84% 39%;            /* #059669 (emerald-600) */
+    --success-light: 160 84% 96%;      /* ~10% emerald on stone-50 */
+    --warning: 38 92% 50%;             /* #D97706 (amber-600) */
+    --warning-light: 38 92% 96%;       /* ~10% amber on stone-50 */
+
+    --border: 24 6% 83%;               /* #D6D3D1 (stone-300) */
+    --border-hover: 24 6% 65%;         /* #A8A29E (stone-400) */
+    --input: 24 6% 83%;
+    --ring: 217 91% 60%;
+
+    --radius: 0.5rem;                  /* 8px max */
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.03);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.03);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.03);
+
+    /* Sidebar */
+    --sidebar-width: 240px;
+    --sidebar-collapsed: 72px;
+  }
+
+  .dark {
+    /* ===== DARK MODE — Warm Neutral Grays ===== */
+    --background: 0 0% 9%;              /* #171717 */
+    --background-card: 0 0% 15%;        /* #262626 */
+    --foreground: 0 0% 96%;             /* #F5F5F5 */
+
+    --card: 0 0% 15%;                   /* #262626 */
+    --card-foreground: 0 0% 96%;        /* #F5F5F5 */
+    --popover: 0 0% 15%;               /* #262626 */
+    --popover-foreground: 0 0% 96%;     /* #F5F5F5 */
+
+    --primary: 0 0% 96%;               /* #F5F5F5 */
+    --primary-foreground: 0 0% 9%;     /* #171717 */
+
+    --secondary: 0 0% 15%;             /* #262626 */
+    --secondary-foreground: 0 0% 96%;
+
+    --muted: 0 0% 16%;                 /* #2A2A2A */
+    --muted-foreground: 0 0% 63%;      /* #A1A1A1 (WCAG 4.6:1 on #262626) */
+
+    --accent: 217 91% 60%;             /* #2563EB */
+    --accent-foreground: 0 0% 100%;
+    --accent-hover: 214 96% 68%;       /* blue-400 */
+    --accent-light: 217 50% 18%;       /* ~20% blue on #262626 */
+
+    --destructive: 0 72% 45%;          /* #C81E1E */
+    --destructive-foreground: 0 0% 96%;
+
+    --success: 160 84% 39%;            /* #059669 */
+    --success-light: 160 40% 15%;      /* ~20% emerald on dark */
+    --warning: 38 92% 50%;             /* #D97706 */
+    --warning-light: 38 40% 15%;       /* ~20% amber on dark */
+
+    --border: 0 0% 25%;                /* #404040 */
+    --border-hover: 0 0% 33%;          /* #555555 */
+    --input: 0 0% 25%;
+    --ring: 217 91% 60%;
+
+    /* Dark shadows = subtle borders */
+    --shadow-sm: 0 0 0 1px rgb(255 255 255 / 0.05);
+    --shadow-md: 0 0 0 1px rgb(255 255 255 / 0.08);
+    --shadow-lg: 0 0 0 1px rgb(255 255 255 / 0.1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}
+
+/* Toast styling — more visible, polished */
+[data-sonner-toaster] {
+  --width: 380px;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+[data-sonner-toast] {
+  padding: 16px 20px !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 30px rgb(0 0 0 / 0.12), 0 2px 8px rgb(0 0 0 / 0.08) !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+  backdrop-filter: blur(8px);
+}
+
+[data-sonner-toast][data-type="success"] {
+  border-left: 4px solid hsl(var(--success)) !important;
+}
+
+[data-sonner-toast][data-type="error"] {
+  border-left: 4px solid hsl(var(--destructive)) !important;
+}
+
+[data-sonner-toast][data-type="warning"] {
+  border-left: 4px solid hsl(var(--warning)) !important;
+}
+
+[data-sonner-toast][data-type="info"] {
+  border-left: 4px solid hsl(var(--accent)) !important;
+}
+
+[data-sonner-toast] [data-close-button] {
+  top: 6px !important;
+  right: 6px !important;
+  opacity: 0.5 !important;
+  transition: opacity 0.15s !important;
+}
+
+[data-sonner-toast] [data-close-button]:hover {
+  opacity: 1 !important;
+}
+
+.dark [data-sonner-toast] {
+  box-shadow: 0 8px 30px rgb(0 0 0 / 0.4), 0 0 0 1px rgb(255 255 255 / 0.08) !important;
+}
+
+/* Scrollbar styling */
+@layer utilities {
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-border rounded-full;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    @apply bg-border-hover;
+  }
+}

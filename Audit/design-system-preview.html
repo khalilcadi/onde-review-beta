@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PROSPECTOR — Design System Preview</title>
+  <style>
+    /* ===== RESET ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ===== FONTS ===== */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    /* ===== VARIABLES ===== */
+    :root {
+      /* Light Mode — Warm Stone */
+      --background: #F5F5F4;
+      --background-card: #FAFAF9;
+      --foreground: #1C1917;
+      --card: #FAFAF9;
+      --card-foreground: #1C1917;
+      --primary: #1C1917;
+      --primary-foreground: #FAFAF9;
+      --secondary: #E7E5E4;
+      --secondary-foreground: #1C1917;
+      --muted: #E7E5E4;
+      --muted-foreground: #78716C;
+      --accent: #2563EB;
+      --accent-foreground: #FFFFFF;
+      --accent-hover: #1D4ED8;
+      --accent-light: #EFF6FF;
+      --destructive: #DC2626;
+      --destructive-foreground: #FFFFFF;
+      --destructive-proposed: #C81E1E;
+      --success: #059669;
+      --success-light: #ECFDF5;
+      --warning: #D97706;
+      --warning-light: #FFFBEB;
+      --border: #D6D3D1;
+      --border-hover: #A8A29E;
+      --ring: #2563EB;
+      --radius-sm: 4px;
+      --radius-md: 6px;
+      --radius-lg: 8px;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.03);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.03);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.03);
+
+      /* Dark mode tokens (used in .dark-preview) */
+      --dark-background: #171717;
+      --dark-card: #262626;
+      --dark-foreground: #F5F5F5;
+      --dark-muted: #2A2A2A;
+      --dark-muted-fg-current: #8C8C8C;
+      --dark-muted-fg-proposed: #A1A1A1;
+      --dark-border: #404040;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--background);
+      color: var(--foreground);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===== LAYOUT ===== */
+    .container { max-width: 1200px; margin: 0 auto; padding: 48px 32px; }
+    .section { margin-bottom: 64px; }
+    .section-title {
+      font-size: 24px; font-weight: 600; letter-spacing: -0.025em;
+      margin-bottom: 8px; color: var(--foreground);
+    }
+    .section-desc { font-size: 14px; color: var(--muted-foreground); margin-bottom: 32px; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+    .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 16px; }
+    .flex-row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .flex-col { display: flex; flex-direction: column; gap: 8px; }
+    .subsection { margin-bottom: 32px; }
+    .subsection-title { font-size: 16px; font-weight: 600; margin-bottom: 16px; color: var(--foreground); }
+
+    /* ===== COLOR SWATCHES ===== */
+    .swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; }
+    .swatch {
+      border-radius: var(--radius-lg); border: 1px solid var(--border);
+      overflow: hidden; background: var(--card);
+    }
+    .swatch-color { height: 72px; display: flex; align-items: center; justify-content: center; }
+    .swatch-info { padding: 12px; }
+    .swatch-name { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+    .swatch-hex { font-size: 12px; color: var(--muted-foreground); font-family: 'Courier New', monospace; }
+    .swatch-ratio { font-size: 11px; margin-top: 4px; padding: 2px 6px; border-radius: var(--radius-sm); display: inline-block; }
+    .ratio-pass { background: var(--success-light); color: var(--success); }
+    .ratio-fail { background: #FEF2F2; color: var(--destructive); }
+    .ratio-warn { background: var(--warning-light); color: var(--warning); }
+
+    /* ===== TYPOGRAPHY ===== */
+    .type-sample { padding: 12px 0; border-bottom: 1px solid var(--border); }
+    .type-sample:last-child { border-bottom: none; }
+    .type-label { font-size: 12px; color: var(--muted-foreground); margin-bottom: 4px; font-family: 'Courier New', monospace; }
+
+    /* ===== SPACING ===== */
+    .spacing-row { display: flex; align-items: center; gap: 16px; padding: 8px 0; }
+    .spacing-block { background: var(--accent); border-radius: 3px; height: 24px; }
+    .spacing-label { font-size: 12px; color: var(--muted-foreground); width: 60px; font-family: 'Courier New', monospace; }
+    .spacing-value { font-size: 12px; color: var(--muted-foreground); width: 40px; }
+
+    /* ===== COMPONENTS ===== */
+    .component-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 24px;
+    }
+    .component-title { font-size: 14px; font-weight: 600; margin-bottom: 16px; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      border-radius: var(--radius-md); font-size: 14px; font-weight: 500;
+      padding: 8px 16px; height: 40px; border: none; cursor: pointer;
+      transition: all 0.2s; text-decoration: none; white-space: nowrap;
+    }
+    .btn:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--ring); }
+    .btn-sm { height: 36px; padding: 6px 12px; font-size: 13px; }
+    .btn-lg { height: 44px; padding: 10px 32px; }
+    .btn-icon { width: 40px; padding: 0; }
+    .btn-default { background: var(--primary); color: var(--primary-foreground); }
+    .btn-default:hover { opacity: 0.9; }
+    .btn-accent { background: var(--accent); color: var(--accent-foreground); }
+    .btn-accent:hover { background: var(--accent-hover); }
+    .btn-secondary { background: var(--secondary); color: var(--secondary-foreground); }
+    .btn-secondary:hover { opacity: 0.8; }
+    .btn-outline { background: var(--background); color: var(--foreground); border: 1px solid var(--border); }
+    .btn-outline:hover { background: var(--muted); }
+    .btn-ghost { background: transparent; color: var(--foreground); }
+    .btn-ghost:hover { background: var(--muted); }
+    .btn-destructive { background: var(--destructive); color: var(--destructive-foreground); }
+    .btn-destructive:hover { opacity: 0.9; }
+    .btn-link { background: transparent; color: var(--accent); text-decoration: none; }
+    .btn-link:hover { text-decoration: underline; }
+    .btn:disabled, .btn-disabled { opacity: 0.5; pointer-events: none; }
+
+    /* Badges */
+    .badge {
+      display: inline-flex; align-items: center; border-radius: var(--radius-md);
+      padding: 2px 8px; font-size: 12px; font-weight: 500; border: 1px solid transparent;
+    }
+    .badge-default { background: var(--primary); color: var(--primary-foreground); }
+    .badge-secondary { background: var(--secondary); color: var(--secondary-foreground); }
+    .badge-outline { background: transparent; color: var(--foreground); border-color: var(--border); }
+    .badge-destructive { background: #FEF2F2; color: var(--destructive); }
+    .badge-success { background: var(--success-light); color: var(--success); }
+    .badge-warning { background: var(--warning-light); color: var(--warning); }
+    .badge-accent { background: var(--accent-light); color: var(--accent); }
+
+    /* Inputs */
+    .input-field {
+      height: 40px; width: 100%; border-radius: var(--radius-md);
+      border: 1px solid var(--border); background: var(--background);
+      padding: 8px 12px; font-size: 14px; color: var(--foreground);
+      transition: all 0.2s; outline: none; font-family: inherit;
+    }
+    .input-field::placeholder { color: var(--muted-foreground); }
+    .input-field:focus { box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--ring); }
+    .input-field:disabled { opacity: 0.5; cursor: not-allowed; }
+    .input-label { font-size: 14px; font-weight: 500; display: block; margin-bottom: 6px; }
+
+    /* Cards */
+    .card-demo {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); transition: all 0.2s;
+    }
+    .card-header { padding: 24px 24px 0; }
+    .card-title { font-size: 18px; font-weight: 600; line-height: 1; letter-spacing: -0.025em; }
+    .card-desc { font-size: 14px; color: var(--muted-foreground); margin-top: 6px; }
+    .card-content { padding: 24px; }
+
+    /* Tabs */
+    .tabs-list {
+      display: inline-flex; background: var(--muted); padding: 4px;
+      border-radius: var(--radius-md); gap: 2px;
+    }
+    .tab-trigger {
+      padding: 6px 12px; font-size: 14px; font-weight: 500; border: none;
+      background: transparent; color: var(--muted-foreground);
+      border-radius: var(--radius-sm); cursor: pointer; transition: all 0.2s;
+    }
+    .tab-trigger.active {
+      background: var(--background); color: var(--foreground);
+      box-shadow: var(--shadow-sm);
+    }
+    .tab-trigger:hover:not(.active) { color: var(--foreground); }
+
+    /* Table */
+    .table-demo { width: 100%; border-collapse: collapse; }
+    .table-demo th {
+      text-align: left; font-size: 12px; font-weight: 500; color: var(--muted-foreground);
+      padding: 12px 16px; border-bottom: 1px solid var(--border); text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .table-demo td {
+      padding: 12px 16px; font-size: 14px; border-bottom: 1px solid var(--border);
+    }
+    .table-demo tr:hover td { background: rgba(0,0,0,0.02); }
+
+    /* Dialog mock */
+    .dialog-demo {
+      background: var(--background); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-lg);
+      max-width: 400px; position: relative;
+    }
+    .dialog-close {
+      position: absolute; top: 16px; right: 16px; background: none; border: none;
+      cursor: pointer; opacity: 0.7; color: var(--foreground); font-size: 18px;
+    }
+    .dialog-close:hover { opacity: 1; }
+    .dialog-title { font-size: 18px; font-weight: 600; letter-spacing: -0.025em; margin-bottom: 8px; }
+    .dialog-desc { font-size: 14px; color: var(--muted-foreground); margin-bottom: 20px; }
+    .dialog-footer { display: flex; justify-content: flex-end; gap: 8px; }
+
+    /* ===== CONTRAST COMPARISON ===== */
+    .contrast-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .contrast-box {
+      border-radius: var(--radius-lg); padding: 20px; min-height: 100px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .contrast-text { margin-bottom: 4px; }
+    .contrast-meta { font-size: 11px; opacity: 0.7; font-family: 'Courier New', monospace; }
+
+    /* Dark preview sections */
+    .dark-preview {
+      background: var(--dark-background); color: var(--dark-foreground);
+      border-radius: var(--radius-lg); padding: 24px; border: 1px solid var(--dark-border);
+    }
+    .dark-card-preview {
+      background: var(--dark-card); border-radius: var(--radius-md);
+      padding: 16px; border: 1px solid var(--dark-border);
+    }
+
+    /* State examples */
+    .state-row { display: flex; gap: 16px; align-items: center; margin-bottom: 12px; }
+    .state-label { font-size: 12px; color: var(--muted-foreground); width: 80px; text-align: right; }
+
+    /* Separator */
+    hr.sep { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+
+    /* Header */
+    .page-header {
+      background: var(--card); border-bottom: 1px solid var(--border);
+      padding: 20px 32px; margin: -48px -32px 48px; display: flex;
+      align-items: center; justify-content: space-between;
+    }
+    .page-header h1 { font-size: 20px; font-weight: 600; letter-spacing: -0.025em; }
+    .page-header .meta { font-size: 13px; color: var(--muted-foreground); }
+
+    /* Radius demo */
+    .radius-demo {
+      width: 80px; height: 80px; background: var(--accent-light);
+      border: 2px solid var(--accent); display: flex; align-items: center;
+      justify-content: center; font-size: 11px; color: var(--accent);
+      font-weight: 600; font-family: 'Courier New', monospace;
+    }
+
+    /* Shadow demo */
+    .shadow-demo {
+      width: 120px; height: 80px; background: var(--card);
+      border-radius: var(--radius-lg); display: flex; align-items: center;
+      justify-content: center; font-size: 11px; color: var(--muted-foreground);
+      font-family: 'Courier New', monospace;
+    }
+
+    /* Nav items */
+    .nav-item {
+      display: flex; align-items: center; gap: 12px; padding: 10px 12px;
+      border-radius: var(--radius-md); font-size: 14px; transition: all 0.15s;
+      cursor: pointer;
+    }
+    .nav-item.active { background: var(--muted); color: var(--accent); font-weight: 500; }
+    .nav-item:not(.active) { color: var(--muted-foreground); }
+    .nav-item:not(.active):hover { background: var(--muted); color: var(--foreground); }
+    .nav-icon { width: 16px; height: 16px; border-radius: 3px; background: currentColor; opacity: 0.5; }
+
+    @media (max-width: 768px) {
+      .grid-2, .grid-3, .grid-4, .contrast-grid { grid-template-columns: 1fr; }
+      .swatch-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <div>
+      <h1>PROSPECTOR Design System</h1>
+      <div class="meta">Preview &mdash; 2026-02-27 &mdash; v0.1.0</div>
+    </div>
+    <div style="display:flex;gap:8px;">
+      <span class="badge badge-accent">Light Mode</span>
+      <span class="badge badge-secondary">Warm Stone</span>
+    </div>
+  </div>
+
+  <!-- ========================================= -->
+  <!-- 1. COULEURS -->
+  <!-- ========================================= -->
+  <div class="section">
+    <h2 class="section-title">1. Palette de couleurs</h2>
+    <p class="section-desc">Toutes les couleurs utilisent des CSS variables HSL. Z&eacute;ro couleur hardcod&eacute;e dans les composants.</p>
+
+    <div class="subsection">
+      <h3 class="subsection-title">Neutral (Warm Stone)</h3>
+      <div class="swatch-grid">
+        <div class="swatch">
+          <div class="swatch-color" style="background:#FAFAF9;border-bottom:1px solid var(--border);">
+            <span style="color:#1C1917;font-size:13px;font-weight:500;">Aa</span>
+          </div>
+          <div class="swatch-info">
+            <div class="swatch-name">background-card</div>
+            <div class="swatch-hex">#FAFAF9 &middot; stone-50</div>
+            <div class="swatch-ratio ratio-pass">13.2:1 &check; AAA</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#F5F5F4;border-bottom:1px solid var(--border);">
+            <span style="color:#1C1917;font-size:13px;font-weight:500;">Aa</span>
+          </div>
+          <div class="swatch-info">
+            <div class="swatch-name">background</div>
+            <div class="swatch-hex">#F5F5F4 &middot; stone-100</div>
+            <div class="swatch-ratio ratio-pass">12.6:1 &check; AAA</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#E7E5E4;border-bottom:1px solid var(--border);">
+            <span style="color:#1C1917;font-size:13px;font-weight:500;">Aa</span>
+          </div>
+          <div class="swatch-info">
+            <div class="swatch-name">muted / secondary</div>
+            <div class="swatch-hex">#E7E5E4 &middot; stone-300</div>
+            <div class="swatch-ratio ratio-pass">10.2:1 &check; AAA</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#D6D3D1;border-bottom:1px solid var(--border);">
+            <span style="color:#1C1917;font-size:13px;font-weight:500;">Aa</span>
+          </div>
+          <div class="swatch-info">
+            <div class="swatch-name">border</div>
+            <div class="swatch-hex">#D6D3D1 &middot; stone-300</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#A8A29E;border-bottom:1px solid var(--border);">
+            <span style="color:#FFFFFF;font-size:13px;font-weight:500;">Aa</span>
+          </div>
+          <div class="swatch-info">
+            <div class="swatch-name">border-hover</div>
+            <div class="swatch-hex">#A8A29E &middot; stone-400</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#78716C;border-bottom:1px solid var(--border);">
+            <span style="color:#FFFFFF;font-size:13px;font-weight:500;">Aa</span>
+          </div>
+          <div class="swatch-info">
+            <div class="swatch-name">muted-foreground</div>
+            <div class="swatch-hex">#78716C &middot; stone-500</div>
+            <div class="swatch-ratio ratio-pass">4.5:1 &check; AA</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#1C1917;border-bottom:1px solid var(--border);">
+            <span style="color:#FAFAF9;font-size:13px;font-weight:500;">Aa</span>
+          </div>
+          <div class="swatch-info">
+            <div class="swatch-name">foreground / primary</div>
+            <div class="swatch-hex">#1C1917 &middot; stone-900</div>
+            <div class="swatch-ratio ratio-pass">13.2:1 &check; AAA</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3 class="subsection-title">Accent & S&eacute;mantique</h3>
+      <div class="swatch-grid">
+        <div class="swatch">
+          <div class="swatch-color" style="background:#2563EB;">
+            <span style="color:#FFFFFF;font-size:13px;font-weight:500;">Aa</span>
+          </div>
+          <div class="swatch-info">
+            <div class="swatch-name">accent</div>
+            <div class="swatch-hex">#2563EB &middot; blue-600</div>
+            <div class="swatch-ratio ratio-pass">4.6:1 &check; AA</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#1D4ED8;">
+            <span style="color:#FFFFFF;font-size:13px;font-weight:500;">Aa</span>
+          </div>
+          <div class="swatch-info">
+            <div class="swatch-name">accent-hover</div>
+            <div class="swatch-hex">#1D4ED8 &middot; blue-700</div>
+            <div class="swatch-ratio ratio-pass">5.9:1 &check; AA</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#EFF6FF;border-bottom:1px solid var(--border);">
+            <span style="color:#2563EB;font-size:13px;font-weight:500;">Aa</span>
+          </div>
+          <div class="swatch-info">
+            <div class="swatch-name">accent-light</div>
+            <div class="swatch-hex">#EFF6FF</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#DC2626;">
+            <span style="color:#FFFFFF;font-size:13px;font-weight:500;">Aa</span>
+          </div>
+          <div class="swatch-info">
+            <div class="swatch-name">destructive</div>
+            <div class="swatch-hex">#DC2626 &middot; red-600</div>
+            <div class="swatch-ratio ratio-warn">4.0:1 &#x26A0; limite</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#C81E1E;">
+            <span style="color:#FFFFFF;font-size:13px;font-weight:500;">Aa</span>
+          </div>
+          <div class="swatch-info">
+            <div class="swatch-name">destructive (propos&eacute;)</div>
+            <div class="swatch-hex">#C81E1E &middot; red-700</div>
+            <div class="swatch-ratio ratio-pass">5.1:1 &check; AA</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#059669;">
+            <span style="color:#FFFFFF;font-size:13px;font-weight:500;">Aa</span>
+          </div>
+          <div class="swatch-info">
+            <div class="swatch-name">success</div>
+            <div class="swatch-hex">#059669 &middot; emerald-600</div>
+            <div class="swatch-ratio ratio-pass">4.6:1 &check; AA</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#D97706;">
+            <span style="color:#FFFFFF;font-size:13px;font-weight:500;">Aa</span>
+          </div>
+          <div class="swatch-info">
+            <div class="swatch-name">warning</div>
+            <div class="swatch-hex">#D97706 &middot; amber-600</div>
+            <div class="swatch-ratio ratio-warn">3.3:1 &#x26A0; large only</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3 class="subsection-title">Dark Mode</h3>
+      <div class="dark-preview">
+        <div class="swatch-grid">
+          <div class="swatch" style="border-color:var(--dark-border);">
+            <div class="swatch-color" style="background:var(--dark-background);">
+              <span style="color:var(--dark-foreground);font-size:13px;font-weight:500;">Aa</span>
+            </div>
+            <div class="swatch-info" style="background:var(--dark-card);">
+              <div class="swatch-name" style="color:var(--dark-foreground);">background</div>
+              <div class="swatch-hex" style="color:var(--dark-muted-fg-proposed);">#171717</div>
+              <div class="swatch-ratio ratio-pass">15.9:1 AAA</div>
+            </div>
+          </div>
+          <div class="swatch" style="border-color:var(--dark-border);">
+            <div class="swatch-color" style="background:var(--dark-card);">
+              <span style="color:var(--dark-foreground);font-size:13px;font-weight:500;">Aa</span>
+            </div>
+            <div class="swatch-info" style="background:var(--dark-card);">
+              <div class="swatch-name" style="color:var(--dark-foreground);">card</div>
+              <div class="swatch-hex" style="color:var(--dark-muted-fg-proposed);">#262626</div>
+              <div class="swatch-ratio ratio-pass">12.7:1 AAA</div>
+            </div>
+          </div>
+          <div class="swatch" style="border-color:var(--dark-border);">
+            <div class="swatch-color" style="background:var(--dark-card);">
+              <span style="color:var(--dark-muted-fg-current);font-size:13px;font-weight:500;">Aa (actuel)</span>
+            </div>
+            <div class="swatch-info" style="background:var(--dark-card);">
+              <div class="swatch-name" style="color:var(--dark-foreground);">muted-fg actuel</div>
+              <div class="swatch-hex" style="color:var(--dark-muted-fg-proposed);">#8C8C8C</div>
+              <div class="swatch-ratio ratio-fail">3.4:1 &#x2717; Fail AA</div>
+            </div>
+          </div>
+          <div class="swatch" style="border-color:var(--dark-border);">
+            <div class="swatch-color" style="background:var(--dark-card);">
+              <span style="color:var(--dark-muted-fg-proposed);font-size:13px;font-weight:500;">Aa (propos&eacute;)</span>
+            </div>
+            <div class="swatch-info" style="background:var(--dark-card);">
+              <div class="swatch-name" style="color:var(--dark-foreground);">muted-fg propos&eacute;</div>
+              <div class="swatch-hex" style="color:var(--dark-muted-fg-proposed);">#A1A1A1</div>
+              <div class="swatch-ratio ratio-pass">4.6:1 &check; AA</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="sep">
+
+  <!-- ========================================= -->
+  <!-- 2. TYPOGRAPHIE -->
+  <!-- ========================================= -->
+  <div class="section">
+    <h2 class="section-title">2. &Eacute;chelle typographique</h2>
+    <p class="section-desc">7 niveaux. Font : Geist Sans (Inter en fallback). &Eacute;liminer les tailles arbitraires.</p>
+
+    <div class="component-card">
+      <div class="type-sample">
+        <div class="type-label">text-3xl &middot; 30px &middot; semibold</div>
+        <div style="font-size:30px;font-weight:600;letter-spacing:-0.025em;line-height:1.2;">Titre page Auth</div>
+      </div>
+      <div class="type-sample">
+        <div class="type-label">text-2xl &middot; 24px &middot; semibold</div>
+        <div style="font-size:24px;font-weight:600;letter-spacing:-0.025em;line-height:1.33;">Titre principal Dashboard</div>
+      </div>
+      <div class="type-sample">
+        <div class="type-label">text-xl &middot; 20px &middot; semibold</div>
+        <div style="font-size:20px;font-weight:600;letter-spacing:-0.025em;line-height:1.4;">Header de page</div>
+      </div>
+      <div class="type-sample">
+        <div class="type-label">text-lg &middot; 18px &middot; semibold</div>
+        <div style="font-size:18px;font-weight:600;line-height:1.55;">Titre de section / Dialog</div>
+      </div>
+      <div class="type-sample">
+        <div class="type-label">text-base &middot; 16px &middot; medium</div>
+        <div style="font-size:16px;font-weight:500;line-height:1.5;">Titre de carte, contenu principal</div>
+      </div>
+      <div class="type-sample">
+        <div class="type-label">text-sm &middot; 14px &middot; normal</div>
+        <div style="font-size:14px;font-weight:400;line-height:1.43;">Corps UI, cellules de table, labels de formulaire, descriptions. Le texte le plus utilis&eacute; dans l&apos;application.</div>
+      </div>
+      <div class="type-sample">
+        <div class="type-label">text-xs &middot; 12px &middot; medium</div>
+        <div style="font-size:12px;font-weight:500;line-height:1.33;color:var(--muted-foreground);">Labels, timestamps, metadata, badges</div>
+      </div>
+    </div>
+
+    <div class="subsection" style="margin-top:24px;">
+      <h3 class="subsection-title">Poids typographiques (3 niveaux)</h3>
+      <div class="component-card">
+        <div class="type-sample">
+          <div class="type-label">font-normal (400)</div>
+          <div style="font-size:14px;font-weight:400;">Corps de texte, descriptions, paragraphes</div>
+        </div>
+        <div class="type-sample">
+          <div class="type-label">font-medium (500)</div>
+          <div style="font-size:14px;font-weight:500;">Labels, boutons, badges, m&eacute;tadonn&eacute;es</div>
+        </div>
+        <div class="type-sample">
+          <div class="type-label">font-semibold (600)</div>
+          <div style="font-size:14px;font-weight:600;">Titres, sections, emphasis</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="sep">
+
+  <!-- ========================================= -->
+  <!-- 3. SPACING -->
+  <!-- ========================================= -->
+  <div class="section">
+    <h2 class="section-title">3. &Eacute;chelle de spacing</h2>
+    <p class="section-desc">Base 4px. 8 niveaux principaux utilis&eacute;s dans le projet.</p>
+
+    <div class="component-card">
+      <div class="spacing-row"><span class="spacing-label">0.5</span><div class="spacing-block" style="width:2px;"></div><span class="spacing-value">2px</span></div>
+      <div class="spacing-row"><span class="spacing-label">1</span><div class="spacing-block" style="width:4px;"></div><span class="spacing-value">4px</span></div>
+      <div class="spacing-row"><span class="spacing-label">1.5</span><div class="spacing-block" style="width:6px;"></div><span class="spacing-value">6px</span></div>
+      <div class="spacing-row"><span class="spacing-label">2</span><div class="spacing-block" style="width:8px;"></div><span class="spacing-value">8px</span></div>
+      <div class="spacing-row"><span class="spacing-label">3</span><div class="spacing-block" style="width:12px;"></div><span class="spacing-value">12px</span></div>
+      <div class="spacing-row"><span class="spacing-label">4</span><div class="spacing-block" style="width:16px;"></div><span class="spacing-value">16px</span></div>
+      <div class="spacing-row"><span class="spacing-label">6</span><div class="spacing-block" style="width:24px;"></div><span class="spacing-value">24px</span></div>
+      <div class="spacing-row"><span class="spacing-label">8</span><div class="spacing-block" style="width:32px;"></div><span class="spacing-value">32px</span></div>
+      <div class="spacing-row"><span class="spacing-label">12</span><div class="spacing-block" style="width:48px;"></div><span class="spacing-value">48px</span></div>
+      <div class="spacing-row"><span class="spacing-label">16</span><div class="spacing-block" style="width:64px;"></div><span class="spacing-value">64px</span></div>
+    </div>
+  </div>
+
+  <hr class="sep">
+
+  <!-- ========================================= -->
+  <!-- 4. BORDER RADIUS & SHADOWS -->
+  <!-- ========================================= -->
+  <div class="section">
+    <h2 class="section-title">4. Border radius & Shadows</h2>
+
+    <div class="grid-2">
+      <div class="subsection">
+        <h3 class="subsection-title">Border radius</h3>
+        <div class="flex-row">
+          <div style="text-align:center;">
+            <div class="radius-demo" style="border-radius:4px;">sm</div>
+            <div style="font-size:11px;color:var(--muted-foreground);margin-top:6px;">4px</div>
+          </div>
+          <div style="text-align:center;">
+            <div class="radius-demo" style="border-radius:6px;">md</div>
+            <div style="font-size:11px;color:var(--muted-foreground);margin-top:6px;">6px</div>
+          </div>
+          <div style="text-align:center;">
+            <div class="radius-demo" style="border-radius:8px;">lg</div>
+            <div style="font-size:11px;color:var(--muted-foreground);margin-top:6px;">8px</div>
+          </div>
+          <div style="text-align:center;">
+            <div class="radius-demo" style="border-radius:9999px;">full</div>
+            <div style="font-size:11px;color:var(--muted-foreground);margin-top:6px;">9999px</div>
+          </div>
+        </div>
+      </div>
+      <div class="subsection">
+        <h3 class="subsection-title">Shadows</h3>
+        <div class="flex-row">
+          <div style="text-align:center;">
+            <div class="shadow-demo" style="box-shadow:var(--shadow-sm);">sm</div>
+            <div style="font-size:11px;color:var(--muted-foreground);margin-top:6px;">Subtil</div>
+          </div>
+          <div style="text-align:center;">
+            <div class="shadow-demo" style="box-shadow:var(--shadow-md);">md</div>
+            <div style="font-size:11px;color:var(--muted-foreground);margin-top:6px;">Dropdown</div>
+          </div>
+          <div style="text-align:center;">
+            <div class="shadow-demo" style="box-shadow:var(--shadow-lg);">lg</div>
+            <div style="font-size:11px;color:var(--muted-foreground);margin-top:6px;">Modal</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="sep">
+
+  <!-- ========================================= -->
+  <!-- 5. BOUTONS -->
+  <!-- ========================================= -->
+  <div class="section">
+    <h2 class="section-title">5. Boutons</h2>
+    <p class="section-desc">7 variants &times; 4 tailles &times; 4 &eacute;tats = syst&egrave;me complet.</p>
+
+    <div class="subsection">
+      <h3 class="subsection-title">Variants (taille default)</h3>
+      <div class="flex-row" style="gap:12px;">
+        <button class="btn btn-default">Default</button>
+        <button class="btn btn-accent">Accent</button>
+        <button class="btn btn-secondary">Secondary</button>
+        <button class="btn btn-outline">Outline</button>
+        <button class="btn btn-ghost">Ghost</button>
+        <button class="btn btn-destructive">Destructive</button>
+        <button class="btn btn-link">Link</button>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3 class="subsection-title">Tailles</h3>
+      <div class="flex-row" style="gap:12px;align-items:flex-end;">
+        <div style="text-align:center;">
+          <button class="btn btn-accent btn-sm">Small</button>
+          <div style="font-size:11px;color:var(--muted-foreground);margin-top:6px;">h-9 / 36px</div>
+        </div>
+        <div style="text-align:center;">
+          <button class="btn btn-accent">Default</button>
+          <div style="font-size:11px;color:var(--muted-foreground);margin-top:6px;">h-10 / 40px</div>
+        </div>
+        <div style="text-align:center;">
+          <button class="btn btn-accent btn-lg">Large</button>
+          <div style="font-size:11px;color:var(--muted-foreground);margin-top:6px;">h-11 / 44px</div>
+        </div>
+        <div style="text-align:center;">
+          <button class="btn btn-ghost btn-icon" aria-label="Settings">&#x2699;</button>
+          <div style="font-size:11px;color:var(--muted-foreground);margin-top:6px;">icon / 40px</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3 class="subsection-title">&Eacute;tats</h3>
+      <div class="grid-4">
+        <div class="component-card">
+          <div class="component-title">Default</div>
+          <button class="btn btn-accent">Action</button>
+        </div>
+        <div class="component-card">
+          <div class="component-title">Hover</div>
+          <button class="btn" style="background:var(--accent-hover);color:white;">Action</button>
+        </div>
+        <div class="component-card">
+          <div class="component-title">Focus</div>
+          <button class="btn btn-accent" style="box-shadow:0 0 0 2px var(--background), 0 0 0 4px var(--ring);">Action</button>
+        </div>
+        <div class="component-card">
+          <div class="component-title">Disabled</div>
+          <button class="btn btn-accent btn-disabled">Action</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="sep">
+
+  <!-- ========================================= -->
+  <!-- 6. BADGES -->
+  <!-- ========================================= -->
+  <div class="section">
+    <h2 class="section-title">6. Badges</h2>
+    <p class="section-desc">7 variants s&eacute;mantiques. Taille unique (text-xs / 12px).</p>
+
+    <div class="flex-row" style="gap:12px;">
+      <span class="badge badge-default">Default</span>
+      <span class="badge badge-secondary">Secondary</span>
+      <span class="badge badge-outline">Outline</span>
+      <span class="badge badge-accent">Accent</span>
+      <span class="badge badge-success">Success</span>
+      <span class="badge badge-warning">Warning</span>
+      <span class="badge badge-destructive">Destructive</span>
+    </div>
+
+    <div style="margin-top:24px;">
+      <h3 class="subsection-title">Exemples d&apos;usage (mapping status)</h3>
+      <div class="flex-row" style="gap:12px;">
+        <span class="badge badge-warning">Pending</span>
+        <span class="badge badge-accent">Validated</span>
+        <span class="badge badge-success">Sent</span>
+        <span class="badge badge-destructive">Failed</span>
+        <span class="badge badge-secondary">Cancelled</span>
+        <span class="badge badge-success">Active</span>
+        <span class="badge badge-secondary">Paused</span>
+      </div>
+    </div>
+  </div>
+
+  <hr class="sep">
+
+  <!-- ========================================= -->
+  <!-- 7. INPUTS & FORMULAIRES -->
+  <!-- ========================================= -->
+  <div class="section">
+    <h2 class="section-title">7. Inputs & Formulaires</h2>
+
+    <div class="grid-2">
+      <div class="component-card">
+        <div class="component-title">Input standard</div>
+        <div class="flex-col">
+          <label class="input-label">Email</label>
+          <input type="text" class="input-field" placeholder="vous@exemple.com">
+        </div>
+      </div>
+      <div class="component-card">
+        <div class="component-title">Input focus</div>
+        <div class="flex-col">
+          <label class="input-label">Recherche</label>
+          <input type="text" class="input-field" value="Jean Dupont" style="box-shadow:0 0 0 2px var(--background), 0 0 0 4px var(--ring);">
+        </div>
+      </div>
+      <div class="component-card">
+        <div class="component-title">Input disabled</div>
+        <div class="flex-col">
+          <label class="input-label" style="opacity:0.7;">Nom</label>
+          <input type="text" class="input-field" disabled placeholder="Indisponible">
+        </div>
+      </div>
+      <div class="component-card">
+        <div class="component-title">Textarea</div>
+        <div class="flex-col">
+          <label class="input-label">Message</label>
+          <textarea class="input-field" style="height:80px;resize:vertical;" placeholder="Votre message personnalis&eacute;..."></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="sep">
+
+  <!-- ========================================= -->
+  <!-- 8. CARDS -->
+  <!-- ========================================= -->
+  <div class="section">
+    <h2 class="section-title">8. Cards</h2>
+
+    <div class="grid-2">
+      <div class="card-demo">
+        <div class="card-header">
+          <div class="card-title">Card Title</div>
+          <div class="card-desc">Description courte de la carte avec du contexte suppl&eacute;mentaire.</div>
+        </div>
+        <div class="card-content">
+          <p style="font-size:14px;color:var(--muted-foreground);">Contenu de la carte avec des informations d&eacute;taill&eacute;es.</p>
+        </div>
+      </div>
+      <div class="card-demo">
+        <div class="card-header">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div class="card-title">KPI Card</div>
+            <span class="badge badge-success">+12%</span>
+          </div>
+        </div>
+        <div class="card-content">
+          <div style="font-size:32px;font-weight:600;letter-spacing:-0.025em;">2,847</div>
+          <div style="font-size:13px;color:var(--muted-foreground);margin-top:4px;">Messages envoy&eacute;s ce mois</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="sep">
+
+  <!-- ========================================= -->
+  <!-- 9. TABS -->
+  <!-- ========================================= -->
+  <div class="section">
+    <h2 class="section-title">9. Tabs</h2>
+
+    <div class="component-card">
+      <div class="tabs-list">
+        <button class="tab-trigger active">Vue d&apos;ensemble</button>
+        <button class="tab-trigger">Analytics</button>
+        <button class="tab-trigger">Notifications</button>
+      </div>
+      <div style="margin-top:16px;padding:16px;font-size:14px;color:var(--muted-foreground);">
+        Contenu de l&apos;onglet &laquo; Vue d&apos;ensemble &raquo;. L&apos;onglet actif a un fond blanc avec une ombre subtile.
+      </div>
+    </div>
+  </div>
+
+  <hr class="sep">
+
+  <!-- ========================================= -->
+  <!-- 10. TABLE -->
+  <!-- ========================================= -->
+  <div class="section">
+    <h2 class="section-title">10. Table</h2>
+
+    <div class="component-card" style="padding:0;overflow:hidden;">
+      <table class="table-demo">
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Entreprise</th>
+            <th>Statut</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="font-weight:500;">Marie Laurent</td>
+            <td>TechVision SAS</td>
+            <td><span class="badge badge-success">Active</span></td>
+            <td>87</td>
+          </tr>
+          <tr>
+            <td style="font-weight:500;">Pierre Durand</td>
+            <td>DataFlow</td>
+            <td><span class="badge badge-warning">Pending</span></td>
+            <td>64</td>
+          </tr>
+          <tr>
+            <td style="font-weight:500;">Sophie Martin</td>
+            <td>CloudFirst</td>
+            <td><span class="badge badge-secondary">Paused</span></td>
+            <td>42</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr class="sep">
+
+  <!-- ========================================= -->
+  <!-- 11. DIALOG -->
+  <!-- ========================================= -->
+  <div class="section">
+    <h2 class="section-title">11. Dialog / Modal</h2>
+
+    <div style="display:flex;justify-content:center;padding:40px;background:rgba(0,0,0,0.03);border-radius:var(--radius-lg);">
+      <div class="dialog-demo">
+        <button class="dialog-close">&times;</button>
+        <div class="dialog-title">Confirmer la suppression</div>
+        <div class="dialog-desc">&Ecirc;tes-vous s&ucirc;r de vouloir supprimer ce lead ? Cette action est irr&eacute;versible.</div>
+        <div class="dialog-footer">
+          <button class="btn btn-outline btn-sm">Annuler</button>
+          <button class="btn btn-destructive btn-sm">Supprimer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="sep">
+
+  <!-- ========================================= -->
+  <!-- 12. NAVIGATION -->
+  <!-- ========================================= -->
+  <div class="section">
+    <h2 class="section-title">12. Navigation (Sidebar)</h2>
+
+    <div class="grid-2">
+      <div class="component-card" style="max-width:240px;">
+        <div class="component-title">Items de navigation</div>
+        <div style="display:flex;flex-direction:column;gap:2px;">
+          <div class="nav-item active"><div class="nav-icon"></div> Dashboard</div>
+          <div class="nav-item"><div class="nav-icon"></div> Actions du jour</div>
+          <div class="nav-item"><div class="nav-icon"></div> Pipeline</div>
+          <div class="nav-item"><div class="nav-icon"></div> S&eacute;quences</div>
+          <div class="nav-item"><div class="nav-icon"></div> Inbox</div>
+        </div>
+      </div>
+      <div class="component-card">
+        <div class="component-title">&Eacute;tats de navigation</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div class="state-row">
+            <span class="state-label">Active</span>
+            <div class="nav-item active" style="flex:1;"><div class="nav-icon"></div> Dashboard</div>
+          </div>
+          <div class="state-row">
+            <span class="state-label">Default</span>
+            <div class="nav-item" style="flex:1;"><div class="nav-icon"></div> Pipeline</div>
+          </div>
+          <div class="state-row">
+            <span class="state-label">Hover</span>
+            <div class="nav-item" style="flex:1;background:var(--muted);color:var(--foreground);"><div class="nav-icon"></div> S&eacute;quences</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="sep">
+
+  <!-- ========================================= -->
+  <!-- 13. CONTRASTE — CORRECT vs INCORRECT -->
+  <!-- ========================================= -->
+  <div class="section">
+    <h2 class="section-title">13. Contraste &mdash; Correct vs Incorrect</h2>
+    <p class="section-desc">Exemples de combinaisons qui passent ou &eacute;chouent WCAG AA.</p>
+
+    <div class="contrast-grid">
+      <!-- CORRECT -->
+      <div>
+        <h3 class="subsection-title" style="color:var(--success);">&check; Correct</h3>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div class="contrast-box" style="background:#F5F5F4;">
+            <div class="contrast-text" style="color:#1C1917;font-size:14px;">Foreground sur Background</div>
+            <div class="contrast-meta">13.2:1 &mdash; AAA &check;</div>
+          </div>
+          <div class="contrast-box" style="background:#FAFAF9;">
+            <div class="contrast-text" style="color:#78716C;font-size:14px;">Muted-foreground sur Card</div>
+            <div class="contrast-meta">4.5:1 &mdash; AA &check;</div>
+          </div>
+          <div class="contrast-box" style="background:#2563EB;">
+            <div class="contrast-text" style="color:#FFFFFF;font-size:14px;">Blanc sur Accent</div>
+            <div class="contrast-meta">4.6:1 &mdash; AA &check;</div>
+          </div>
+          <div class="contrast-box" style="background:#171717;">
+            <div class="contrast-text" style="color:#A1A1A1;font-size:14px;">Muted-fg propos&eacute; sur Dark bg</div>
+            <div class="contrast-meta">7.2:1 &mdash; AAA &check;</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INCORRECT -->
+      <div>
+        <h3 class="subsection-title" style="color:var(--destructive);">&cross; Incorrect</h3>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div class="contrast-box" style="background:#262626;">
+            <div class="contrast-text" style="color:#8C8C8C;font-size:14px;">Muted-fg actuel sur Dark card</div>
+            <div class="contrast-meta">3.4:1 &mdash; Fail AA &cross;</div>
+          </div>
+          <div class="contrast-box" style="background:#DC2626;">
+            <div class="contrast-text" style="color:#FFFFFF;font-size:14px;">Blanc sur Destructive actuel</div>
+            <div class="contrast-meta">4.0:1 &mdash; Limite AA &#x26A0;</div>
+          </div>
+          <div class="contrast-box" style="background:#FAFAF9;">
+            <div class="contrast-text" style="color:#D6D3D1;font-size:14px;">Border color comme texte</div>
+            <div class="contrast-meta">1.5:1 &mdash; Fail &cross;</div>
+          </div>
+          <div class="contrast-box" style="background:#F5F5F4;">
+            <div class="contrast-text" style="color:#78716C;font-size:10px;">text-[10px] muted (trop petit)</div>
+            <div class="contrast-meta">Lisibilit&eacute; r&eacute;duite &mdash; pr&eacute;f&eacute;rer 12px min</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="sep">
+
+  <!-- ========================================= -->
+  <!-- 14. ICONES -->
+  <!-- ========================================= -->
+  <div class="section">
+    <h2 class="section-title">14. Syst&egrave;me d&apos;ic&ocirc;nes</h2>
+    <p class="section-desc">5 tailles standardis&eacute;es. Librairie : Lucide React.</p>
+
+    <div class="component-card">
+      <div class="flex-row" style="gap:24px;">
+        <div style="text-align:center;">
+          <div style="width:14px;height:14px;background:var(--muted-foreground);border-radius:3px;margin:0 auto;"></div>
+          <div style="font-size:11px;color:var(--muted-foreground);margin-top:8px;">icon-xs</div>
+          <div style="font-size:11px;color:var(--muted-foreground);">14px</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="width:16px;height:16px;background:var(--foreground);border-radius:3px;margin:0 auto;"></div>
+          <div style="font-size:11px;color:var(--muted-foreground);margin-top:8px;font-weight:600;">icon-sm</div>
+          <div style="font-size:11px;color:var(--muted-foreground);">16px (standard)</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="width:20px;height:20px;background:var(--muted-foreground);border-radius:3px;margin:0 auto;"></div>
+          <div style="font-size:11px;color:var(--muted-foreground);margin-top:8px;">icon-md</div>
+          <div style="font-size:11px;color:var(--muted-foreground);">20px</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="width:24px;height:24px;background:var(--muted-foreground);border-radius:3px;margin:0 auto;"></div>
+          <div style="font-size:11px;color:var(--muted-foreground);margin-top:8px;">icon-lg</div>
+          <div style="font-size:11px;color:var(--muted-foreground);">24px</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="width:32px;height:32px;background:var(--muted-foreground);border-radius:4px;margin:0 auto;"></div>
+          <div style="font-size:11px;color:var(--muted-foreground);margin-top:8px;">icon-xl</div>
+          <div style="font-size:11px;color:var(--muted-foreground);">32px</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="sep">
+
+  <!-- ========================================= -->
+  <!-- 15. LOADING STATES -->
+  <!-- ========================================= -->
+  <div class="section">
+    <h2 class="section-title">15. &Eacute;tats de chargement</h2>
+
+    <div class="grid-3">
+      <div class="component-card">
+        <div class="component-title">Bouton loading</div>
+        <button class="btn btn-accent btn-disabled" style="gap:8px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin 1s linear infinite;">
+            <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
+          </svg>
+          Chargement...
+        </button>
+      </div>
+      <div class="component-card">
+        <div class="component-title">Bouton disabled</div>
+        <button class="btn btn-accent btn-disabled">Action</button>
+      </div>
+      <div class="component-card">
+        <div class="component-title">Input disabled</div>
+        <input type="text" class="input-field" disabled value="Verrouill&eacute;">
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="text-align:center;padding:48px 0 24px;font-size:13px;color:var(--muted-foreground);">
+    PROSPECTOR Design System Preview &mdash; G&eacute;n&eacute;r&eacute; le 2026-02-27
+    <br>
+    <span style="font-size:11px;">Ouvrir dans un navigateur pour la r&eacute;f&eacute;rence visuelle compl&egrave;te</span>
+  </div>
+
+</div>
+
+<style>
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+</style>
+
+</body>
+</html>

@@ -10,9 +10,8 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[];
 
-export interface Database {
-  public: {
-    Tables: {
+export interface AppSchema {
+  Tables: {
       profiles: {
         Row: {
           id: string;
@@ -713,11 +712,15 @@ export interface Database {
         ];
       };
     };
-    Views: Record<string, never>;
-    Functions: Record<string, never>;
-    Enums: Record<string, never>;
-    CompositeTypes: Record<string, never>;
-  };
+  Views: Record<string, never>;
+  Functions: Record<string, never>;
+  Enums: Record<string, never>;
+  CompositeTypes: Record<string, never>;
+}
+
+export interface Database {
+  public: AppSchema;
+  beta_mission: AppSchema;
 }
 
 // Convenience type aliases

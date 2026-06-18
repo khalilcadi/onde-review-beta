@@ -215,6 +215,7 @@ export async function importLeadsFromDatagouv(
           };
           const bucket = assignBucket({
             title: d.qualite,
+            company: d.companyNom,
             enrichmentData: { signal: signalData },
           });
 

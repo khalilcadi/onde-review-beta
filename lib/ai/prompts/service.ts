@@ -64,7 +64,7 @@ export const buildSystemPromptParts = async (
     const promptType: PromptType = (sequenceStep && sequenceStep >= 2) ? "M2" : "M1";
     const resolvedAgentId: AgentId = promptType === "M1" ? "prospection_m1" : "prospection_m2";
 
-    const segment: IcpSegment = (["A", "B", "C", "D1", "D2", "HORS_ICP"].includes(icpSegment || ""))
+    const segment: IcpSegment = (["A", "B", "C", "D", "E", "F", "HORS_ICP"].includes(icpSegment || ""))
       ? (icpSegment as IcpSegment)
       : "B"; // fallback segment par défaut
 

@@ -38,7 +38,7 @@ export const RAG_BLOC_IDS: readonly RagBlocId[] = [
 export type PromptType = 'M1' | 'M2';
 export type M2Situation = 'reponse' | 'relance' | 'dernier_message';
 export type SignalTypeM1 = 'A' | 'B' | 'C' | 'D';
-export type IcpSegment = 'A' | 'B' | 'C' | 'D1' | 'D2' | 'HORS_ICP';
+export type IcpSegment = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'HORS_ICP';
 
 export interface ResolvedSections {
   [blocId: string]: string[]; // blocId → array de section_ids à injecter

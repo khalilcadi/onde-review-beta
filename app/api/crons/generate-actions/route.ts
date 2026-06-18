@@ -266,13 +266,13 @@ export async function GET(req: NextRequest) {
                   continue;
                 }
 
-                // Auto-enrich if lead hasn't gone through the new enrichment pipeline (v2).
-                // "dossier" is the key added by the new system (Unipile profile + posts + dossier d'attaque).
-                // Leads enriched with the old Perplexity system have "company" but no "dossier" → re-enrich.
+                // Auto-enrich if lead hasn't gone through the enrichment pipeline yet.
+                // "enriched_at" is the marker stamped by enrichSingleLead at the end of
+                // a successful run. Leads without it have never been enriched → enrich.
                 const isEnriched =
                   lead.enrichmentData &&
                   typeof lead.enrichmentData === "object" &&
-                  "dossier" in lead.enrichmentData;
+                  "enriched_at" in lead.enrichmentData;
 
                 if (!isEnriched && enrichmentCount < MAX_AUTO_ENRICHMENTS) {
                   try {
@@ -374,6 +374,9 @@ export async function GET(req: NextRequest) {
                     runtimeContext,
                     messages: [{ role: "user", content: userPrompt }],
                     maxTokens: 1200,
+                    // M1 (V10) : température modérée (0.7) — assez de diversité lexicale entre leads
+                    // tout en gardant l'angle offre-first stable (friction embarquée). M2 garde la config user par défaut.
+                    temperature: isFirstContact ? 0.7 : undefined,
                     metadata: {
                       leadId: sl.lead_id,
                       sequenceId: seq.id,

@@ -41,6 +41,8 @@ next-env.d.ts
 
 # data / PII exports — never commit (prospect names, LinkedIn, enrichment dumps)
 *.csv
+Conenctions Yann/
+scripts/test_results.csv
 scripts/e2e-*.json
 scripts/e2e-*.txt
 scripts/enrich-log.txt
@@ -49,3 +51,4 @@ scripts/esn-idf-*.txt
 
 # supabase CLI state
 supabase/.temp/
+.env*

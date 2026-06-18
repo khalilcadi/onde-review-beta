@@ -165,6 +165,7 @@ export async function importLeadsFromGojiberry(
           // Assign bucket score at import (no AI call)
           const bucket = assignBucket({
             title: row.jobTitle,
+            company: row.company,
             enrichmentData: { signal: signalData },
           });
 

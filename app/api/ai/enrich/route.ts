@@ -1,25 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { createServerClient } from "@/lib/supabase/server";
-import { callAI, callClaudeWebSearch } from "@/lib/ai/service";
-import {
-  type LeadForGeneration,
-  buildDossierInput,
-  buildScoringContext,
-  buildScoringUserPrompt,
-} from "@/lib/ai/lead-context";
+import { type LeadForGeneration } from "@/lib/ai/lead-context";
 import {
   getUnipileClient,
   extractLinkedInIdentifier,
 } from "@/lib/unipile/client";
-import { type ScoringResult } from "@/lib/ai/scoring";
-import { assignBucket } from "@/lib/scoring-buckets";
-import { searchAndPoll } from "@/lib/icypeas/client";
-import type { IcypeasEmailEnrichment } from "@/lib/icypeas/types";
-import type { AgentId } from "@/lib/ai/prompts/defaults";
+import { computeSegmentIcp } from "@/lib/scoring-buckets";
 import type { Database } from "@/types/database";
 
-const SONNET_MODEL = "claude-sonnet-4-6";
 const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000;
 
 /** Stages éligibles à l'auto-correction vers "connected" */
@@ -81,42 +70,6 @@ function parseRelativeDate(relative: string): Date | null {
     default: return null;
   }
   return now;
-}
-
-// ---------------------------------------------------------------------------
-// Helper: extrait le dernier objet JSON {...} équilibré d'un texte (prose + JSON).
-// String-aware (ignore les accolades dans les chaînes). Renvoie null si aucun.
-// ---------------------------------------------------------------------------
-
-function extractLastJsonObject(text: string): string | null {
-  let depth = 0;
-  let start = -1;
-  let inStr = false;
-  let esc = false;
-  let last: string | null = null;
-  for (let i = 0; i < text.length; i++) {
-    const ch = text[i];
-    if (inStr) {
-      if (esc) esc = false;
-      else if (ch === "\\") esc = true;
-      else if (ch === '"') inStr = false;
-      continue;
-    }
-    if (ch === '"') { inStr = true; continue; }
-    if (ch === "{") {
-      if (depth === 0) start = i;
-      depth++;
-    } else if (ch === "}") {
-      if (depth > 0) {
-        depth--;
-        if (depth === 0 && start !== -1) {
-          last = text.slice(start, i + 1);
-          start = -1;
-        }
-      }
-    }
-  }
-  return last;
 }
 
 // ---------------------------------------------------------------------------
@@ -252,59 +205,9 @@ async function stepUnipile(
 
   console.log(`[ENRICH DEBUG] Posts après filtre 30 jours: ${filteredPosts.length} / ${rawPosts.length} bruts`);
 
-  // Summarize each filtered post via Claude — structured extraction (sujet, tension, ton)
-  // Parallélisation par batches de 5 (réduit ~10s → ~2-3s pour 10 posts)
-  const SUMMARY_CONCURRENCY = 5;
+  // Résumés IA (post_summary) supprimés : on conserve uniquement les posts bruts
+  // (linkedin_posts). person.recentPosts reste donc vide.
   const postSummaries: PostSummary[] = [];
-  const summarizablePosts = filteredPosts.filter((p) => p.text.trim());
-
-  for (let i = 0; i < summarizablePosts.length; i += SUMMARY_CONCURRENCY) {
-    const batch = summarizablePosts.slice(i, i + SUMMARY_CONCURRENCY);
-    const results = await Promise.all(
-      batch.map(async (post): Promise<PostSummary> => {
-        try {
-          const summaryResponse = await callAI({
-            userId,
-            agentId: "post_summary" as AgentId,
-            messages: [{ role: "user", content: `Analyse ce post LinkedIn et extrais les informations suivantes en JSON strict :\n{\n  "sujet": "le thème principal en 5 mots max",\n  "tension": "la douleur ou l'enjeu business révélé (null si c'est juste du contenu informatif)",\n  "ton": "corporate | decontracte | expert | vulnerable"\n}\nRéponds UNIQUEMENT avec le JSON, rien d'autre.\n\nPost:\n${post.text}` }],
-            maxTokens: 150,
-            temperature: 0,
-            modelOverride: SONNET_MODEL,
-            runtimeContext: "Tu es un analyste de contenu LinkedIn. Tu extrais sujet, tension business et ton de chaque post. Tu réponds uniquement en JSON strict, sans commentaire.",
-            metadata: { leadId: lead.id, action: "enrich_summarize_post" },
-            supabaseOverride: supabase,
-          });
-
-          const cleanJson = summaryResponse.text
-            .replace(/^```(?:json)?\s*/i, "")
-            .replace(/\s*```$/i, "")
-            .trim();
-          const parsed = JSON.parse(cleanJson) as { sujet?: string; tension?: string | null; ton?: string };
-
-          return {
-            summary: parsed.sujet || summaryResponse.text.slice(0, 60),
-            sujet: parsed.sujet || undefined,
-            tension: parsed.tension || null,
-            ton: parsed.ton || undefined,
-            reactions: post.reactions_count,
-            comments: post.comments_count,
-            date: post.date,
-          };
-        } catch (err) {
-          console.warn("Post summarization failed, using truncated text:", err instanceof Error ? err.message : err);
-          return {
-            summary: post.text.slice(0, 150) + (post.text.length > 150 ? "..." : ""),
-            reactions: post.reactions_count,
-            comments: post.comments_count,
-            date: post.date,
-          };
-        }
-      })
-    );
-    postSummaries.push(...results);
-  }
-
-  console.log(`[ENRICH DEBUG] Résumés générés: ${postSummaries.length}`, postSummaries.map(s => s.summary.slice(0, 60)));
 
   // Extract current company (most recent work_experience entry)
   const expArr = experience as Array<Record<string, unknown>>;
@@ -411,55 +314,12 @@ export async function enrichSingleLead(
   try {
     unipileResult = await stepUnipile(lead, userId, supabase);
   } catch (err) {
-    console.warn("Step 1 (Unipile) failed, continuing with Perplexity only:", err instanceof Error ? err.message : err);
+    console.warn("Step 1 (Unipile) failed, continuing without profile data:", err instanceof Error ? err.message : err);
     unipileResult = { linkedinProfile: null, filteredPosts: [], postSummaries: [], linkedinPosts: [], headline: null, about: null, profileFirstName: null, profileLastName: null, currentCompanyId: null, currentCompanyName: null, accountId: null };
   }
 
-  // === STEP 1b: Fetch Gojiberry intent post content (if applicable) ===
+  // Signal Gojiberry pré-existant (préservé en passthrough plus bas).
   const existingSignal = (lead.enrichmentData?.signal as Record<string, unknown>) || {};
-  if (
-    existingSignal.source === "gojiberry" &&
-    existingSignal.intent_post_url &&
-    !existingSignal.intent_post_content
-  ) {
-    try {
-      const postUrl = existingSignal.intent_post_url as string;
-      // Extract LinkedIn activity ID from URL (format: activity-XXXXXXXXX)
-      const activityMatch = postUrl.match(/activity-(\d+)/);
-      if (activityMatch) {
-        const { data: linkedinAccount } = await supabase
-          .from("linkedin_accounts")
-          .select("unipile_account_id")
-          .eq("user_id", userId)
-          .eq("status", "active")
-          .single();
-
-        if (linkedinAccount?.unipile_account_id) {
-          const client = getUnipileClient();
-          const post = await client.getPost(activityMatch[1]).catch(() => null);
-          const postObj = post as unknown as Record<string, unknown> | null;
-          if (postObj && postObj.text) {
-            const postText = (postObj.text as string).slice(0, 500);
-            // Update the lead's enrichment_data with the post content
-            const currentEnrichment = (lead.enrichmentData || {}) as Record<string, unknown>;
-            const currentSignal = (currentEnrichment.signal || {}) as Record<string, unknown>;
-            await supabase
-              .from("leads")
-              .update({
-                enrichment_data: {
-                  ...currentEnrichment,
-                  signal: { ...currentSignal, intent_post_content: postText },
-                },
-              })
-              .eq("id", lead.id);
-            console.log(`[ENRICH] Gojiberry post content fetched for lead ${lead.id} (${postText.length} chars)`);
-          }
-        }
-      }
-    } catch (err) {
-      console.warn("[ENRICH] Gojiberry post fetch failed (non-blocking):", err instanceof Error ? err.message : err);
-    }
-  }
 
   // === STEP 2: Unipile company data ===
   const enrichmentResult: Record<string, any> = {};
@@ -494,151 +354,6 @@ export async function enrichSingleLead(
   // confidence dérivé : "high" si Unipile a donné size+industry, "low" sinon
   enrichmentResult.confidence = companyData?.size && companyData?.industry ? "high" : "low";
 
-  // === STEP 3 — Web research (OpenAI web_search × 3 en parallèle) ===
-  // 3 recherches : société (Pappers/Verif), presse/actualités, signaux personne.
-  // Promise.allSettled : un échec d'une recherche n'empêche pas les autres.
-  if (lead.company) {
-    const queryA = `${lead.company} Pappers Verif effectifs CA structure juridique`;
-    const queryB = `"${lead.company}" actualités presse 2025 recrutement partenariat`;
-    const queryC = `"${lead.firstName} ${lead.lastName}" ${lead.company} LinkedIn signaux`;
-
-    const webMeta = { leadId: lead.id, action: "enrich_web_research" };
-    const [resA, resB, resC] = await Promise.allSettled([
-      callClaudeWebSearch({
-        userId,
-        agentId: "enrichissement" as AgentId,
-        prompt: queryA,
-        instructions:
-          'Réponds UNIQUEMENT en JSON strict, sans commentaire : {"effectif": "...|null", "ca": "...|null", "structure_capitalistique": "...|null", "code_naf": "...|null", "date_creation": "...|null"}. Mets null pour chaque champ non trouvé.',
-        metadata: webMeta,
-        supabaseOverride: supabase,
-      }),
-      callClaudeWebSearch({
-        userId,
-        agentId: "enrichissement" as AgentId,
-        prompt: queryB,
-        instructions:
-          'Réponds UNIQUEMENT en JSON strict, sans commentaire : {"presse": [{"titre": "...", "resume": "...", "date": "AAAA-MM-JJ|null"}]}. Tableau vide si rien de pertinent.',
-        metadata: webMeta,
-        supabaseOverride: supabase,
-      }),
-      callClaudeWebSearch({
-        userId,
-        agentId: "enrichissement" as AgentId,
-        prompt: queryC,
-        instructions:
-          'Réponds UNIQUEMENT en JSON strict, sans commentaire : {"signaux": [{"type": "...", "description": "...", "date": "AAAA-MM-JJ|null"}]}. Tableau vide si rien de pertinent.',
-        metadata: webMeta,
-        supabaseOverride: supabase,
-      }),
-    ]);
-
-    // Robuste : Claude (web_search) renvoie souvent de la prose + JSON. On tente,
-    // dans l'ordre : (1) parse direct, (2) bloc ```json ... ```, (3) dernier {...} complet.
-    const parseWebJson = (raw: string): Record<string, unknown> | null => {
-      const tryParse = (s: string): Record<string, unknown> | null => {
-        try {
-          return JSON.parse(s.trim()) as Record<string, unknown>;
-        } catch {
-          return null;
-        }
-      };
-
-      // (1) parse direct (après strip d'éventuels fences entourant tout le texte)
-      const stripped = raw.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/i, "").trim();
-      const direct = tryParse(stripped);
-      if (direct) return direct;
-
-      // (2) extraire depuis un bloc markdown ```json ... ``` (le dernier s'il y en a plusieurs)
-      const fenceMatches = Array.from(raw.matchAll(/```(?:json)?\s*([\s\S]*?)```/gi));
-      if (fenceMatches.length > 0) {
-        const fromFence = tryParse(fenceMatches[fenceMatches.length - 1][1]);
-        if (fromFence) return fromFence;
-      }
-
-      // (3) dernier objet {...} complet dans le texte (équilibrage des accolades)
-      const lastObj = extractLastJsonObject(raw);
-      if (lastObj) {
-        const fromObj = tryParse(lastObj);
-        if (fromObj) return fromObj;
-      }
-
-      return null;
-    };
-
-    // Query A → societe (null si échec ou rien trouvé)
-    let societe: Record<string, unknown> | undefined;
-    if (resA.status === "fulfilled") {
-      try {
-        const parsed = parseWebJson(resA.value.text);
-        if (parsed) {
-          societe = {
-            effectif: (parsed.effectif as string) || undefined,
-            ca: (parsed.ca as string) || undefined,
-            structure_capitalistique: (parsed.structure_capitalistique as string) || undefined,
-            code_naf: (parsed.code_naf as string) || undefined,
-            date_creation: (parsed.date_creation as string) || undefined,
-            source: resA.value.sources[0] || "claude_web_search",
-          };
-        }
-      } catch (err) {
-        console.warn("[ENRICH] web_research societe parse failed:", err instanceof Error ? err.message : err);
-        societe = undefined;
-      }
-    } else {
-      console.warn("[ENRICH] web_research query A (societe) rejected:", resA.reason);
-    }
-
-    // Query B → presse[] (tableau vide si échec)
-    let presse: Array<Record<string, unknown>> = [];
-    if (resB.status === "fulfilled") {
-      try {
-        const parsed = parseWebJson(resB.value.text);
-        const items = (parsed?.presse as Array<Record<string, unknown>>) || [];
-        presse = items.map((it) => ({
-          titre: (it.titre as string) || "",
-          resume: (it.resume as string) || "",
-          date: (it.date as string) || undefined,
-          source: (it.source as string) || resB.value.sources[0] || "claude_web_search",
-        }));
-      } catch (err) {
-        console.warn("[ENRICH] web_research presse parse failed:", err instanceof Error ? err.message : err);
-        presse = [];
-      }
-    } else {
-      console.warn("[ENRICH] web_research query B (presse) rejected:", resB.reason);
-    }
-
-    // Query C → signaux[] (tableau vide si échec)
-    let signaux: Array<Record<string, unknown>> = [];
-    if (resC.status === "fulfilled") {
-      try {
-        const parsed = parseWebJson(resC.value.text);
-        const items = (parsed?.signaux as Array<Record<string, unknown>>) || [];
-        signaux = items.map((it) => ({
-          type: (it.type as string) || "",
-          description: (it.description as string) || "",
-          date: (it.date as string) || undefined,
-          source: (it.source as string) || resC.value.sources[0] || "claude_web_search",
-        }));
-      } catch (err) {
-        console.warn("[ENRICH] web_research signaux parse failed:", err instanceof Error ? err.message : err);
-        signaux = [];
-      }
-    } else {
-      console.warn("[ENRICH] web_research query C (signaux) rejected:", resC.reason);
-    }
-
-    enrichmentResult.web_research = {
-      ...(societe ? { societe } : {}),
-      presse,
-      signaux,
-      searched_at: new Date().toISOString(),
-    };
-  } else {
-    console.log(`[ENRICH] Step 3 (web research) skipped for lead ${lead.id}: no company`);
-  }
-
   // === Gojiberry signal passthrough (preserved from pre-enrichment) ===
   const hasGojiberryTag = (lead.tags || []).some((t) => t.startsWith("goji:"));
   const isGojiberrySignal =
@@ -651,7 +366,7 @@ export async function enrichSingleLead(
       }
     : null;
 
-  // === Assemble core enrichment fields (needed by the dossier d'attaque below) ===
+  // === Assemble core enrichment fields ===
   // Preserve Gojiberry-specific signal fields when merging
   if (gojiberrySignal) {
     enrichmentResult.signal = {
@@ -665,177 +380,26 @@ export async function enrichSingleLead(
     enrichmentResult.linkedin_profile = unipileResult.linkedinProfile;
   }
 
-  if (unipileResult.postSummaries.length > 0) {
-    if (!enrichmentResult.person) enrichmentResult.person = {};
-    enrichmentResult.person.recentPosts = unipileResult.postSummaries;
-  }
-
   if (unipileResult.linkedinPosts.length > 0) {
     enrichmentResult.linkedin_posts = unipileResult.linkedinPosts;
   }
 
-  // === STEP 3.5 — Scoring IA (avant le dossier) ===
-  // L'agent de scoring qualifie le lead à partir de toutes les données collectées
-  // (profil, posts, entreprise, web_research, signal). Son résultat conditionne le
-  // dossier d'attaque (Step 4) : un lead NO_GO ne mérite pas de dossier.
-  // Fallback : si l'appel IA échoue, on retombe sur assignBucket (déterministe,
-  // zéro API). Le fallback NE renseigne PAS `categorie` → on sait que le score vient
-  // du bucketer et non de l'agent.
-  let scoreValue: number | null = null;
-  let scoreStatus: string | null = null;
-  try {
-    // Donner au scorer le contexte enrichi (données fraîches non encore persistées)
-    const leadForScoring: LeadForGeneration = {
-      ...lead,
-      enrichmentData: { ...(lead.enrichmentData || {}), ...enrichmentResult },
-    };
-    const scoringResponse = await callAI({
-      userId,
-      agentId: "scoring" as AgentId,
-      runtimeContext: buildScoringContext(leadForScoring),
-      messages: [{ role: "user", content: buildScoringUserPrompt(leadForScoring) }],
-      maxTokens: 1024,
-      temperature: 0.3,
-      modelOverride: SONNET_MODEL,
-      metadata: { leadId: lead.id, action: "enrich_score" },
-      supabaseOverride: supabase,
-    });
+  // === STEP 2.5 — Segment ICP déterministe ===
+  // Plus de scoring IA ni de dossier d'attaque : le segment est calculé en pur code
+  // à partir du titre + des données entreprise Unipile (size/industry).
+  // `scoring_detail.segment_icp` est PRÉSERVÉ (lu par generate-actions).
+  const segmentIcp = computeSegmentIcp(lead.title, enrichmentResult, lead.company);
+  const inIcp = segmentIcp !== "HORS_ICP";
+  const scoreValue: number = inIcp ? 50 : 20;
+  const scoreStatus: string = inIcp ? "warm" : "cold";
 
-    const cleanText = scoringResponse.text
-      .replace(/^```(?:json)?\s*/i, "")
-      .replace(/\s*```$/i, "")
-      .trim();
-    const parsed = JSON.parse(cleanText) as ScoringResult;
+  enrichmentResult.scoring_detail = {
+    ...((enrichmentResult.scoring_detail as Record<string, unknown>) || {}),
+    segment_icp: segmentIcp,
+  };
 
-    const categoryToStatus: Record<string, string> = {
-      HOT: "hot",
-      WARM: "warm",
-      COLD: "cold",
-      NO_GO: "cold",
-    };
-    scoreValue = typeof parsed.score === "number" ? parsed.score : null;
-    scoreStatus = categoryToStatus[parsed.categorie?.toUpperCase()] ?? null;
-
-    enrichmentResult.scoring_detail = {
-      ...parsed.detail,
-      categorie: parsed.categorie,
-      segment_icp: parsed.segment_icp || null,
-      confidence: parsed.confidence,
-      cas_limite: parsed.cas_limite,
-      ajustement_ia: parsed.ajustement_ia,
-      justification: parsed.justification,
-    };
-  } catch (err) {
-    console.warn(
-      `[ENRICH] AI scoring failed for lead ${lead.id}, falling back to bucketer:`,
-      err instanceof Error ? err.message : err
-    );
-    const bucket = assignBucket({
-      title: lead.title,
-      enrichmentData: enrichmentResult as {
-        signal?: { type?: string | null; source?: string | null } | null;
-        company?: { size?: string | null; industry?: string | null; revenue?: string | null } | null;
-      },
-    });
-    scoreValue = bucket.score;
-    scoreStatus = bucket.status;
-    // Fallback bucketer : pas de `categorie` (réservée à l'agent IA).
-    enrichmentResult.scoring_detail = {
-      ...((enrichmentResult.scoring_detail as Record<string, unknown>) || {}),
-      segment_icp: bucket.segmentIcp,
-    };
-  }
-
-  // === STEP 4 — Dossier d'attaque ===
-  // Synthèse stratégique du lead via Claude Sonnet, à partir de toutes les données
-  // collectées en amont (profil, posts, entreprise, web_research, signal).
-  // Placé après le scoring et avant Icypeas (l'email n'alimente pas le dossier).
-  // Skip si lead NO_GO, ou si ni profil LinkedIn ni données entreprise.
-  const hasLinkedinProfile = !!enrichmentResult.linkedin_profile;
-  const hasCompanyData = !!enrichmentResult.company;
-  if (enrichmentResult.scoring_detail?.categorie === "NO_GO") {
-    console.log(`[ENRICH] Lead ${lead.id} scored NO_GO — skipping dossier`);
-    enrichmentResult.dossier = null;
-    // still run Icypeas (Step 5) — email is useful even for future re-evaluation
-  } else if (!hasLinkedinProfile && !hasCompanyData) {
-    console.warn(
-      `[ENRICH] Step 4 (Dossier d'attaque) skipped for lead ${lead.id}: no linkedin_profile and no company data`
-    );
-    enrichmentResult.dossier = null;
-  } else {
-    try {
-      const userMessage = buildDossierInput(lead, enrichmentResult);
-      const dossierResponse = await callAI({
-        userId,
-        agentId: "dossier_attaque" as AgentId,
-        messages: [{ role: "user", content: userMessage }],
-        // 3000 : un dossier in-ICP riche (corps_message + listes a_eviter/a_integrer
-        // + reserves) dépasse 1500 tokens et tronque le JSON → parse échoue.
-        maxTokens: 3000,
-        temperature: 0.3,
-        modelOverride: SONNET_MODEL,
-        metadata: { leadId: lead.id, action: "enrich_dossier_attaque" },
-        supabaseOverride: supabase,
-      });
-
-      const responseText = dossierResponse.text;
-      try {
-        const cleaned = responseText.replace(/```json|```/g, "").trim();
-        const dossier = JSON.parse(cleaned) as Record<string, unknown>;
-        enrichmentResult.dossier = { ...dossier, generated_at: new Date().toISOString() };
-      } catch (e) {
-        console.error("Dossier parse failed:", e);
-        enrichmentResult.dossier = null;
-      }
-    } catch (err) {
-      console.warn(
-        "[ENRICH] Step 4 (Dossier d'attaque) call failed (non-blocking):",
-        err instanceof Error ? err.message : err
-      );
-      enrichmentResult.dossier = null;
-    }
-  }
-
-  // === STEP 5: Icypeas Email Enrichment ===
-  let emailEnrichment: IcypeasEmailEnrichment | null = null;
-  if (lead.firstName && lead.lastName) {
-    // Domain source: enrichment company website (priority) or lead.company (fallback)
-    let domain: string | null = null;
-    const companyWebsiteUrl =
-      (enrichmentResult.company?.website as string | undefined) ||
-      (lead.enrichmentData?.company?.website as string | undefined);
-    if (companyWebsiteUrl) {
-      try {
-        domain = new URL(companyWebsiteUrl).hostname.replace(/^www\./, "");
-      } catch {
-        // invalid URL, try as-is
-        domain = companyWebsiteUrl.replace(/^www\./, "");
-      }
-    }
-    if (!domain && lead.company) {
-      domain = lead.company;
-    }
-
-    if (domain) {
-      try {
-        emailEnrichment = await searchAndPoll(lead.firstName, lead.lastName, domain, lead.id);
-        if (emailEnrichment) {
-          console.log(`[ENRICH] Icypeas result for lead ${lead.id}: ${emailEnrichment.email ?? "no email"} (${emailEnrichment.certainty ?? "n/a"}, status=${emailEnrichment.status})`);
-        } else {
-          console.log(`[ENRICH] Icypeas: no result for lead ${lead.id}`);
-        }
-      } catch (err) {
-        console.warn("[ENRICH] Icypeas failed (non-blocking):", err instanceof Error ? err.message : err);
-      }
-    } else {
-      console.log(`[ENRICH] Icypeas: skipped, no domain for lead ${lead.id}`);
-    }
-  }
-
-  // Icypeas email enrichment
-  if (emailEnrichment) {
-    enrichmentResult.email_enrichment = emailEnrichment;
-  }
+  // Marqueur d'enrichissement : sert de gate anti-réenrichissement dans generate-actions.
+  enrichmentResult.enriched_at = new Date().toISOString();
 
   // === DB UPDATE with retry ===
   let dbWarning: string | undefined;
@@ -851,19 +415,18 @@ export async function enrichSingleLead(
       ...enrichmentResult,
     };
 
-    // Purge champ legacy : hook_recommande (remplacé par dossier). Le merge ci-dessus
-    // préserverait sinon une valeur d'un enrichissement pré-refonte indéfiniment.
+    // Purge champ legacy : hook_recommande (remplacé par le segment ICP). Le merge
+    // ci-dessus préserverait sinon une valeur d'un enrichissement pré-refonte.
     delete mergedData.hook_recommande;
 
-    console.log(`[ENRICH DEBUG] Merge final - person.recentPosts:`, JSON.stringify(mergedData.person?.recentPosts ?? "ABSENT").slice(0, 300));
     console.log(`[ENRICH DEBUG] Merge final - linkedin_posts count:`, Array.isArray(mergedData.linkedin_posts) ? (mergedData.linkedin_posts as unknown[]).length : "ABSENT");
 
-    // Inclut les champs de scoring (score, status) calculés au Step 3.5.
+    // score/status dérivés du segment ICP déterministe (Step 2.5).
     // scoring_detail est déjà dans mergedData via enrichmentResult.
     const leadUpdate: Database["public"]["Tables"]["leads"]["Update"] = {
       enrichment_data: mergedData,
-      ...(scoreValue !== null ? { score: scoreValue } : {}),
-      ...(scoreStatus !== null ? { status: scoreStatus } : {}),
+      score: scoreValue,
+      status: scoreStatus,
     };
 
     const { error: updateError } = await supabase
@@ -903,24 +466,14 @@ export async function enrichSingleLead(
         profileUpdates.company = enrichedCompany;
       }
     }
-    // Icypeas: backfill email + phone if high certainty
-    if (emailEnrichment?.email && (emailEnrichment.certainty === "ultra_sure" || emailEnrichment.certainty === "very_sure" || emailEnrichment.certainty === "probable")) {
-      if (!currentLead?.email) {
-        profileUpdates.email = emailEnrichment.email;
-      }
-    }
-    if (emailEnrichment?.phones?.[0] && !currentLead?.phone) {
-      profileUpdates.phone = emailEnrichment.phones[0];
-    }
-
-    // Fallback Unipile : si Icypeas n'a rien trouvé, utiliser contact_info du profil LinkedIn
+    // Email/téléphone : contact_info du profil LinkedIn Unipile (Icypeas supprimé).
     const unipileContactInfo = unipileResult.linkedinProfile?.contact_info as
       | { emails?: string[]; phones?: string[] }
       | undefined;
-    if (!profileUpdates.email && !currentLead?.email && unipileContactInfo?.emails?.[0]) {
+    if (!currentLead?.email && unipileContactInfo?.emails?.[0]) {
       profileUpdates.email = unipileContactInfo.emails[0];
     }
-    if (!profileUpdates.phone && !currentLead?.phone && unipileContactInfo?.phones?.[0]) {
+    if (!currentLead?.phone && unipileContactInfo?.phones?.[0]) {
       profileUpdates.phone = unipileContactInfo.phones[0];
     }
 

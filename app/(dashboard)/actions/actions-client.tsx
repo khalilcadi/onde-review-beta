@@ -202,9 +202,14 @@ export default function ActionsClient({ initialActions, initialStats, initialQuo
         toast.success(`Action validée pour ${action.lead?.firstName ?? ""} ${action.lead?.lastName ?? ""}`);
       }
     } else {
-      // Rollback on failure
+      // Rollback on failure — surface the EXACT reason returned by
+      // serverValidate/calculateSchedule (quota dépassé / hors plage horaire)
+      // with a non-dismissable toast so the rollback is never silent.
       setActions(previousActions);
-      toast.error(result.error || "Erreur lors de la validation");
+      toast.error(`Validation refusée : ${result.error || "raison inconnue"}`, {
+        duration: 12000,
+        description: "L’action reste en attente.",
+      });
     }
   };
 
@@ -337,7 +342,17 @@ export default function ActionsClient({ initialActions, initialStats, initialQuo
 
   const openEditModal = (action: ActionWithLead) => {
     setEditingAction(action);
-    setEditedFragments(parseFragments(action.generatedMessage || ""));
+    // Variant-aware: load the SELECTED variant's message for M1 actions
+    // (generatedMessage is frozen on variante_a by the generate cron).
+    let source = action.generatedMessage || "";
+    if (isM1Data(action.generationData)) {
+      const variant = selectedVariant[action.id] || "a";
+      source =
+        variant === "b"
+          ? action.generationData.variante_b.message
+          : action.generationData.variante_a.message;
+    }
+    setEditedFragments(parseFragments(source));
   };
 
   const saveEdit = () => {

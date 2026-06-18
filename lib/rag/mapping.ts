@@ -66,14 +66,17 @@ function segmentSection(segment: IcpSegment): string {
     case 'A': return 'segment_a';
     case 'B': return 'segment_b';
     case 'C': return 'segment_c';
-    case 'D1': return 'segment_d1';
-    case 'D2': return 'segment_d2';
+    // D/E/F : pas de section RAG dédiée en Phase 1 → défaut général
+    case 'D': return 'segment_b';
+    case 'E': return 'segment_b';
+    case 'F': return 'segment_b';
     case 'HORS_ICP': return '';
   }
 }
 
-function isEsn(segment: IcpSegment): boolean {
-  return segment === 'D1' || segment === 'D2';
+function isEsn(_segment: IcpSegment): boolean {
+  // Concept ESN supprimé en Phase 2 (ICP studios créa). Toujours false.
+  return false;
 }
 
 function empty(): ResolvedSections {
@@ -128,9 +131,8 @@ function resolveM2Reponse(segment: IcpSegment, responseType?: string): ResolvedS
   }
 
   const seg = segmentSection(segment);
-  const painSeg = isEsn(segment)
-    ? (segment === 'D1' ? 'pp_esn_intercontrat' : 'pp_commerciaux')
-    : 'pp_generiques_b2b';
+  // isEsn() always returns false in Phase 2 (ICP studios créa) — pain stays generic
+  const painSeg = isEsn(segment) ? 'pp_commerciaux' : 'pp_generiques_b2b';
 
   switch (responseType) {
     case 'question_produit':

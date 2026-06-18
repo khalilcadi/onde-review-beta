@@ -121,6 +121,27 @@ export function parseM1Response(text: string): M1Response | null {
 }
 
 // ---------------------------------------------------------------------------
+// M1 output sanitizer (filet de sécurité déterministe, en plus des règles prompt)
+// ---------------------------------------------------------------------------
+
+/**
+ * Post-traitement déterministe d'un message M1 généré.
+ * Garantit, même si le LLM dérape, les règles dures du prompt prospection_m1 :
+ *  1. cadratin "—" / demi-cadratin "–" → ", " (l'espacement environnant est absorbé)
+ *  2. "Frame.io" → "Frame" (jamais la forme .io ni l'URL)
+ *  3. collapse des espaces doubles
+ * NB : les traits d'union des mots composés (U+002D "-", ex. "aller-retour") ne sont PAS touchés.
+ */
+export function sanitizeM1Message(text: string): string {
+  if (!text) return text;
+  return text
+    .replace(/\s*[—–]\s*/g, ", ") // —/– (+ espaces autour) → ", "
+    .replace(/Frame\.io/gi, "Frame")        // forme .io / URL → "Frame"
+    .replace(/ {2,}/g, " ")                  // collapse espaces doubles
+    .trim();
+}
+
+// ---------------------------------------------------------------------------
 // M2 parser (relance / réponse)
 // ---------------------------------------------------------------------------
 
@@ -327,6 +348,8 @@ export interface LeadForGeneration {
       niveau_contexte: "fort" | "partiel" | "faible";
     } | null;
     summary?: string | null;
+    /** Marqueur posé en fin d'enrichissement (gate anti-réenrichissement). */
+    enriched_at?: string;
     dossier?: {
       destinataire_profil_lecture?: string;
       mecanisme?: string;
@@ -893,22 +916,21 @@ export function buildUserPrompt(
   if (hasNotes) {
     contextDirective = `CONTEXTE RICHE : Notes disponibles, écris depuis la relation.`;
   } else if (dossier && (angleQualite === "SOLIDE" || angleQualite === "DÉGRADÉ")) {
-    contextDirective = `CONTEXTE FORT : dossier d'attaque disponible (angle ${angleQualite}). Personnalise depuis le brief.`;
-  } else if (dossier && angleQualite === "FAIBLE") {
-    contextDirective = `CONTEXTE PARTIEL : dossier d'attaque disponible mais angle FAIBLE. Utilise le contexte implicitement.`;
+    contextDirective = `CONTEXTE FORT : dossier d'attaque disponible (angle ${angleQualite}). Inspire-toi du brief pour le hook.`;
   } else {
-    contextDirective = `CONTEXTE FAIBLE : peu de données. Tension ICP plausible + question ouverte. 2-3 phrases max.`;
+    // Cas STANDARD (M1 Onde Review) : invitation bêta founder, construite depuis le segment + les basiques du lead.
+    contextDirective = `MODE NORMAL : invitation bêta founder, OFFRE-FIRST. Présente Onde Review en EMBARQUANT une friction créa concrète (allers-retours de validation par mail, versions/commentaires éparpillés, liens Drive à relancer chez les clients) — jamais la catégorie sèche "un outil de review créa". Dis "bêta gratuite". Termine par UNE seule question Drive courte (≤8 mots, ex : "Vous êtes sur Google Drive chez [studio] ?"), sans question empilée ni jargon "tourner sur Drive". Frame OPTIONNEL (~moitié), jamais "Frame.io". ZÉRO familiarité supposée : tu ne connais pas le lead — bannis "vu que tu diriges X", "je pense à toi", "pile dans la cible", "bon fit". La perso vit dans le nom du studio (dans la question) + le fait que l'offre est créa. ≤55 mots (idéal 25-50), tutoiement neutre, 1re personne, aucun lien, aucun cadratin "—", zéro mirroring de douleur projeté. 3 angles tournent (offre-first ~60%, friction-first, feedback-ask). VARIE la formulation, deux leads ne reçoivent jamais un message quasi-identique.`;
   }
 
   if (dossier) {
-    contextDirective += `\n\nÉléments de personnalisation disponibles :\n- Brief d'attaque disponible dans le contexte (voir ## Dossier d'attaque).`;
+    contextDirective += `\n\nÉléments de personnalisation disponibles :\n- Brief d'attaque disponible dans le contexte (voir ## Dossier d'attaque), à utiliser comme inspiration.`;
   }
 
   // JSON output suffix selon M1 ou M2
   const m1JsonSuffix = `\n\nIMPORTANT : Réponds en JSON strict :
-{"variante_a": {"message": "...", "angle": "..."}, "variante_b": {"message": "...", "angle": "..."}, "canal": "linkedin|email|none", "canal_recommande": "linkedin|email", "persona": "fondateur|sales|marketing|dg_esn|drh_esn", "reasoning": "..."}
+{"variante_a": {"message": "...", "angle": "..."}, "variante_b": {"message": "...", "angle": "..."}, "canal": "linkedin", "canal_recommande": "linkedin", "persona": "studio_founder|studio_prod|agency_creative|agency_founder|freelance_crea|pme_crea", "reasoning": "..."}
 Les 2 variantes doivent utiliser des angles DIFFÉRENTS.
-Si le canal recommandé est email et que seul LinkedIn est disponible : canal = "none", messages vides, reasoning explique pourquoi.
+Mission LinkedIn uniquement : canal = "linkedin", canal_recommande = "linkedin". Pas d'email, pas de lien, pas de pitch.
 Pas de markdown, pas de backticks, juste le JSON.`;
 
   const m2JsonSuffix = `\n\nIMPORTANT : Réponds en JSON strict :

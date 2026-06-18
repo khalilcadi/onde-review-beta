@@ -1,3 +1,7 @@
 {
-  "crons": [  ]
+  "crons": [
+    { "path": "/api/crons/generate-actions", "schedule": "0 4,5 * * 1-5" },
+    { "path": "/api/crons/send-actions", "schedule": "*/2 7-19 * * 1-5" },
+    { "path": "/api/crons/check-invitations", "schedule": "0 8 * * 1-5" }
+  ]
 }

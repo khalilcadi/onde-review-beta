@@ -32,14 +32,14 @@ const supabase = createClient(supabaseUrl, serviceRoleKey, {
   auth: { autoRefreshToken: false, persistSession: false },
 });
 
-const VALID_SEGMENTS: readonly IcpSegment[] = ["A", "B", "C", "D1", "D2", "HORS_ICP"];
+const VALID_SEGMENTS: readonly IcpSegment[] = ["A", "B", "C", "D", "E", "F", "HORS_ICP"];
 
 async function main() {
   console.log("Loading leads with enrichment_data...\n");
 
   const { data: leads, error } = await supabase
     .from("leads")
-    .select("id, title, enrichment_data")
+    .select("id, title, company, enrichment_data")
     .not("enrichment_data", "is", null);
 
   if (error) {
@@ -61,7 +61,11 @@ async function main() {
       continue;
     }
 
-    const segment = computeSegmentIcp(lead.title, enrichment as Parameters<typeof computeSegmentIcp>[1]);
+    const segment = computeSegmentIcp(
+      lead.title,
+      enrichment as Parameters<typeof computeSegmentIcp>[1],
+      lead.company,
+    );
     const nextEnrichment = {
       ...(enrichment || {}),
       scoring_detail: { ...scoringDetail, segment_icp: segment },

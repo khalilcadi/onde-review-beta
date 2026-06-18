@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createServerClient } from "@/lib/supabase/server";
 import { callAI } from "@/lib/ai/service";
-import { buildLeadContext, buildUserPrompt, parseGenerationResponse, type M1Response, type M2Response, type LeadForGeneration } from "@/lib/ai/lead-context";
+import { buildLeadContext, buildUserPrompt, parseGenerationResponse, sanitizeM1Message, type M1Response, type M2Response, type LeadForGeneration } from "@/lib/ai/lead-context";
 import { humanizeMessage } from "@/lib/humanize";
 
 // ---------------------------------------------------------------------------
@@ -149,17 +149,21 @@ export async function POST(req: NextRequest) {
             };
           }
 
+          // Sanitize déterministe (—/– → ", ", Frame.io → Frame, espaces doubles) AVANT humanisation.
+          const cleanA = sanitizeM1Message(parsed.m1.variante_a.message);
+          const cleanB = sanitizeM1Message(parsed.m1.variante_b.message);
+
           return {
             type: "M1" as const,
-            message: humanizeMessage(parsed.m1.variante_a.message, actionType || "message"),
+            message: humanizeMessage(cleanA, actionType || "message"),
             reasoning: parsed.reasoning,
             m1: {
               variante_a: {
-                message: humanizeMessage(parsed.m1.variante_a.message, actionType || "message"),
+                message: humanizeMessage(cleanA, actionType || "message"),
                 angle: parsed.m1.variante_a.angle,
               },
               variante_b: {
-                message: humanizeMessage(parsed.m1.variante_b.message, actionType || "message"),
+                message: humanizeMessage(cleanB, actionType || "message"),
                 angle: parsed.m1.variante_b.angle,
               },
               canal: parsed.m1.canal,

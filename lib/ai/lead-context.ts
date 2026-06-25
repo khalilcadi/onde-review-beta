@@ -121,18 +121,19 @@ export function parseM1Response(text: string): M1Response | null {
 }
 
 // ---------------------------------------------------------------------------
-// M1 output sanitizer (filet de sécurité déterministe, en plus des règles prompt)
+// Output sanitizer (filet de sécurité déterministe, en plus des règles prompt)
 // ---------------------------------------------------------------------------
 
 /**
- * Post-traitement déterministe d'un message M1 généré.
- * Garantit, même si le LLM dérape, les règles dures du prompt prospection_m1 :
+ * Post-traitement déterministe d'un message généré (M1 ET M2).
+ * Garantit, même si le LLM dérape, les règles dures partagées des prompts
+ * prospection_m1 / prospection_m2 :
  *  1. cadratin "—" / demi-cadratin "–" → ", " (l'espacement environnant est absorbé)
  *  2. "Frame.io" → "Frame" (jamais la forme .io ni l'URL)
  *  3. collapse des espaces doubles
  * NB : les traits d'union des mots composés (U+002D "-", ex. "aller-retour") ne sont PAS touchés.
  */
-export function sanitizeM1Message(text: string): string {
+export function sanitizeMessage(text: string): string {
   if (!text) return text;
   return text
     .replace(/\s*[—–]\s*/g, ", ") // —/– (+ espaces autour) → ", "
@@ -140,6 +141,9 @@ export function sanitizeM1Message(text: string): string {
     .replace(/ {2,}/g, " ")                  // collapse espaces doubles
     .trim();
 }
+
+/** @deprecated Alias rétro-compatible — utiliser sanitizeMessage (s'applique à M1 ET M2). */
+export const sanitizeM1Message = sanitizeMessage;
 
 // ---------------------------------------------------------------------------
 // M2 parser (relance / réponse)

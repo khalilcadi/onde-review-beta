@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createServerClient } from "@/lib/supabase/server";
 import { callAI } from "@/lib/ai/service";
-import { buildLeadContext, buildUserPrompt, parseGenerationResponse, sanitizeM1Message, type M1Response, type M2Response, type LeadForGeneration } from "@/lib/ai/lead-context";
-import { humanizeMessage } from "@/lib/humanize";
+import { buildLeadContext, buildUserPrompt, parseGenerationResponse, sanitizeMessage, type M1Response, type M2Response, type LeadForGeneration } from "@/lib/ai/lead-context";
+import { humanizeMessage, applyAntiBloc } from "@/lib/humanize";
 
 // ---------------------------------------------------------------------------
 // Helpers: extract signal & M2 situation from lead data
@@ -149,21 +149,24 @@ export async function POST(req: NextRequest) {
             };
           }
 
-          // Sanitize déterministe (—/– → ", ", Frame.io → Frame, espaces doubles) AVANT humanisation.
-          const cleanA = sanitizeM1Message(parsed.m1.variante_a.message);
-          const cleanB = sanitizeM1Message(parsed.m1.variante_b.message);
+          // Pipeline déterministe : sanitize (—/– → ", ", Frame.io → Frame, espaces) →
+          // humanisation → anti-bloc EN DERNIER (humanize aplatit les \n\n s'il passe après).
+          const finishMsg = (raw: string) =>
+            applyAntiBloc(humanizeMessage(sanitizeMessage(raw), actionType || "message"));
+          const finalA = finishMsg(parsed.m1.variante_a.message);
+          const finalB = finishMsg(parsed.m1.variante_b.message);
 
           return {
             type: "M1" as const,
-            message: humanizeMessage(cleanA, actionType || "message"),
+            message: finalA,
             reasoning: parsed.reasoning,
             m1: {
               variante_a: {
-                message: humanizeMessage(cleanA, actionType || "message"),
+                message: finalA,
                 angle: parsed.m1.variante_a.angle,
               },
               variante_b: {
-                message: humanizeMessage(cleanB, actionType || "message"),
+                message: finalB,
                 angle: parsed.m1.variante_b.angle,
               },
               canal: parsed.m1.canal,
@@ -175,13 +178,17 @@ export async function POST(req: NextRequest) {
         }
 
         if (parsed.m2) {
+          // Même pipeline que M1 : sanitize → humanize → anti-bloc en dernier.
+          const finalM2 = applyAntiBloc(
+            humanizeMessage(sanitizeMessage(parsed.m2.message), actionType || "message")
+          );
           return {
             type: "M2" as const,
-            message: humanizeMessage(parsed.m2.message, actionType || "message"),
+            message: finalM2,
             reasoning: parsed.reasoning,
             m2: {
               ...parsed.m2,
-              message: humanizeMessage(parsed.m2.message, actionType || "message"),
+              message: finalM2,
             } satisfies M2Response,
           };
         }

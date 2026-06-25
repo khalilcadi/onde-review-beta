@@ -43,8 +43,35 @@ function splitSentences(text: string): string[] {
 }
 
 /**
+ * Proper nouns that must NEVER be lowercased at a fragment boundary.
+ * The M1/M2 prompts assume casing is authored directly ("aucun transform
+ * externe ne la rejoue") — but humanize lowercases the first letter of
+ * non-first fragments for a casual feel. When a fragment happens to start
+ * with one of these, lowercasing corrupts it ("Onde Review" → "onde Review",
+ * "Drive" → "drive"). Detected on the first token, accent/case-insensitive.
+ */
+const PROPER_NOUNS = new Set([
+  "onde",
+  "drive",
+  "frame",
+  "loom",
+  "google",
+  "wetransfer",
+  "linkedin",
+  "yann",
+]);
+
+/** First alphabetic token of a fragment, lowercased (leading punctuation stripped). */
+function firstToken(text: string): string {
+  // Latin letters incl. French accents (À-ÿ); avoids \p{L} which needs the `u` flag / es6 target.
+  const m = text.trim().match(/[a-zA-ZÀ-ÿ]+/);
+  return m ? m[0].toLowerCase() : "";
+}
+
+/**
  * Apply subtle text transforms to a single fragment:
- * - ~25% chance: lowercase first letter on non-first fragments (casual typing)
+ * - ~25% chance: lowercase first letter on non-first fragments (casual typing),
+ *   UNLESS the fragment starts with a proper noun (preserve capitalization)
  * - ~50% chance: remove trailing period on the last fragment
  */
 function transformFragment(
@@ -54,7 +81,12 @@ function transformFragment(
 ): string {
   let f = fragment.trim();
 
-  if (!isFirst && Math.random() < 0.25 && f.length > 0) {
+  if (
+    !isFirst &&
+    Math.random() < 0.25 &&
+    f.length > 0 &&
+    !PROPER_NOUNS.has(firstToken(f))
+  ) {
     f = f[0].toLowerCase() + f.slice(1);
   }
 
@@ -115,4 +147,68 @@ export function humanizeMessage(text: string, actionType: string): string {
   );
 
   return transformed.join(FRAGMENT_SEPARATOR);
+}
+
+/**
+ * Aerate a message into up to 3 visual blocks separated by a blank line:
+ *
+ *   Salut [Prénom] !
+ *
+ *   <corps>
+ *
+ *   <dernière phrase>
+ *
+ * MUST run AFTER humanizeMessage — humanize splits on sentences and rejoins
+ * with join(" "), which would flatten the "\n\n" block separators if it ran
+ * last. So anti-bloc is always the final transform in the pipeline.
+ *
+ * If the message was fragmented by humanizeMessage (contains FRAGMENT_SEPARATOR),
+ * the fragmentation already breaks it into separate sends — anti-bloc is skipped
+ * to avoid stacking two break mechanisms on one short message.
+ *
+ * Falls back to fewer blocks (or the original text) when there aren't enough
+ * sentences to form three.
+ */
+export function applyAntiBloc(text: string): string {
+  if (!text) return text;
+  // Fragmentation already breaks the message — don't stack anti-bloc on top.
+  if (text.includes(FRAGMENT_SEPARATOR)) return text;
+
+  const trimmed = text.trim();
+
+  // Block 1: the greeting — "Salut [Prénom] !" or "Salut [Prénom]," (case-insensitive).
+  const greetMatch = trimmed.match(/^(salut\b[^!?.\n]*?[!,])/i);
+  const greeting = greetMatch ? greetMatch[1].trim() : "";
+  const rest = greetMatch ? trimmed.slice(greetMatch[0].length).trim() : trimmed;
+
+  const sentences = rest
+    .split(/(?<=[.!?])\s+/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+
+  let blocks: string[];
+  if (greeting) {
+    // greeting + body + last sentence
+    if (sentences.length >= 2) {
+      const last = sentences[sentences.length - 1];
+      const body = sentences.slice(0, -1).join(" ");
+      blocks = [greeting, body, last];
+    } else if (sentences.length === 1) {
+      blocks = [greeting, sentences[0]];
+    } else {
+      blocks = [greeting];
+    }
+  } else {
+    // no greeting detected: first / middle / last
+    if (sentences.length >= 3) {
+      const last = sentences[sentences.length - 1];
+      const middle = sentences.slice(1, -1).join(" ");
+      blocks = [sentences[0], middle, last];
+    } else {
+      // not enough structure to aerate — leave untouched
+      return trimmed;
+    }
+  }
+
+  return blocks.filter(Boolean).join("\n\n");
 }

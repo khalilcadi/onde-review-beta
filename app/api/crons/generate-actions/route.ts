@@ -12,9 +12,9 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { createServiceClient } from "@/lib/supabase/service";
 import { callAI } from "@/lib/ai/service";
-import { buildLeadContext, buildUserPrompt, parseGenerationResponse } from "@/lib/ai/lead-context";
+import { buildLeadContext, buildUserPrompt, parseGenerationResponse, sanitizeMessage } from "@/lib/ai/lead-context";
 import type { LeadForGeneration, M1Response, M2Response } from "@/lib/ai/lead-context";
-import { humanizeMessage } from "@/lib/humanize";
+import { humanizeMessage, applyAntiBloc } from "@/lib/humanize";
 import type { Json } from "@/types/database";
 import {
   isActiveDay,
@@ -400,16 +400,26 @@ export async function GET(req: NextRequest) {
                       generationReasoning = parsed.m1.reasoning || null;
                       generationData = parsed.m1 as unknown as Json;
                     } else {
+                      // Pipeline déterministe (M1) : sanitize (—/– → ", ", Frame.io → Frame) →
+                      // humanize → anti-bloc EN DERNIER. Appliqué aux DEUX variantes pour que
+                      // le switch variante dans Daily Actions reste propre lui aussi.
+                      const finishMsg = (raw: string) =>
+                        applyAntiBloc(humanizeMessage(sanitizeMessage(raw), nextStep.step_type));
+                      parsed.m1.variante_a.message = finishMsg(parsed.m1.variante_a.message);
+                      parsed.m1.variante_b.message = finishMsg(parsed.m1.variante_b.message);
                       // M1: pick variante_a as default (user can switch in Daily Actions)
-                      const messageText = parsed.m1.variante_a.message || parsed.m1.variante_b.message;
-                      generatedMessage = humanizeMessage(messageText, nextStep.step_type);
+                      generatedMessage = parsed.m1.variante_a.message || parsed.m1.variante_b.message;
                       generationReasoning = parsed.reasoning;
                       // Store full M1 response (both variants + canal + reasoning)
                       generationData = parsed.m1 as unknown as Json;
                     }
                   } else if (parsed.m2) {
-                    // M2: store message + full M2 response
-                    generatedMessage = humanizeMessage(parsed.m2.message, nextStep.step_type);
+                    // Même pipeline que M1 : sanitize → humanize → anti-bloc en dernier.
+                    // ⚠️ Le "—" des relances survivait jusqu'ici (M2 jamais sanitizé).
+                    parsed.m2.message = applyAntiBloc(
+                      humanizeMessage(sanitizeMessage(parsed.m2.message), nextStep.step_type)
+                    );
+                    generatedMessage = parsed.m2.message;
                     generationReasoning = parsed.reasoning;
                     generationData = parsed.m2 as unknown as Json;
                   } else {
